@@ -1,0 +1,43 @@
+a=(1, 2.5, True, "ram")
+print(a)
+print(type(a))
+print(a[1])
+print(a[-1])
+print(a[0:3])
+print("*************************")
+b = list(a)
+print(b)
+print(type(b))
+b.append(55)
+#b.append("vaali")
+print(b)
+a=tuple(b)
+print(a)
+print(type(a))
+print("**********************")
+for i in a:
+    print(i)
+
+print("***************")
+if "ra" in a:
+    print("yes")
+else:
+    print("No")
+
+print("************************")
+a=(1,2,3,4,5)
+b=(6,7,8,9)
+c=a+b
+print(c)
+d=(a,b)
+print(d)
+print(d[0])
+print(d[1])
+print(d[0][2])
+print("******* Reputation ********")
+print(min(a))
+print(max(a))
+print(len(d))
+x=('selva',)*2
+print(x)
+print(type(x))

@@ -1,0 +1,42 @@
+Variable :
+
+	1. Place holder in memory that hold some data
+	
+	2. Variable must be in a valid name a data type and data length
+	
+	3. Variable must be declared prior to its use
+	
+	
+_____________________________________________________________________________________________________________________
+	
+Example 1:
+
+SET SERVEROUTPUT ON; 
+
+DECLARE
+  v_test  VARCHAR2(30);
+BEGIN 
+  v_test := 'Welcome to oracle';
+  DBMS_OUTPUT.PUT_LINE (v_test); 
+END;
+
+
+_____________________________________________________________________________________________________________________
+
+Example 2:
+
+
+SET SERVEROUTPUT ON; 
+
+DECLARE
+  a1  number := 20;
+  b1  number := 30;
+  c1 number;
+BEGIN 
+  c1 := a1 + b1;
+  DBMS_OUTPUT.PUT_LINE (c1); 
+END;
+
+
+_____________________________________________________________________________________________________________________
+

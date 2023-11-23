@@ -1,0 +1,165 @@
+Single Inheritance in Java :
+----------------------------
+
+	Inheritance in Java is a mechanism in which one object acquires all the properties and behaviors of a parent object. 
+	Inheritance is a basic object oriented feature in which one class acquires and extends upon the properties of another class, 
+	**using the keyword extends.
+	
+	
+Types of Inheritance :
+----------------------
+		1. Single Inheritance
+		2. Multilevel Inheritance
+		3. Hierarchical Inheritance
+		
+Single Inheritance :
+--------------------
+    Single inheritance is one base class and one derived class. 
+	One in which the derived class inherits the one base class either publicly, privately or protected
+	
+Syntax:
+-------
+      class baseclass_Name
+      {
+            superclass data variables ;
+            superclass member functions ;
+      }
+      class derivedclass_Name extends baseclass _Name
+      {
+            subclass data variables ;
+            subclass member functions ;
+      }
+	  
+Example :
+---------
+
+//Single Inheritance in Java
+class Father //Base
+{
+    public void house()
+    {
+        System.out.println("Have Own 2BHK House.");
+    }
+}
+class Son extends Father //Derived
+{
+    public void car()
+    {
+        System.out.println("Have Own Audi Car.");
+    }
+}
+ 
+class single {
+    public static void main(String args[])
+    {
+        Son o =new Son();
+        o.car();
+        o.house();
+    }
+}  
+
+
+___________________________________________________________________________________________________________
+
+
+Multilevel Inheritance in Java :
+--------------------------------
+
+Example :
+---------
+    1. class Son extends class Father and class Father extends class Grandfather then this type of inheritance is known as multilevel inheritance.
+
+	2. This Java program demonstrates the concept of multilevel inheritance, where a derived class extends another 
+	   derived class which itself extends a base class.
+	   
+Example code :
+--------------
+
+
+//Multilevel Inheritance in Java
+class GrandFather {
+    public void house() {
+        System.out.println("3 BHK House.");
+    }
+}
+class father  extends GrandFather{
+    public void land() {
+        System.out.println("5 Arcs of Land..");
+    }
+}
+ 
+class son extends father {
+    public void car() {
+        System.out.println("Own Audi Car..");
+    }
+}
+ 
+class multilevel {
+    public static void main(String args[]) {
+        son o = new son();
+        o.car();
+        o.house();
+        o.land();
+    }
+}
+
+
+___________________________________________________________________________________________________________
+
+
+Hierarchical Inheritance in Java :
+----------------------------------
+
+
+		The program is an example of Hierarchical inheritance, where multiple child classes extend from a single parent class.
+		
+//Hierarchical Inheritance in Java
+class shape {
+    float length, breadth, radius;
+}
+class rect extends shape {
+    public rect(float l, float b) {
+        length = l;
+        breadth = b;
+    }
+    float rectangle_area() {
+        return length * breadth;
+    }
+}
+class circle extends shape {
+    public circle(float r) {
+        radius = r;
+    }
+    float circle_area() {
+        return 3.14f * (radius * radius);
+    }
+}
+class square extends shape {
+    public square(float l) {
+        length = l;
+    }
+ 
+    float square_area() {
+        return (length * length);
+    }
+}
+
+
+class Hierarchical {
+    public static void main(String[] args) {
+ 
+        rect o1 =new rect(2,5);
+        System.out.println("Area of Rectangle : "+o1.rectangle_area());
+ 
+        circle o2 =new circle(5);
+        System.out.println("Area of Circle : "+ o2.circle_area());
+ 
+        square o3 =new square(3);
+        System.out.println("Area of Square : "+o3.square_area());
+ 
+    }
+}
+
+___________________________________________________________________________________________________________
+
+

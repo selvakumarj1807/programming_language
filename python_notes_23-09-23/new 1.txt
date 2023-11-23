@@ -1,0 +1,98 @@
+Python Programming :
+
+	1.Python is an interpreted, object-oriented, high-level programming language that can be used for a wide variety of applications.
+	2.Python is a powerful general-purpose programming language.
+	3.First developed in the late 1980s by Guido van Rossum.
+	4.Python is open source programming language.
+	5.Guido van Rossum named it after the BBC Comedy TV series Monty Python’s Flying Circus
+	
+Advantages of Python Programming :
+
+	1.Python is easy to learn and use.
+	2.Large number of libraries available that can be used in your projects today.
+	3.High Level Programming Language.
+	4.Huge Community
+	5.Object-oriented language
+	6.Portable across Operating systems
+	
+Organizations using Python :
+
+	1.Google
+	2.microsoft
+	3.facebook
+	4.mozilla
+	5.cisco
+	6.Quora
+	7.YouTube etc...
+	
+Python Based Jobs :
+
+	1.Data Analysis
+	2.Artificial Intelligence
+	3.Automation
+	4.Web Application
+	5.Desktop Application
+	6.Hacking
+	
+High-level Languages :
+	High-level languages, like C, C++, JAVA,Python etc., are very near to English. It makes programming process easy.
+	
+Machine Code :
+	Machine languages are very close to the hardware. Every computer has its machine language. 
+	A machine language programs are made up of series of binary pattern. (Eg. 110110)
+	It represents the simple operations which should be performed by the computer.
+	
+Diffrence between Compiler and Interpreter :
+
+Compiler :	
+
+	1.It read the whole program at a time.	
+	2.It translates the whole program at a time into machine code.	
+	3.It produces machine code which is directly understood by computer.	
+	4.It takes large amount of time to analyze the source code.	
+	5.it is faster	it is slower
+	6.It requires more memory space.	
+	7.Programming language like C,C++ use compiler.	
+
+Interpreter :
+
+	1.It read the program line by line.
+	2.It translates only one line of program at a time into machine code.
+	3.It produces intermediate code after translation.
+	4.It takes less amount of time to analyze the source code.
+	5.It requires less memory space.
+	6.Programming language like Python,Ruby use interpreter.
+	
+Python Data Types
+
+	1.Text Type		:	str
+	2.Numeric Types :	int, float, complex
+	3.Sequence Types:	list, tuple, range
+	4.Mapping Type	:	dict
+	5.Set Types		:	set, frozenset
+	6.Boolean Type	:	bool
+	7.Binary Types	:	bytes, bytearray, memoryview
+	8.None Type		:	NoneType
+	
+Keywords in Python Programming :
+
+	1.A keyword is a word having special meaning reserved by programming language
+	2.We cannot use a keyword as a variable name, function name or any other identifier.
+	3.Eg: for,break,continue,etc.
+	
+Python Variables :
+
+	Variables are containers for storing data values.
+	
+	Variable is a name that is used to refer to memory location. Python variable is also known as an identifier and used to hold value.
+
+	In Python, we don't need to specify the type of variable because Python is a infer language and smart enough to get variable type.
+	
+	Variables are the example of identifiers. An Identifier is used to identify the literals used in the program.
+	
+	Identifier names are case sensitive; for example, myname, and MyName is not the same.
+	
+	Examples of valid identifiers: a123, _n, n_9, etc.
+	
+	Examples of invalid identifiers: 1a, n%4, n 9, etc.
+

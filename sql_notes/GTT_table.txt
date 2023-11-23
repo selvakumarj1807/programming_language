@@ -1,0 +1,82 @@
+ GLOBAL TEMPRAVERY TABLE :
+ 
+		  1. It is tempravery table space
+		  2. It is session based one
+		  3. it was deleted at end of the session
+		  
+		  
+Usage :
+
+	1. Improves performance of complicated tasks.
+	2. GTT can't have foreign keys related to other temporary / parent tables.
+	
+	
+Syntax :
+
+			CREATE GLOBAL TEMPORARY TABLE table_Name 
+			{ column-definition [, column-definition ] *} 
+			[ON COMMIT {DELETE | PRESERVE} ROWS] 
+			NOT LOGGED [ON ROLLBACK DELETE ROWS];
+			
+			
+____________________________________________________________________________________________________________________________________
+
+
+
+Example 1:
+
+
+CREATE GLOBAL TEMPORARY TABLE GTT_COUNTRY 
+(COUNTRY_ID NUMBER, COUNTRY_NAME VARCHAR2 (30)) 
+ON COMMIT DELETE ROWS;
+
+SELECT * FROM GTT_COUNTRY; 
+
+INSERT INTO GTT_COUNTRY VALUES (100, 'INDIA'); 
+INSERT INTO GTT_COUNTRY VALUES (101, 'CANADA'); 
+INSERT INTO GTT_COUNTRY VALUES (102, 'USA');
+
+SELECT * FROM GTT_COUNTRY; 
+
+COMMIT;
+
+SELECT * FROM GTT_COUNTRY; 
+
+
+____________________________________________________________________________________________________________________________________
+
+
+
+Example 2:
+
+
+drop table GTT_COUNTRY;
+
+
+CREATE GLOBAL TEMPORARY TABLE GTT_COUNTRY 
+(COUNTRY_ID NUMBER, COUNTRY_NAME VARCHAR2 (30)) 
+ON COMMIT PRESERVE ROWS;
+
+SELECT * FROM GTT_COUNTRY; 
+
+INSERT INTO GTT_COUNTRY VALUES (100, 'INDIA'); 
+INSERT INTO GTT_COUNTRY VALUES (101, 'CANADA'); 
+INSERT INTO GTT_COUNTRY VALUES (102, 'USA');
+
+SELECT * FROM GTT_COUNTRY; 
+
+COMMIT;
+
+SELECT * FROM GTT_COUNTRY; 
+
+
+____________________________________________________________________________________________________________________________________
+
+Disconnect the user and re connect it then ,
+
+
+SELECT * FROM GTT_COUNTRY; 
+
+
+____________________________________________________________________________________________________________________________________
+

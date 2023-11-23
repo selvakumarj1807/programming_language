@@ -1,0 +1,32 @@
+Convert Decimal To Binary in Java :
+
+
+import java.util.Scanner;
+ 
+class decimal_binary {
+    public static void decimal2Binary(int n)
+    {
+        int[] binaryNum = new int[1000];
+ 
+        int i = 0;
+        while (n > 0) //n=12 -->12 > 0  , 6 > 0 , 3 > 0 , 1 > 0
+        {
+            binaryNum[i] = n % 2; // 0 0 1 1
+            n = n / 2; // 6 3 1 0
+            i++; // 1 2 3 4
+
+            //             0 0 1 1
+            // index (i) - 0 1 2 3
+        }
+        for (int j = i - 1; j >= 0; j--)
+            System.out.print(binaryNum[j]);
+    }
+    public static void main(String args[]) {
+        Scanner in =new Scanner(System.in);
+        System.out.println("Enter The Decimal No : ");
+        int n = in.nextInt();
+        System.out.println("Decimal No : " + n);
+        System.out.print("Binary No : ");
+        decimal2Binary(n);
+    }
+}

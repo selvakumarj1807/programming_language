@@ -1,0 +1,53 @@
+Schema & Database Auditing Using DDL Trigger In PL/SQL :
+
+
+DDL Trigger for Schema Auditing :
+
+CREATE TABLE schema_audit
+  (
+    ddl_date       DATE,
+    ddl_user       VARCHAR2(15),
+    object_created VARCHAR2(15),
+    object_name    VARCHAR2(15),
+    ddl_operation  VARCHAR2(15)
+  );
+  
+  
+CREATE OR REPLACE TRIGGER hr_audit_tr 
+AFTER DDL ON SCHEMA
+BEGIN
+    INSERT INTO schema_audit VALUES (
+sysdate, 
+sys_context('USERENV','CURRENT_USER'), 
+ora_dict_obj_type, 
+ora_dict_obj_name, 
+ora_sysevent);
+END;
+/
+
+
+select * from schema_audit;
+
+create table ddltriger (ddltr varchar2 (20));
+
+insert into ddltriger values ('ddltriggervalue1');
+
+select * from ddltriger;
+
+TRUNCATE TABLE ddltriger;
+
+select * from schema_audit;
+
+
+drop table ddltriger;
+
+select * from schema_audit;
+
+
+
+drop trigger hr_audit_tr;
+
+drop table schema_audit;
+
+
+____________________________________________________________________________________________________________

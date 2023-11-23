@@ -1,0 +1,49 @@
+<html>
+<head>
+</head>
+<body>
+<div>
+	<div style="background-color:red;">
+<h1> person1</h1>
+<input id="id1">
+<button onclick="sendsms()">SEND</button>
+</div>
+<br>
+<div style="background-color:pink;" id="mydiv">
+
+</div>
+
+<div style="background-color:blue;">
+<h1> person2</h1>
+<input id="id2">
+<button onclick="sendsms()">SEND</button>
+</div>
+
+</div>
+<script>
+function sendsms(){
+value1=document.getElementById("id1").value;
+value2=document.getElementById("id2").value;
+element=document.createElement("li");//<li>  </li>
+
+	if(value1!=""){
+	text1 = document.createTextNode(value1);//hi
+	element.appendChild(text1);//<li> hi </li>
+	mydiv=document.getElementById("mydiv");
+	mydiv.appendChild(element);//<div> <li> hi</hi> </div>
+	element.style.color="red";
+	document.getElementById("id1").value="";	
+	}
+	else if(value2!=""){
+	text2 = document.createTextNode(value2);//hi
+	element.appendChild(text2);//<li> hi </li>
+	mydiv=document.getElementById("mydiv");
+	mydiv.appendChild(element);//<div> <li> hi</hi> </div>
+	element.style.color="blue";
+	document.getElementById("id2").value="";	
+	}
+}
+</script>
+</body>
+
+</html>

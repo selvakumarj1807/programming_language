@@ -1,0 +1,182 @@
+PL/SQL Exception Handling In Oracle Database :
+----------------------------------------------
+
+What is an Exception? :
+-----------------------
+
+	1. Any abnormal condition or say event that interrupts the normal flow of your program’s instructions at run time is an exception. 
+	2. An exception is a run time error.
+	
+Types of exceptions :
+---------------------
+		There are two types of PL/SQL exceptions in Oracle database.
+
+			1. System-defined exceptions and
+			2. User-defined exceptions
+			
+1. System-Defined Exceptions :
+------------------------------
+
+		1. System-defined exceptions are defined and maintained implicitly by the Oracle server. 
+		2. These exceptions are mainly defined in the Oracle STANDARD package. 
+		3. Whenever an exception occurs inside the program. 
+		4. The Oracle server matches and identifies the appropriate exception from the available set of exceptions.
+		5. System defined exceptions majorly have a negative error code and error message. 
+		
+2. User-Define Exceptions :
+---------------------------
+
+		1. Unlike System-Define Exception, User-Define Exceptions are raised explicitly in the 
+			body of the PL/SQL block (more specifically inside the BEGIN-END section) using the RAISE Statement.
+			
+			
+How to Declare a User-Define Exception in Oracle Database :
+-----------------------------------------------------------
+
+		There are three ways of declaring user-define exceptions in Oracle Database.
+	
+	1. By declaring a variable of EXCEPTION type in declaration section :
+	
+			You can declare a user defined exception by declaring a variable of EXCEPTION datatype in your code and 
+			raise it explicitly in your program using RAISE statement and handle them in the Exception Section.
+			
+	2. Declare user-defined exception using PRAGMA EXCEPTION_INIT function :
+	
+			Using PRAGMA EXCEPTION_INIT function you can map a non-predefined error number with the variable of EXCEPTION datatype.  
+			Means using the same function you can associate a variable of EXCEPTION datatype with a standard error.
+			
+			
+	3. RAISE_APPLICATION_ERROR method :
+	
+			Using this method you can declare a user defined exception with your own customized error number and message.
+			
+			
+________________________________________________________________________________________________________________________________________
+
+How To Declare User-Define Exception Using An Exception Variable In Oracle Database :
+-------------------------------------------------------------------------------------
+
+	1. Declaring a user-define exception using Exception variable is a three step process. These three steps are :
+	--------------------------------------------------------------------------------------------------------------
+	
+		1. Declare a variable of exception datatype – This variable is going to take the entire burden on its shoulders.
+		
+		2. Raise the Exception – This is the part where you tell the compiler about the condition which will trigger the exception.
+		
+		3. Handle the exception – This is the last section where you specify what will happen when the error which you raised will trigger.
+		
+
+Example 1:
+----------
+
+
+SET SERVEROUTPUT ON;
+DECLARE
+  var_dividend NUMBER := 24;
+  var_divisor NUMBER := 0;
+  var_result NUMBER;
+  ex_DivZero EXCEPTION;
+  
+BEGIN
+  IF var_divisor = 0 THEN
+    RAISE ex_DivZero;
+  END IF;
+  var_result := var_dividend/var_divisor;
+  DBMS_OUTPUT.PUT_LINE('Result = ' ||var_result);
+  
+  EXCEPTION WHEN ex_DivZero THEN
+      DBMS_OUTPUT.PUT_LINE('Error Error - Your Divisor is Zero');
+END;
+/
+
+________________________________________________________________________________________________________________________________________
+
+
+2. Declare User-Define Exception Using RAISE_APPLICATION_ERROR Method In Oracle Database :
+------------------------------------------------------------------------------------------
+
+
+	What is RAISE_APPLICATION_ERROR method? :
+	-----------------------------------------
+	
+		RAISE APPLICATION ERROR is a stored procedure which comes in-built with Oracle software. 
+		Using this procedure you can associate an error number with the custom error message. 
+		Combining both the error number as well as the custom error message you can compose an error string 
+		which looks similar to those default error strings which are displayed by Oracle engine when an error occurs.
+		
+	How many errors can we generate using RAISE_APPLICATION_ERROR procedure? :
+	--------------------------------------------------------------------------
+	
+		RAISE_APPLICATION_ERROR procedure allows us to number our errors from -20,000 to -20,999 
+		thus we can say that using RAISE_APPLICATION_ERROR procedure we can generate 1000 errors.
+		
+	Syntax of Raise_Application_Error :
+	-----------------------------------
+			
+			raise_application_error (error_number, message [, {TRUE | FALSE}]);
+			
+			
+	TRUE, the error is placed on the pile of all the previous errors. 
+	However in case of FALSE (the default) parameter, the error replaces all previous errors. 
+	RAISE_APPLICATION_ERROR is part of package DBMS_STANDARD,
+	
+	
+Example :
+---------
+
+SET SERVEROUTPUT ON;
+ACCEPT var_age NUMBER PROMPT 'What is yor age';
+DECLARE
+  age   NUMBER := &var_age;
+BEGIN
+  IF age < 18 THEN
+    RAISE_APPLICATION_ERROR (-20008, 'you should be 18 or above for the DRINK!');
+  END IF; 
+  DBMS_OUTPUT.PUT_LINE ('Sure, What would you like to have?'); 
+  EXCEPTION WHEN OTHERS THEN
+    DBMS_OUTPUT.PUT_LINE (SQLERRM);
+END;
+/ 
+
+________________________________________________________________________________________________________________________________________
+
+3. How To Declare User Define Exception Using PRAGMA EXCEPTION_INIT :
+---------------------------------------------------------------------
+
+	What is the PRAGMA EXCEPTION_INIT function :
+	--------------------------------------------
+		
+		Using the pragma EXCEPTION_INIT we can exception name with an Oracle error number.
+		We can use that name in designing the exception handler for the error.
+		
+	Syntax of Pragma Exception_Init :
+	---------------------------------
+	
+		PRAGMA EXCEPTION_INIT (exception_name, error_number);
+		
+
+Example: Declare User-define exception using Pragma Exception_Init :
+--------------------------------------------------------------------
+
+DECLARE
+  ex_age    EXCEPTION;
+  age       NUMBER    := 17;
+  PRAGMA EXCEPTION_INIT(ex_age, -20008);
+BEGIN
+  IF age<18 THEN
+    RAISE_APPLICATION_ERROR(-20008, 'You should be 18 or above for the drinks!');
+  END IF;
+  
+  DBMS_OUTPUT.PUT_LINE('Sure! What would you like to have?');
+  
+  EXCEPTION WHEN ex_age THEN
+    DBMS_OUTPUT.PUT_LINE(SQLERRM);   
+END;
+/
+
+________________________________________________________________________________________________________________________________________
+
+
+
+
+

@@ -1,0 +1,66 @@
+
+
+Sql loader :
+
+	create table emps(emp_id number,emp_name varchar2(20),dept_id number);
+
+	select * from emps;
+	
+______________________________________________________________________________________________________________
+	
+create a file :
+
+------------------------------------------------------------------
+	1. emp_data.dat
+	
+	
+				emp_id,emp_name,dept_id
+				100,steave,10
+				101,jonh,20
+				102,mega,30
+				103,neena,30
+				104,kala,40
+				105,billa,50
+	
+------------------------------------------------------------------
+
+	2. load_emp_data.ctl
+	
+
+
+				LOAD DATA
+				INFILE 'C:\Users\selva\Documents\sql_notes\emp_data.dat'
+				TRUNCATE
+				INTO TABLE EMPS
+				fields terminated by ","
+				(
+					emp_id,
+					emp_name,
+					dept_id
+				)
+				
+------------------------------------------------------------------
+
+______________________________________________________________________________________________________________
+
+Open CMD (command prompt) :
+
+
+		sqlldr userid=hr/admin control='C:\Users\selva\Documents\sql_notes\load_emp_data.ctl'
+
+
+
+______________________________________________________________________________________________________________
+
+
+
+Open Sql developper :
+
+
+		select * from emps;
+		
+		
+		
+_________________________________________________________________________________________________________________________________________________
+
+

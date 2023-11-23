@@ -1,0 +1,80 @@
+Introduction To PL/SQL Functions In Oracle Database :
+-----------------------------------------------------
+
+		In Oracle Database we can define a PL/SQL function as a self-contained sub-program that is meant 
+		to do some specific well defined task. Functions are named PL/SQL block which means they can be stored 
+		into the database as a database object and can be reused.
+		
+Types of PL/SQL functions in Oracle Database :
+----------------------------------------------
+
+	There are two types of PL/SQL functions in Oracle Database, these are
+
+
+			1. Pass-by-Value Functions and
+			2. Pass-by-Reference functions
+			
+Syntax of PL/SQL Functions in Oracle Database :
+-----------------------------------------------
+
+
+				CREATE [OR REPLACE] FUNCTION function_name
+				(Parameter 1, Parameter 2…)
+				RETURN datatype
+				IS
+					Declare variable, constant etc.  
+				BEGIN
+					Executable Statements
+					Return (Return Value);
+				END;
+				
+				
+_______________________________________________________________________________________________________________________
+
+How To Create PL/SQL Function In Oracle Database :
+--------------------------------------------------
+
+PL/SQL function for calculating “Area of the Circle” :
+------------------------------------------------------
+
+--Function Header
+CREATE OR REPLACE FUNCTION circle_area (radius NUMBER) 
+RETURN NUMBER IS
+--Declare a constant and a variable
+pi  	CONSTANT NUMBER(7,2) :=	3.141;
+area 	NUMBER(7,2);
+BEGIN
+  --Area of Circle pi*r*r;
+  area := pi * (radius * radius);
+  RETURN area; 
+END;
+/
+
+
+How to call the function :
+--------------------------
+
+Example 1:
+----------
+
+SET SERVEROUTPUT ON;
+BEGIN
+  DBMS_OUTPUT.PUT_LINE(circle_area(25));
+END;
+/
+
+Example 2:
+----------
+
+SET SERVEROUTPUT ON;
+DECLARE
+  vr_area NUMBER (7,3);
+BEGIN
+  vr_area := circle_area(25);
+  
+  DBMS_OUTPUT.PUT_LINE(vr_area);
+END;
+/
+
+
+_______________________________________________________________________________________________________________________

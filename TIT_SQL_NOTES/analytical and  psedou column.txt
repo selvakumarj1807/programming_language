@@ -1,0 +1,182 @@
+Analytical Function
+_________________________
+
+  where clause does not apply 
+  that time use aliase name 
+  but in where aliase name also does not apply
+  so ,take a query in one tempravery table make subquery or 
+  then use where condition in aliase name its taken by a coloum name
+
+    select * from( select salary,department_id,dense_rank()
+    over(partition by department_id order by salary desc)as kvp from employees ) 
+    where kvp=1; 
+
+   select * from( select salary,dense_rank()
+    over(order by salary desc)as kvp from employees ) 
+    where kvp=2; 
+
+
+select * from (select first_name,salary,department_id,DENSE_RANK() OVER
+      ( ORDER BY salary DESC)as kn from employees )
+      where department_id=90;
+
+WITH CLAUSE 
+______________
+
+
+with emp_salary as 
+(
+select employee_id,rank() over(order by employee_id)as sl from employees
+)
+select * from emp_salary where sl=2;
+
+ using dense_rank()
+
+   Rank()
+   Dense_rank()
+   Row_number()
+   Lead()
+   Lag()
+listagg()
+   
+    
+          rank    
+           24000-1
+           17000-2
+           17000-2
+           9000-4
+           6000-5
+           
+           dense rank
+           24000-1
+           17000-2
+           17000-2
+           9000-3
+           6000-4
+   
+   Rank()  skip tha gap-- depertmenrwise salary rank will be provide 
+   _____
+   
+   --rank() over( -------------)
+   
+   select salary,department_id ,rank()over(order by salary desc) from employees;
+   
+   Dense_rank() does not skip the 
+   ___________
+   
+   select salary,department_id,dense_rank()over(partition by department_id order by salary desc) from employees;
+   
+   Row_number()
+   __________
+  
+   select salary,row_number()over(order by salary desc) from employees;
+
+Lead  : one step ahead
+Lag   : one step before 
+
+   lead()
+   ______
+    
+    lead(to take the next value from level 1)
+    select first_name,lead(first_name,'1','xx') over ( order by first_name) from employee;
+
+          alex   bruce
+          bruce  n
+          n      neena
+          neena steven
+          steven xx
+
+  LAG()
+  ______
+  select first_name,lag(first_name,'1','xx') over ( order by first_name) from employee;
+             alex  -  xx
+             bruce - alex
+             n     - bruce
+             neena - n
+             steven - neena
+
+
+listagg()
+___________
+
+row to cloumnwise
+
+   select listagg(product_name,',') within group(order by product_name asc) from products;
+
+
+  
+
+
+ psedou column 
+ ________________
+ 
+ user
+ uid
+ sysdate
+ systime stamp
+ rownum 
+ row id
+ level
+ 
+ user:
+ return name of user actually connected to the session
+ select user from dual;
+    
+ uid:
+ return id of the user actually connected to the session
+ select uid from dual;
+  
+ sysdate
+ _________
+ it show the current date from the local device
+ select sysdate from dual;
+ 
+ systime stamp
+ ______________
+ it show the current date and time (including date,time second and time xone)my loacl device
+ select systimestamp from dual;
+
+  rownum
+  _______
+  
+  select first_name,rownum from employees;
+  it is a serial number
+  it will not stored in the data base
+  it will start always from 1
+  depends on result set off query
+  
+    select employee_id,first_name,salary ,rownum from employees;
+    select employee_id,first_name,salary ,rownum from employees where rownum=1;
+    select employee_id,first_name,salary ,rownum from employees where rownum<5;
+
+  
+  rowid
+  ______
+  
+  it is a 18 digit alpha numeric number
+  it will stored permantly in data base
+  it consist of charcter number special charcter
+  row id will get created wher user insert new record into table
+  
+  select first_name,rowid,length(rowid)from employees;
+  
+  level
+  _____
+  
+  used to fine hierachy  level un numeric format
+  it is always follow with connected by
+  select 2*level from dual connect by level<=20
+   
+   
+   ASSIGNMENT
+   __________
+   
+   diff b/w group function and analytical function?
+   diff b/w translate and replace ? ( sorting and restriction topic )
+   diff b/w rank and dense_rank ?
+   diff b/w rownum and rowid ?
+   diff blw lead and lag ?
+   all topics title and subtitle ?
+ 
+  
+

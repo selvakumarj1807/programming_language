@@ -1,0 +1,67 @@
+
+   
+   
+   
+   ____________________________________________________________________________
+   
+   GROUP FUNCTION / Aggregate function
+   
+   select
+   from
+   where
+   group by 
+   having
+   order by
+   
+   MIN
+   MAX
+   COUNT
+   SUM 
+   AVG
+   
+   
+   #group functions ignore the null
+   # count(*),count(1) will include nullwhile couting the colums
+   # min , max , count accept string , int , date
+   # SUM and AVG accepts number datatype alone
+
+   
+      select count(*) from employees;
+      select count(1) from employees;
+      
+
+   select max(salary), min(salary),count(manager_id),sum(salary)/107, sum(salary), avg(salary) from employees;
+   select * from employees;
+   
+   select department_id, max(salary)
+   from employees
+   group by department_id
+   ;
+   
+   select job_id,count(*) as cnt 
+   from employees
+   group by job_id
+   order by 2 ;
+   
+   select to_char(hire_date,'yyyy') as year , count(*) as cnt
+   from employees
+   group by to_char(hire_date,'yyyy')
+   order by 1 DESC;
+   
+   select department_id, count(first_name)
+   from employees
+   group by department_id
+   having count(first_name)>10
+
+
+   select department_id, count(first_name)
+   from employees
+   group by department_id
+   having department_id='A';
+   
+   
+   
+   
+   
+   
+   

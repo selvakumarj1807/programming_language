@@ -1,0 +1,145 @@
+
+--------
+Example 1:
+--------
+Input type 2 :
+--------------
+ Input in multiple variable :
+ ----------------------------
+ 
+para=["25","28","20"]
+print('/'.join(para))
+
+
+
+name1,name2,name3 = input("Enter 3 name :").split(' ')
+
+print("name1 :",name1)
+print("name1 :",name2)
+print("name1 :",name3)
+
+Example :
+---------
+Input type 3:
+-------------
+Input in multiple line (paragraph) :
+------------------------------------
+
+para = []
+print("Enter a para :")
+while True:
+    line = input()
+    if line :
+        para.append(line)
+    else :
+        break
+
+print(para)
+output ='\n'.join(para)
+print(output)
+
+_______________________________________________________________________________________________________________________________
+
+Example 2:
+----------
+
+# String Manipulation :
+-----------------------
+
+a="hi this is tamil info"
+
+
+print(a)
+
+print(a[0:2])
+
+print(a[:5])
+
+print(a[1:])
+
+print(a[-1])
+
+print(a[-2:-1])
+
+print(a[:-1])
+
+print(a[::-1])
+
+
+_______________________________________________________________________________________________________________________________
+
+Example :
+---------
+
+Comment :
+---------
+
+single line comment -->  #
+
+
+multiline comment   -->  """ """
+
+_______________________________________________________________________________________________________________________________
+
+String function :
+-----------------
+
+s="tAmil INfo TEchnoLogy"
+print(s)
+print(type(s))
+print(s.lower())
+print(s.upper())
+print(s.capitalize())
+print(s.title())
+print(s.count('o'))
+print(s.endswith('gy'))
+print(s.endswith('es'))
+print(s.find('o'))
+print(s.find('o',11))
+print(s.replace('o','t'))
+
+
+i="js1807"
+print(i)
+print(i.isupper())
+print(i.islower())
+print(i.isalpha())
+print(i.isalnum())
+
+
+sp="he\nis\ngoos"
+print(sp)
+print(sp.splitlines())
+print(sp.splitlines(True))
+a="Tamil info technology"
+b="Tamil,info,technology"
+print(a.split(' '))
+print(b.split(','))
+
+a = input('Enter a date :')
+
+print(a)
+
+b = a.split(' ')
+
+print(b)
+
+print('/'.join(b))
+
+
+c="   selva    "
+d="*** selva ***"
+print(c)
+print(len(c))
+print(c.strip())
+print(len(c.strip()))
+print(c.lstrip())
+print(len(c.lstrip()))
+print(c.rstrip())
+print(len(c.rstrip()))
+
+
+_______________________________________________________________________________________________________________________________
+
+
+

@@ -1,0 +1,148 @@
+Instead-Of Insert Trigger  :
+
+
+Instead Of Trigger :
+
+	Instead-of triggers in oracle database provide a way of modifying views that cannot be 
+	modified directly through the DML statements. By using Instead-of triggers, you can perform Insert, 
+	Update, Delete and Merge operations on a view in oracle database.
+	
+Example :
+
+CREATE TABLE trainer
+  ( 
+    full_name VARCHAR2(20)
+  );
+  
+  
+CREATE TABLE subject
+  ( 
+    subject_name VARCHAR2(15)
+  );
+  
+
+INSERT INTO trainer VALUES ('selva');
+
+INSERT INTO subject VALUES ('Oracle');
+
+select * from trainer;
+
+select * from subject;
+
+
+CREATE VIEW vw_rebellionrider AS SELECT full_name, subject_name FROM trainer, subject;
+
+SELECT * FROM vw_rebellionrider;
+
+insert into vw_rebellionrider VALUES ('bala','python');
+
+
+CREATE OR REPLACE TRIGGER tr_Io_Insert
+INSTEAD OF INSERT ON vw_rebellionrider
+FOR EACH ROW
+BEGIN
+  INSERT INTO trainer (full_name) VALUES (:new.full_name);
+  INSERT INTO subject (subject_name) VALUES (:new.subject_name);
+END;
+/
+
+
+insert into vw_rebellionrider VALUES ('bala','python');
+
+select * from trainer;
+
+select * from subject;
+
+_________________________________________________________________________________________________________________________
+
+Example 2:
+
+Instead-Of Update Trigger :
+
+
+CREATE TABLE trainer
+  ( 
+    full_name VARCHAR2(20)
+  );
+  
+  
+CREATE TABLE subject
+  ( 
+    subject_name VARCHAR2(15)
+  );
+  
+select * from subject;
+
+select * from trainer;
+
+INSERT INTO trainer VALUES ('selva');
+
+INSERT INTO subject VALUES ('Oracle');
+
+CREATE VIEW vw_rebellionrider AS SELECT full_name, subject_name FROM trainer, subject;
+
+SELECT * FROM vw_rebellionrider;
+
+insert into vw_rebellionrider VALUES ('bala','python');
+
+CREATE OR REPLACE TRIGGER tr_Io_Insert
+INSTEAD OF INSERT ON vw_rebellionrider
+FOR EACH ROW
+BEGIN
+  INSERT INTO trainer (full_name) VALUES (:new.full_name);
+  INSERT INTO subject (subject_name) VALUES (:new.subject_name);
+END;
+/
+
+
+insert into vw_rebellionrider VALUES ('bala','python');
+
+select * from trainer;
+
+select * from subject;
+
+
+update vw_rebellionrider set FULL_NAME = 'kala' where SUBJECT_NAME = 'python';
+
+
+CREATE OR REPLACE TRIGGER io_update
+INSTEAD OF UPDATE ON vw_rebellionrider
+FOR EACH ROW
+BEGIN
+  UPDATE trainer SET FULL_NAME = :new.full_name 
+  WHERE FULL_NAME = :old.full_name;
+  UPDATE subject SET subject_NAME = :new.subject_name 
+  WHERE subject_NAME = :old.subject_name;
+END;
+/
+
+update vw_rebellionrider set FULL_NAME = 'kala' where SUBJECT_NAME = 'python';
+
+select * from trainer;
+
+select * from subject;
+
+_________________________________________________________________________________________________________________________
+
+
+Instead-Of DELETE Trigger :
+---------------------------
+
+CREATE OR REPLACE TRIGGER io_delete
+INSTEAD OF DELETE ON vw_RebellionRider
+FOR EACH ROW
+BEGIN
+  DELETE FROM trainer WHERE FULL_NAME = :old.FULL_NAME;
+  DELETE FROM subject WHERE SUBJECT_NAME= :old.SUBJECT_NAME;
+END;
+/
+
+DELETE from vw_RebellionRider where full_name = 'kala';
+
+select * from trainer;
+
+select * from subject;
+
+
+
+_________________________________________________________________________________________________________________________

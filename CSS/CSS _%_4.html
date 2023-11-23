@@ -1,0 +1,92 @@
+<!--
+
+Type of units in CSS :
+
+
+		1. CSS - px :
+				px stands for Pixel. Pixels can be defined as 1/96th part of an inch.
+				Pixels are widely used in websites to make elements of fixed sizes (ex: font-size:14px;) 
+				i.e we don't want them to change size with screen size variation.
+
+		2. CSS - pt :
+				pt stands for point. 1 CSS pt is defined as 1/72th of an inch.
+				This unit is mainly used in printers for printing the output on paper and not so widely used for on-screen outputs.
+
+		3. CSS - pc :
+				pc stands for pica or picas. 1 CSS pt is defined as 1/6th of an inch.
+				This unit is mainly used in printers for printing the output on paper and not so widely used for on-screen outputs.
+
+		4. CSS - cm :
+				cm stands for centimeter. this also similar to pt and pc
+
+		5. CSS - mm :
+				mm stands for millimeter. this also similar to pt,cm and pc
+
+		6. CSS - in :
+				mm stands for inch. this also similar to pt,pc,cm and mm
+				
+				
+Relative units :
+
+		1. percentage
+		2. em
+		3. rem
+		4. ch
+		5. vh
+		6. vw
+		7. vmin
+		8. ex
+
+-->
+
+
+<!--CSS - % (percentage)-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS %</title>
+  <style>
+	*{
+	  margin: 0;
+	  padding: 0;
+	  box-sizing: border-box;
+	}
+	.main{
+	 
+	  height: 500px;
+	  width: 50%;
+	  background-color: blue;
+	}
+	.box{
+	  width: 33.33%;
+	  height: 50%;
+	  background-color: red;
+	  float: left;
+	  font-size: 45px;
+	  color:white;
+	  border: 5px solid black;
+	}
+	
+	#box{
+	  width: 33.33%;
+	  height: 50%;
+	  background-color: yellow;
+	  float: left;
+	  font-size: 45px;
+	  color:white;
+	  border: 5px solid green;
+	}
+  </style>
+</head>
+<body>
+  <div class="main">
+    <div class="box">Manoj</div>
+    <div id="box">s</div>
+    <div class="box">N</div>
+  </div>
+</body>
+</html>

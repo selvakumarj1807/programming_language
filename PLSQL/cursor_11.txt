@@ -1,0 +1,155 @@
+ PL/SQL Cursors In Oracle Database :
+ -----------------------------------
+ 
+ What is Database Cursor?
+ ------------------------
+ 
+		Cursor is a pointer to a memory area called context area. 
+		This context area is a memory region inside the Process Global Area or 
+		PGA assigned to hold the information about the processing of a SELECT statement or DML Statement 
+		such as INSERT, DELETE, UPDATE or MERGE.
+		
+What is the Context Area?
+-------------------------
+
+		The context area is a special memory region inside the Process Global Area .
+		
+This information includes:
+--------------------------
+
+		1. Rows returned by a query.
+		2. Number of rows processed by a query.
+		3. A pointer to the parsed query in the shared pool.
+		
+	Using cursor you can control the context area as it is a pointer to the same.
+	
+Advantages of Cursors :
+-----------------------
+
+	There are two main advantages of a cursor:
+
+		1. Cursor is names thus you can reference it in your program whenever you want.
+		2. Cursor allows you to fetch and process rows returned by a SELECT statement by a row at a time.
+		
+Types of cursors in oracle database:
+------------------------------------
+	There are two types of cursors in oracle database:
+
+			1. Implicit cursor
+			2. Explicit cursor
+			
+Implicit Cursors in Oracle Database :
+-------------------------------------
+		As the name suggests these are the cursors which are automatically created by the oracle server every 
+		time an SQL DML statement is executed. User cannot control the behavior of these cursors. 
+		Oracle server creates an implicit cursor in the background for any PL/SQL block which executes an SQL statement 
+		as long as an explicit cursor does not exist for that SQL statement.
+		
+Explicit Cursor in oracle database :
+------------------------------------
+
+		Explicit cursors are user defined cursors which means user has to create these 
+		cursors for any statement which returns more than one row of data. Unlike implicit cursor 
+		user has full control of explicit cursor. An explicit cursor can be generated only by naming 
+		the cursor in the declaration section of the PL/SQL block.
+		
+Advantages of Explicit Cursor:
+------------------------------
+
+		Since Explicit cursors are user defined hence they give you more programmatic control on your program.
+		Explicit cursors are more efficient as compared to implicit cursors as in latters case it is hard to track data errors.
+		
+Steps for creating an Explicit Cursor :
+---------------------------------------
+	To create an explicit cursor you need to follow 4 steps. These 4 steps are:
+
+			1. Declare
+			2. Open
+			3. Fetch
+			4. Close
+			
+1. Declare: How To Declare a Database Cursor?
+---------------------------------------------
+
+		1. Declaring a cursor means initializing a cursor into memory. 
+		2. You define explicit cursor in declaration section of your PL/SQL block and associate it with the SELECT statement.
+
+Syntax:
+-------
+
+			CURSOR cursor_name IS select_statement;
+
+2. Open :
+
+		1. In order to put that cursor to work we have to open it first.
+		2. when you open a cursor the memory will be allotted to it.
+		
+Syntax :
+--------
+			OPEN cursor_name;
+
+3. Fetch: How to retrieve data from cursor?
+-------------------------------------------
+		1. The process of retrieving the data from the cursor is called fetching. 
+		2. Once the cursor is declared and opened then you can retrieve the data from it.
+		
+Syntax :
+--------
+			FETCH cursor_name INTO PL/SQL variable;
+			Or 
+			FETCH cursor_name INTO PL/SQL record;
+
+4. Close:
+---------			
+		1. Once you are done working with your cursor it’s advisable to close it. 
+		2. As soon as the server comes across the closing statement of a cursor it will relinquish all the resources associated with it.
+
+Syntax:
+-------
+			CLOSE cursor_name;
+			
+
+Basic Programming Structure of the Cursor :
+--------------------------------------------
+	Here is the basic programming structure of the cursor in oracle database.
+
+			DECLARE
+				CURSOR cursor_name IS select_statement; 
+			BEGIN
+				 OPEN cursor_name;
+				 FETCH cursor_name INTO PL/SQL variable [PL/SQL record]; 
+			CLOSE cursor_name; 
+			END;
+			/
+			
+			
+			
+Cursor Attributes :
+-------------------
+Oracle provides four attributes which work in correlation with cursors. These attributes are:
+
+			1. %FOUND
+			2. %NOTFOUND
+			3. %ISOPEN
+			4. %ROWCOUNT
+			
+1. %Found :
+
+		Cursor attribute ‘Found’ is a Boolean attribute which returns TRUE if the previous FETCH command returned a row otherwise it returns FALSE.
+
+2. %NotFound :
+
+		‘Not Found’ cursor attribute is also a Boolean attribute which returns TRUE only when previous 
+		FETCH command of the cursor did not return a row otherwise this attribute will return FALSE.
+
+3. %IsOpen :
+
+		Again ‘Is Open’ Cursor attribute is a Boolean attribute which you can use to check 
+		whether your cursor is open or not. It returns TRUE if the cursor is open otherwise it returns FALSE.
+
+4. %RowCount :
+
+		Row count cursor attribute is a numeric attribute which means it returns a 
+		numeric value as a result and that value will be the number of records fetched from a cursor at that point in time.
+
+________________________________________________________________________________________________________________________________________

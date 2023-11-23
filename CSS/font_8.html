@@ -1,0 +1,201 @@
+<!--
+Font Properties in CSS : 
+
+			Styling Text with Font-Family, Size, Weight, Style, and More
+			
+			
+	1. font-family: 
+		Specifies the font face or typeface to be used. 
+		You can provide multiple font names, separated by commas, to define fallback options in case the desired font is not available.
+
+	2. font-size: 
+		Sets the size of the font. 
+		It can be specified using absolute units like pixels (px) or relative units like percentages (%). 
+		Common values include pixels (e.g., 16px) or relative units (e.g., 100%).
+
+	3. font-weight: 
+		Determines the thickness or boldness of the font. 
+		It can be set to values like "normal", "bold", or specified using numeric values (e.g., 400, 700) for finer control.
+
+	4. font-style: 
+		Defines the style of the font, such as "normal" (default), "italic", or "oblique". 
+		Italic and oblique styles slant the characters to give them a distinct appearance.
+		
+	5. font-variant: 
+		Modifies the appearance of the font by enabling small caps or other variations. 
+		It can be set to values like "normal", "small-caps", or "all-small-caps".
+
+	6. font-stretch: 
+		Controls the width or condensedness of the font. 
+		It can be set to values like "normal", "condensed", "expanded", or specific keywords like "ultra-condensed" or "ultra-expanded".
+
+	7. font-synthesis: 
+		Determines how missing font styles or weights are synthesized by the browser. 
+		It can be set to values like "weight", "style", "none", or "all" to control the synthesis behavior.
+
+	8. font-display: 
+		Specifies how the web font is displayed while it is being loaded. 
+		It helps control the text's fallback behavior until the custom font is fully loaded. Values include "auto", "swap", "block", "fallback", and more.
+
+
+
+1. Font Family:
+
+Example :
+
+.serif {
+  font-family: "Times New Roman", Times, serif;
+}
+
+.sansserif {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.monospace {
+  font-family: "Lucida Console", Courier, monospace;
+}
+
+________________________________________________________________________________________________________________________
+
+2. Font Size :
+
+Example :
+
+h1{
+   font-size: 40px;
+}
+h2{
+   font-size: 40pt;
+}
+h3{
+   font-size: 80%;
+}
+
+________________________________________________________________________________________________________________________
+
+3. Font weight :
+
+Example :
+
+i {
+  font-weight: bold;
+}
+
+h1 {
+  font-weight: 300;
+}
+
+p {
+  font-weight: bolder;
+}
+
+________________________________________________________________________________________________________________________
+
+4. Font Style :
+
+Example :
+
+p.normal {
+  font-style: normal;
+}
+
+p.italic {
+  font-style: italic;
+}
+
+p.oblique {
+  font-style: oblique;
+}
+
+________________________________________________________________________________________________________________________
+
+5. Font Variant :
+
+Example :
+
+p.normal {
+  font-variant: normal;
+}
+
+p.small {
+  font-variant: small-caps;
+}
+
+________________________________________________________________________________________________________________________
+
+6. Font stretch :
+
+
+Example :
+
+h1 {
+  font-stretch: condensed;
+}
+
+p {
+  font-stretch: expanded;
+}
+
+span {
+  font-stretch: 7;
+}
+
+________________________________________________________________________________________________________________________
+
+7. Font Synthesis :
+
+Example :
+
+h2{
+  font-synthesis: weight;
+}
+
+span {
+  font-synthesis: style;
+}
+
+p {
+  font-synthesis: style weight;
+}
+
+________________________________________________________________________________________________________________________
+
+-->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Css font</title>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <style>
+        h1{
+            font-family: 'Pacifico', cursive;
+            font-weight:normal;
+            font-variant: small-caps;
+            color:red;
+        }
+        p{
+            font-style:italic;
+            font-size: 25px;
+        }
+        span{
+            font: bold 12pt Arial; 
+        }
+    </style>
+</head>
+<body>
+<h1>CSS Font Properties</h1>
+    <p>
+      <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui, 
+      placeat eius! Error deserunt eaque sed non, laboriosam quaerat veritatis
+      </span>veniam possimus? Facilis corporis quae at alias esse optio sint 
+      dignissimos.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui, 
+      placeat eius! Error deserunt eaque sed non, laboriosam quaerat veritatis
+      veniam possimus? Facilis corporis quae at alias esse optio sint 
+      dignissimos.
+    </p>
+    
+</body>
+</html>

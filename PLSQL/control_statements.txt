@@ -1,0 +1,314 @@
+/*
+
+Control Statements :
+
+       Statements which allow you to control the execution flow of the program depending on a condition.
+      
+        Statements in the program are not necessarily executed in a sequence rather one or 
+        other group of statements are executed depending on the evaluation of a condition. 
+    
+	Types :
+	
+		1.IF statements
+		2.CASE statements
+		
+	1. IF statements :
+	
+		1. IF THEN
+		2. IF THEN ELSE
+		3. IF THEN ELSEIF
+		
+	2.CASE statements :
+	
+		1. Simple case
+		2. Searched case
+
+
+    
+1. IF Syntax :
+    
+      IF condition THEN 
+         Statement1; 
+         .
+         .
+         Statement N;
+      END IF;
+      
+*/
+____________________________________________________________________________________________________________________________
+Example 1:
+
+
+SET SERVEROUTPUT ON; 
+DECLARE  
+V_num NUMBER := 9;
+BEGIN 
+IF v_num >10 THEN 
+DBMS_OUTPUT.PUT_LINE('Inside The IF');
+END IF; 
+DBMS_OUTPUT.PUT_LINE ('Ouside The IF'); 
+END; 
+/ 
+
+____________________________________________________________________________________________________________________________
+Example 2:
+
+SET SERVEROUTPUT ON;
+DECLARE 
+v_website VARCHAR2(30) := 'apple'; 
+v_author VARCHAR2 (30) := 'mango'; 
+BEGIN IF v_website = 'apple' AND v_author = 'mango' THEN 
+DBMS_OUTPUT.PUT_LINE ('Everything is Awesome ');
+END IF; 
+DBMS_OUTPUT.PUT_LINE('End of the statement');
+END; 
+/ 
+
+____________________________________________________________________________________________________________________________
+
+/*
+2. IF  THEN ELSE :
+
+Syntax :
+
+  IF condition THEN 
+  `Statement 1; 
+  ELSE 
+   Statement 2; 
+  END IF; 
+   Statement 3;
+
+*/
+
+____________________________________________________________________________________________________________________________
+
+Example 1:
+
+SET SERVEROUTPUT ON; 
+DECLARE 
+v_num NUMBER := &enter_a_number; 
+BEGIN 
+IF MOD (v_num, 2) = 0 THEN 
+DBMS_OUTPUT.PUT_LINE(v_num||' Is Even'); 
+ELSE DBMS_OUTPUT.PUT_LINE (v_num||' Is Odd'); END IF; 
+DBMS_OUTPUT.PUT_LINE ('If Then Else Construct Complete'); 
+END;
+/
+
+____________________________________________________________________________________________________________________________
+
+
+/*
+3.ELSE IF
+
+Syntax :
+
+IF CONDITION 1 THEN 
+statement 1;
+ELSIF CONDITION 2 THEN 
+STATEMENT 2; 
+ELSIF CONDITION 3 THEN 
+STATEMENT 3; 
+ELSE 
+STATEMENT N; 
+END IF;
+
+*/
+
+____________________________________________________________________________________________________________________________
+
+Example :
+
+SET SERVEROUTPUT ON; 
+DECLARE 
+v_num NUMBER := &enter_a_number; 
+BEGIN 
+IF v_num = 10 THEN 
+DBMS_OUTPUT.PUT_LINE(v_num||' Is 10'); 
+ELSIF v_num = 20 THEN 
+DBMS_OUTPUT.PUT_LINE(v_num||' Is 20'); 
+ELSIF v_num = 30 THEN 
+DBMS_OUTPUT.PUT_LINE(v_num||' Is 30'); 
+ELSE DBMS_OUTPUT.PUT_LINE (v_num||' Is other'); END IF; 
+DBMS_OUTPUT.PUT_LINE ('If Then Else Construct Complete'); 
+END;
+/
+
+____________________________________________________________________________________________________________________________
+
+/*
+Types of loop in sql
+
+    1. Simple loop
+    2. While loop
+    3. Numeric for loop
+    4. Cursor for loop
+    
+1. Simple Loop :
+
+  Syntax :
+  
+    LOOP
+      statement 2;
+      statement 3'
+      ,....
+      statement n;
+    END LOOP;
+
+*/
+
+____________________________________________________________________________________________________________________________
+
+EXAMPLE 1:
+
+SET SERVEROUTPUT ON;
+DECLARE
+  v_counter NUMBER := 0;
+  v_result NUMBER;
+BEGIN
+  LOOP
+  v_counter := v_counter + 1;
+  v_result := 19 * v_counter;
+  DBMS_OUTPUT.PUT_LINE('19'||'X'||v_counter||'='||v_result);
+  --EXIT CONDITION
+  IF v_counter >= 10 THEN
+    EXIT;
+  END IF;
+  END LOOP;
+END;
+/
+
+____________________________________________________________________________________________________________________________
+
+
+/*
+While Loop :
+
+Syntax :
+
+    WHILE condition LOOP
+      statement 1;
+      statement 2;
+      .....
+      statement n;
+    END LOOP
+
+*/
+____________________________________________________________________________________________________________________________
+
+Example 1:
+
+SET SERVEROUTPUT ON; 
+DECLARE 
+v_counter NUMBER :=1; 
+v_result NUMBER; 
+BEGIN 
+WHILE v_counter <= 10 LOOP 
+v_result := 19 * v_counter; 
+DBMS_OUTPUT.PUT_LINE('19 '||' x '||v_counter||' = '||v_result);
+v_counter := v_counter+1; 
+END LOOP; 
+DBMS_OUTPUT.PUT_LINE('Outside the Loop'); 
+END;
+/
+
+
+____________________________________________________________________________________________________________________________
+17/09/2023
+
+Example 2 :
+
+SET SERVEROUTPUT ON; 
+DECLARE 
+  v_test BOOLEAN := TRUE;
+  v_counter NUMBER := 0;
+BEGIN
+  WHILE v_test LOOP
+    v_counter := v_counter + 1;
+    DBMS_OUTPUT.PUT_LINE(v_counter);
+    -- Loop Termination Code
+    IF v_counter = 10 THEN
+      v_test := FALSE;
+    END IF;
+  END LOOP;
+  DBMS_OUTPUT.PUT_LINE('Outside the loop');
+END;
+/
+
+____________________________________________________________________________________________________________________________
+
+
+/*
+For Loop :
+
+      For loop allows you to execute the block of statements repeatedly for a fixed number of times.
+      
+  Syntax :
+  
+      FOR loop_condition IN [REVERSE] lower_limit .. upper_limit LOOP
+      
+          statement 1;
+          statement 2;
+          ...
+          statement n;
+          
+      END LOOP;
+
+*/
+
+
+SET SERVEROUTPUT ON; 
+
+DECLARE
+  v_result NUMBER;
+BEGIN
+  FOR v_counter IN 1 .. 10 LOOP
+    v_result := 19 * v_counter;
+    DBMS_OUTPUT.PUT_LINE(' 19 '||' X '||v_counter||' = '||v_result);
+  END LOOP;
+END;
+/
+
+____________________________________________________________________________________________________________________________
+
+Example 1:
+
+How to get the string value from user :
+
+
+
+SET SERVEROUTPUT ON -- This is required to enable DBMS_OUTPUT
+
+DECLARE
+  v_num VARCHAR2(20);
+  selva VARCHAR2(20) := '&enter_a_name'; -- Provide a default value if needed
+BEGIN
+  v_num := selva;
+  
+  DBMS_OUTPUT.PUT_LINE('v_num: ' || v_num);
+END;
+/
+
+____________________________________________________________________________________________________________________________
+
+Example 2:
+
+SET SERVEROUTPUT ON -- This is required to enable DBMS_OUTPUT
+
+DECLARE
+  v_num VARCHAR2(20);
+  selva VARCHAR2(20) := '&enter_a_name'; -- Provide a default value if needed
+  
+  v_number number(20);
+  selvanum number(20) := '&enter_a_age'; -- Provide a default value if needed
+BEGIN
+  v_num := selva;
+  
+  v_number := selvanum;
+  
+  DBMS_OUTPUT.PUT_LINE(  v_num||' age is '||v_number);
+END;
+/
+
+
+____________________________________________________________________________________________________________________________

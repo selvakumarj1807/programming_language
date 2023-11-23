@@ -1,0 +1,129 @@
+-- GROUP FUNCTION
+
+select * from employees;
+
+--Aggregate Functions:
+--=================
+
+select max(salary) from employees;
+select min(salary) from employees;
+select sum(salary) from employees;
+select count(salary) from employees;
+select avg(salary) from employees;
+
+--------------------------------------------------
+-- We can't select non-aggregate column with aggregate column. 
+
+select count(salary),min(salary) from employees;
+
+select department_id,max(salary) from employees;
+--ORA-00937: not a single-group group function
+
+select department_id,max(salary) from employees group by department_id;
+
+--whenever we want to use wise keyword, use group by.  
+
+--Filter condition on resultant of group by clause - We have to use having clause. 
+
+--Having clause is always come with group by   group by  + having 
+
+select department_id,sum(salary) from employees group by department_id;
+
+select department_id,sum(salary) from  employees group by department_id having sum(salary) >50000;
+
+--The order of keywords in any oracle SQL statement. 
+
+--1.from
+--2.where
+--3.group by
+--4.having
+--5.order by
+
+select department_id,sum(salary) from employees where department_id is not null
+group by department_id having sum(salary) >50000 order by 1;
+
+select * from employees where department_id is null;
+
+select department_id,sum(salary) from employees where department_id is null
+group by department_id having sum(salary) >50000 order by 1;
+
+select * from employees;
+
+
+
+---------------------------------------------------------
+
+--Analytical_function:
+--====================
+
+   --Analytic functions calculate an aggregate value based on a group of rows
+   --however, analytic functions can return multiple rows for each group
+   
+   
+   select sum(salary) from employees;  ---691400
+----- Using Over()
+select employee_id,first_name,salary,sum(salary) over() from employees;
+
+
+---Using PARTITION BY
+select employee_id,first_name,salary,department_id,sum(salary)
+ over(PARTITION by department_id) deaprtment_wise_sum_of_salary ,sum(salary) over() over_all_sum_of_salary from employees;
+ 
+--1  rank():
+--=======
+
+select employee_id,first_name,salary,department_id,
+rank() Over(ORDER BY salary desc) RANK from employees;
+
+select employee_id,first_name,salary,department_id,
+rank() Over(PARTITION BY department_id ORDER BY salary desc) RANK from employees;
+
+SELECT * FROM
+(select employee_id,first_name,salary,department_id,
+rank() Over(ORDER BY salary desc) RANK from employees) where rank<=5; 
+
+----2nd highest salary
+select employee_id,first_name,salary,department_id,
+rank() Over(ORDER BY salary desc) RANK from employees;
+
+SELECT * FROM
+(select employee_id,first_name,salary,department_id,
+rank() Over(ORDER BY salary desc) RANK from employees) where rank=2; 
+---
+----2nd highest salary indepartment vise
+select employee_id,first_name,salary,department_id,
+rank() Over(PARTITION BY department_id ORDER BY salary desc) RANK from employees;
+
+SELECT * FROM
+(select employee_id,first_name,salary,department_id,
+rank() Over(PARTITION BY department_id ORDER BY salary desc) RANK from employees)
+ where rank=25;
+ 
+ ---------------
+ 
+-- DENSE_RANK():
+--============
+select employee_id,first_name,salary,department_id,
+DENSE_RANK() Over(ORDER BY salary desc) RANK from employees;
+
+--row_number():
+--=============
+----using TRANSACTION using unique one so use ROW_NUMBER
+select employee_id,first_name,salary,department_id,
+row_number() Over(ORDER BY salary desc) RANK from employees;
+
+--LEAD():----After
+--========
+select employee_id,first_name,hire_date,salary,department_id,
+lead(First_name) Over(ORDER BY hire_date) After_hire_name,
+lead(hire_date) Over(ORDER BY hire_date) After_hire
+from employees;
+
+--LAG():---Before
+--=======
+select employee_id,first_name,hire_date,salary,department_id,
+LAG(First_name) Over(ORDER BY hire_date) After_hire_name,
+LAG(hire_date) Over(ORDER BY hire_date) After_hire
+from employees;
+
+

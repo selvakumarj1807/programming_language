@@ -1,0 +1,112 @@
+Example 1:
+---------
+
+a=10
+b=15
+
+print(a)
+
+print(b)
+
+print (a,type(a))
+
+print(b,type(b))
+
+c = a + b
+
+print(a," + ",b," = ",c)
+
+
+________________________________________________________________________________________________________________________
+
+Example 2:
+----------
+
+
+a=10
+b=15
+c = a + b
+print(a)
+
+print(b)
+
+print(a," + ",b," = ",c)
+
+print (a,type(a))
+
+print(b,type(b))
+
+d = 10.25
+
+print (d)
+
+print(d,type (d))
+
+str1 = "hellow world"
+
+print (str1)
+
+print(str1,type(str1))
+
+print("************************************************")
+
+print("Type casting :")
+
+
+a1 = int(25.26)
+
+b1 = float (15)
+
+print(a1,type(a1))
+
+print(b1,type(b1))
+
+
+
+
+________________________________________________________________________________________________________________________
+
+Example 3:
+----------
+
+Input Method:
+-------------
+
+a = input('Enter your name :')
+
+print('your name is ',a)
+
+
+b = int(input('Enter your age :'))
+
+print ('your age is',b)
+
+
+print ('***********************************************************')
+
+
+a1 = int(input('Enter a first value :'))
+
+b1 = int(input('Enter a second value :'))
+
+add = a1 + b1
+
+sub = a1 - b1
+
+mul = a1 * b1
+
+div = a1 / b1
+
+print (a1,' +',b1,' =',add)
+
+print (a1,' -',b1,' =',sub)
+
+print (a1,' *',b1,' =',mul)
+
+print (a1,' /',b1,' =',div)
+
+
+
+print ('***********************************************************')
+
+

@@ -1,0 +1,115 @@
+Polymorphism :
+--------------
+
+	Polymorphism means "many forms", and it occurs when we have many classes that are related to each other by inheritance.
+
+	Like we specified in the previous chapter; Inheritance lets us inherit attributes and methods from another class. 
+	Polymorphism uses those methods to perform different tasks. 
+	This allows us to perform a single action in different ways.
+
+	1. Compile time Polymorphism :
+	------------------------------
+			It is also know as static Polymorphism.
+	
+		Example - Method Overloading
+		
+	2. Run time Polymorphism :
+	--------------------------
+			It is also known as Dynomic Method Dispatch
+		
+		Example - Method Overriding
+		
+________________________________________________________________________________________________________________________________________
+
+
+Method Overloading in Java :
+----------------------------
+
+	Method overloading, also known as function overloading, is the ability of a class to have 
+	multiple methods with the same name, granted that they differ in either number or type of arguments. 
+	Compiler checks method signature for method overloading.
+
+Method signature consists of three things :
+-------------------------------------------
+		1. Method name
+		2. Number of parameters
+		3. Types of parameters
+		
+Example :
+---------
+
+//Method Overloading in  Java
+class MathOperation {
+    public static int multiply(int a, int b) {
+        return a * b;
+    }
+    public static double multiply(double x, double y) {
+        return x * y;
+    }
+    public static double multiply(double i, int j) {
+        return i * j;
+    }
+    public static int multiply(int r) {
+        return r*r;
+    }
+}
+class methodOverloading {
+    public static void main(String arg[]) {
+        System.out.println("Multiply 2 Integer Value : " + MathOperation.multiply(25, 10));
+        System.out.println("Multiply 2 Double Value : " + MathOperation.multiply(2.5, 8.5));
+        System.out.println("Multiply Double & Integer Value : " + MathOperation.multiply(2.5, 8));
+        System.out.println("Multiply Integer Value : " + MathOperation.multiply(2));
+    }
+}
+
+
+________________________________________________________________________________________________________________________________________
+
+oru base class la iruka function ah derived class la redifined panna adhhu methodOverrriding.
+
+Method Overriding in Java :
+---------------------------
+
+	Overriding in Inheritance is used when you use a already defined method from a super class in a sub class, 
+	but in a different way than how the method was originally designed in the super class. 
+	Overriding allows the user to reuse code by using existing material and modifying it to suit the user’s needs better.
+	
+Example :
+---------
+
+//Method Overriding in Java
+class user { //Base
+    String name;
+    int age;
+    user(String n, int a) {
+        this.name = n;
+        this.age = a;
+    }
+    public void display(){
+        System.out.println("Name  : "+name);
+        System.out.println("Age   : "+age);
+    }
+ 
+}
+class MainProgrammer extends user{ //Derived Class
+    String CompanyName;
+    MainProgrammer(String n, int a,String c){
+        super(n,a);
+        this.CompanyName=c;
+    }
+    public void display(){
+        System.out.println("Name  : "+name);
+        System.out.println("Age   : "+age);
+        System.out.println("Company Name : "+CompanyName);
+    }
+ 
+}
+class methodOverriding {
+    public static void main(String args[]) {
+        MainProgrammer o =new MainProgrammer("Raja",22,"Tutor Joes");
+        o.display();
+    }
+}
+
+________________________________________________________________________________________________________________________________________
+

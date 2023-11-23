@@ -1,0 +1,32 @@
+<html>
+<head>
+</head
+<body>
+<h1> Java Script Date</h1>
+<p id="p1"> </p>
+<br>
+<button onclick="start()">Start</button><button onclick="stop()">Stop</button>
+<script>
+function changecolor(){
+date = new Date();
+hour = date.getHours();
+minute = date.getMinutes();
+second = date.getSeconds();
+timing = date.toLocaleTimeString();
+
+x=document.getElementById("p1");
+x.innerHTML=timing;
+if(second % 2 == 0)
+{x.style.color="red";}
+else{x.style.color="blue";}
+}
+function start(){
+clear=setInterval(changecolor,1000);//1000 milli seconds
+}
+function stop(){
+clearInterval(clear);
+}
+
+</script>
+</body>
+</html>

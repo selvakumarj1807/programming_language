@@ -1,0 +1,173 @@
+
+Ref cursor :
+------------
+
+	1. It is PL/SQL Datatype, used to create a special type of variable called cursor variable.
+	2. cursor variable act as pointers to the cursor result. 
+
+
+
+
+
+Introduction To PL/SQL Ref Cursors In Oracle Database :
+-------------------------------------------------------
+
+What are PL/SQL Ref Cursors in Oracle Database?:
+------------------------------------------------
+
+	Ref Cursor is an acronym of Reference to a Cursor. 
+	It is a PL/SQL datatype using which you can declare a special type of variable called Cursor Variable.
+	
+What Is PL/SQL Ref Cursors In Oracle Database? :
+------------------------------------------------
+
+	A single ref cursor to get associated with multiple SELECT statements in a single PL/SQL block.
+	In addition, this reduces the need for writing separate explicit cursors. 
+	
+	
+What is the syntax for Declaring Ref Cursor? :
+----------------------------------------------
+
+		DECLARE
+		 TYPE [cursor_variable_name] IS REF CURSOR [RETURN (return_type)];
+		 
+How many types of PL/SQL ref cursors do we have? :
+--------------------------------------------------
+
+		1. Strong Ref Cursor and
+		2. Weak Ref Cursor
+		
+1. Strong Ref Cursor :
+----------------------
+
+	Any ref cursor which has fixed return type is called strong ref cursor.
+	
+Syntax of Strong Ref Cursors in PL/SQL :
+----------------------------------------
+
+		DECLARE
+			TYPE cursor_variable_name IS REF CURSOR 
+		RETURN (return type);
+		
+What is a Weak Ref Cursor in Oracle Database? :
+-----------------------------------------------
+
+	weak ref cursors are those which do not have any return type. In other words, 
+	those ref cursors which do not have fixed return type are called weak ref cursors.
+
+	Since weak Ref Cursors do not have any fixed return type thus they are open to all SELECT statements. 
+	And this makes them one of the most used Ref Cursors in PL/SQL.
+	
+Syntax of Weak Ref Cursors in PL/SQL :
+--------------------------------------
+
+		DECLARE
+			TYPE ref_cursor_name IS REF CURSOR;
+			
+Sys_RefCursor :
+---------------
+	Sys Ref cursor is an Oracle built in cursor variable. It declares a weak ref cursor and that too without declaring the ref pointer type.
+	
+	
+___________________________________________________________________________________________________________________________________________________
+
+Strong Ref Cursors With Table Based Record Datatype :
+-----------------------------------------------------
+
+SET SERVEROUTPUT ON
+ DECLARE
+    	/*Create Ref Pointer Type*/
+	TYPE	my_RefCur	IS REF CURSOR RETURN 	employees%ROWTYPE;
+	/*Create Cursor Variable*/
+	cur_var my_RefCur;
+	rec_var     employees%ROWTYPE;
+ BEGIN
+	OPEN cur_var FOR SELECT * FROM employees WHERE employee_id = 100;
+	FETCH cur_var INTO rec_var;
+	CLOSE cur_var;
+	DBMS_OUTPUT.PUT_LINE ('Employee '||rec_var.first_name||' has salary '||rec_var.salary||'.');
+END;
+/ 
+
+___________________________________________________________________________________________________________________________________________________
+
+PL/SQL Strong Ref Cursor With User Defined Record Datatype :
+------------------------------------------------------------
+
+SET SERVEROUTPUT ON;
+DECLARE
+	--Create User-Defined Record Datatype
+    TYPE my_rec IS RECORD (
+        emp_sal employees.salary%TYPE
+        );
+	--Declare Strong Ref Cursor
+    TYPE RefCur IS REF CURSOR RETURN my_rec;
+    cur_var REFCUR;
+	--Another anchored datatype variable for holding data
+    at_var  employees.salary%TYPE;
+BEGIN
+   OPEN cur_var FOR SELECT salary FROM employees WHERE employee_id = 100;
+    FETCH cur_var INTO at_var;
+    CLOSE cur_var;
+    DBMS_OUTPUT.PUT_LINE ('Salary of the employee is '||at_var);
+END;
+/
+
+___________________________________________________________________________________________________________________________________________________
+
+How To Create PL/SQL Weak Ref Cursor In Oracle Database :
+---------------------------------------------------------
+
+Syntax of Weak Ref Cursor :
+---------------------------
+
+TYPE ref_cursor_name IS REF CURSOR;
+
+
+Example :
+---------
+
+SET SERVEROUTPUT ON;
+DECLARE
+    /*Declare Weak Ref Cursor*/
+    TYPE wk_RefCur IS REF CURSOR;
+    /*Declare Cursor Variable of ref cursor type*/
+    cur_var wk_RefCur;
+    
+     /*Declare two "Anchored Datatype Variable" for holding data from the cursor*/
+    f_name  employees.first_name%TYPE;
+    emp_sal employees.salary%TYPE;
+BEGIN
+    OPEN cur_var FOR SELECT first_name, Salary FROM employees WHERE employee_id = 100;
+    FETCH cur_var INTO f_name, emp_sal;
+    CLOSE cur_var;
+    DBMS_OUTPUT.PUT_LINE (f_name ||' '||emp_sal);
+END;
+/
+
+___________________________________________________________________________________________________________________________________________________
+
+How To Create PL/SQL SYS_REFCURSOR In Oracle Database :
+-------------------------------------------------------
+
+What is PL/SQL SYS_REFCURSOR? :
+-------------------------------
+	SYS_REFCURSOR is a predefined weak ref cursor which comes built-in with the Oracle database software.
+	
+SET SERVEROUTPUT ON;
+DECLARE
+    --Declare cursor variable of SYS_REFCURSOR type
+    cur_var SYS_REFCURSOR;
+    
+    --Declare variables for holding data
+    f_name  employees.first_name%TYPE;
+    emp_sal employees.salary%TYPE;
+BEGIN
+OPEN cur_var FOR SELECT first_name, Salary FROM employees WHERE employee_id = 100;
+    FETCH cur_var INTO f_name, emp_sal;
+    CLOSE cur_var;
+    DBMS_OUTPUT.PUT_LINE(f_name ||' '||emp_sal);
+END;
+/
+
+___________________________________________________________________________________________________________________________________________________

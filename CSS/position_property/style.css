@@ -1,0 +1,25 @@
+.main{
+    border: 5px solid gray;
+    width: 500px;
+    min-height: 500px;
+}
+
+.box{
+    width: 100px;
+    height: 100px;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.box1{
+    background-color: teal;
+}
+
+.box2{
+    background-color: tomato;
+}
+
+.box3{
+    background-color: lightgreen;
+}

@@ -1,0 +1,59 @@
+External Table :
+
+step 1:
+
+sqldeveloper :
+
+	create or replace directory External_dir as 'C:\Users\selva\Documents\External';
+
+step 2:
+
+	create a sample_file file in these folder 'C:\Users\selva\Documents\External'
+	
+		sample_file.txt
+		
+			10,SRI
+			20,DEVI
+			30,RAJINI
+			40,KAMAL
+			
+step 3:
+
+sqldeveloper :
+
+				create table External_Table
+				(
+				v_num number(5),
+				v_name varchar2(20)
+				)
+				ORGANIZATION EXTERNAL 
+				(
+				TYPE ORACLE_LOADER DEFAULT DIRECTORY External_dir
+				ACCESS PARAMETERS
+				(
+				RECORDS DELIMITED BY NEWLINE FIELDS TERMINATED BY ','
+				)
+				LOCATION ('sample_file.txt')
+				);
+				
+				
+step 4:
+
+		select * from External_Table;
+		
+		
+_____________________________________________________________________________________________________________
+
+
+You have a any privilege error :
+
+open cmd :
+
+			sqlplus / as sysdba
+
+			grant connect to hr identified by admin;
+
+			grant all privilege to hr identified by admin;
+
+
+_____________________________________________________________________________________________________________

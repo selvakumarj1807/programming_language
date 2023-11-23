@@ -1,0 +1,169 @@
+
+
+SQL Topics
+
+1.Basic SQL Select Statement
+2.Restricting and Sorting Data
+3.Single Row Functions
+4.Group Functions
+5.Analytical Functions	
+6.Set Operators
+7.Pseudo Columns
+8.Constraints
+9. DCL
+10.DDL
+11.DML
+12.TCL
+13.Sub Queries
+14.Joins
+15.Views
+16.Materialized Views
+17.Synonyms
+18.Sequence
+19.Index
+20.SQL Loader
+21.External Tables
+22.Global Temporary Table
+23.SQL PLUS Commands
+24.Table Partitioning
+25.Virtual Column
+
+
+ select 
+ From
+ where
+ order by
+ distinct
+ logical Operators ( AND , OR , NOT )
+
+ 1.Basic SQL Select Statement
+ _____________________________
+ 
+ select * from employees;
+ 
+ select first_name,email from employees;
+
+ Select  clause comes from coloumn name,
+ From clause Comes from table name
+ * --> all Coloumns or given coloumn names / particular name
+ 
+ 2.Restricting and Sorting Data
+ ______________________________
+ 
+ Sorting
+ _______
+ 
+ In set of Query , Assigning group  Systematically according their requirement
+ 
+ #Select
+ #From
+ #where( Filter records )
+ #Order by ( Filter records Asc , Desc )
+ #Distinct ( Eliminate duplicates )
+ #Relational Operators 
+  = , < , > , <= , >= , ( != / <> ) 
+  like , not like
+  between , not between
+  is null , is not null
+ #Logical operators
+  and , or , not
+ 
+ 
+ select * from employees where department_id=50;
+ 
+ select email,phone_number ,salary,first_name from employees where first_name='John';
+ 
+ select * from employees order by salary DESC;
+ 
+ select distinct(first_name) from employees where first_name='Steven';
+
+
+ ---( = )
+ 
+ select * from employees where manager_id=100;
+
+ ---( != / <> )
+
+  select * from employees where manager_id!=100;
+  select * from employees where department_id<>50;
+  
+ ---( < - less than )
+ 
+   select * from employees where salary<10000;
+
+ ---( <= - less than or equal )
+ 
+   select * from employees where salary<=10000;
+   
+ ---( > - greater than)
+ 
+   select * from employees where salary>10000;
+   
+ ---( >= - greater than or equal)  
+ 
+    select * from employees where salary>=10000;
+
+ ---Like
+ 
+   select * from employees where first_name  like '%r';
+   select * from employees where first_name  like 'P%';
+   select * from employees where first_name  like 'P%r';
+   
+ ---not like 
+ 
+   select * from employees where first_name  not like '%r';
+   select * from employees where first_name  not like 'P%';
+   select * from employees where first_name  not like 'P%r';
+   
+ ---Between and not between
+   
+   select * from employees where salary between 9000 and 10000
+   select * from employees where salary not between 9000 and 10000
+   
+ ---is null , is not null
+       
+      select * from employees where department_id is  null;
+      select * from employees where department_id is not null;
+
+  Logical Operators
+  __________________
+  
+  and 
+  
+  select employee_id, first_name, last_name ,salary
+  from employees
+  where first_name='Steven'
+  and 
+  salary=24000;
+  
+  
+  or 
+  
+  select employee_id, first_name, last_name ,salary
+  from employees
+  where first_name='Steven'
+  or 
+  first_name='Neena';
+  
+   
+   
+   Restricting ( Some Restriction given to the coloumn and table )
+   ______________
+   
+  select * from employees;
+   
+  Can't create Coloumn name in number
+  Space not Allowed
+  reserved Keywords does not given to create coloumn name
+  one primary key in one table
+   
+ Assignment
+
+1) Display employee_id and salary for all employees
+2) Display the first_name of all employees who are working in department 10
+3) Display employee_id,first_name,salary for all employees
+4) Display salary descending , and display employee_id,first_name, salary from all employees \
+5) Display first_name, last_name,salary,department_id from employees table and display the first_name in
+   descending order
+6) Display employee_id, first_name,department_id from employees and display the department_id in ascending order
+7) Each and every opertors you can write with 2 examples

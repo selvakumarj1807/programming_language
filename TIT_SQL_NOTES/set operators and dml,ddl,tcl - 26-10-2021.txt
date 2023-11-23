@@ -1,0 +1,150 @@
+Datatypes ---> number, varchar , varchar2, date 
+
+DDl ( Data definition language )
+____________________________________
+     
+	 #All DDL operations auto commit language
+
+ 1.create - ( Create a new table and columns )
+ 
+ create table demo (id number, name varchar2(10));
+ select * from demo;
+ desc demo;
+ 
+ 2.alter - ( add a new column in existing table )
+ 
+   alter table demo add mark number;
+ 
+ 
+ 3.drop - ( Drop table totally )
+ 
+   drop table emp;
+ 
+ 4.truncate - (truncate all records/data in tha table )
+ 
+   truncate table emp;
+ 
+ 5.rename - ( rename the column name old name to new name in existing table
+ 
+   alter table demo rename column mark to marks;
+ 
+ DML ( Data Manipulation language )
+ ___________________________________
+ 
+ All dml operations requires commit
+ 
+ 1.insert
+ creation of new record in the table
+ select * from demo;
+ insert into demo values(1,'priya',30);
+ commit;
+ 
+ 2.update
+ modify the existing record
+ update demo set name='vino';
+ commit;
+ rollback;
+ 
+ 
+ 3.delete
+ Removing existing record
+ delete from demo;
+ commit;
+ rollback;
+
+4.merge
+Merge into emp_t t
+using empp_s s on (s.empno=t.empno)
+when matched then
+update set
+t.empname=s.empname||s.lname,
+t.lname=s.lname
+
+ 
+ 
+ TCL ( Transaction Control language)
+ ____
+ 1.commit 
+   Commit is used to save all uncommited DML in the same session
+ 2.rollback
+   Rollback is used to revert all pending
+ 3.save point
+   its flag or marker,identify a point which u can roll back later
+ 
+ DCL ( data control language)
+ ____
+ 1.GRANT --USED TO GIVEN PERMISSION TO A USER TO ACCESS A DATABASE
+ 2.REVOKE --IS USED TO WITHDRAW THE USERS ACCESS TO A DATABASE IN SIMPLE WORDS 
+ 
+
+____________________________________________________________________________________ 
+ set operators 
+ _______________
+
+ To compare the result of query
+ 2 select statement
+ 
+ union
+ unionall
+ intersect
+ minus
+ 
+ 1.union - matched and unmatched records , remove duplicate
+ 
+ T1-->1,2,3
+ T2-->2,3,4
+ 
+ 1,2,3,4
+ 
+ select ab from t1
+ union
+ select ab from t2;
+ 
+ 2.unionall - matched and unmatched record
+ 
+  T1-->1,2,3
+  T2-->2,3,4
+ 
+  1,2,2,3,3,4
+ 
+  select ab from t1
+  union all
+  select ab from t2;
+ 
+ 
+ 3.intersect- matched values
+ 
+  T1-->1,2,3
+  T2-->2,3,4
+ 
+  select ab from t1
+  intersect
+  select ab from t2;
+ 
+  2,3
+ 
+  4.minus - which are present in first query but absent in second query
+ 
+   T1-->1,2,3
+   T2-->2,3,4
+ 
+ select ab from t1
+ minus
+ select ab from t2;
+ 
+ 1
+ 
+ _________________________________________________________________________
+ create table t1(ab number);
+ insert into t1 values(3);
+ select * from t1;
+ create table t2(ab number);
+ insert into t2 values(2);
+  insert into t2 values(3);
+ insert into t2 values(4);
+
+ select * from t1;
+ select * from t2;
+
+ 
+ 

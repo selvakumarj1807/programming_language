@@ -1,0 +1,100 @@
+'''
+
+print('-----Arithmetic Operator-------')
+a=10
+b=15
+
+print('Addition : a+b =',a+b)
+print('Subtraction : a-b =',a-b)
+print('Multiplication : a*b =',a*b)
+print('Devision : a/b =',a/b)
+print('modulus : a%b =',a%b)
+a=2
+b=5
+print('Exponentiation : a**b =',a**b)# 2*2*2*2*2 = 32
+a=2
+b=5
+print('Floor devision :', a,'//',b ,'=',a//b)
+
+'''
+
+'''
+print('Assignment operator')
+
+a = 10
+print(a)
+a += 5 # a = a + 5
+
+print(a)
+
+a = 10
+print(a)
+a -= 5 # a = a - 5
+
+print(a)
+
+a = 10
+print(a)
+a *= 5 # a = a * 5
+
+print(a)
+
+a = 10
+print(a)
+a /= 5 # a = a / 5
+
+print(a)
+
+a = 10
+print(a)
+a %= 5 # a = a % 5
+
+print(a)
+
+a = 10
+print(a)
+a **= 5 # a = a ** 5
+
+print(a)
+
+a = 10
+print(a)
+a //= 5 # a = a // 5
+
+print(a)
+
+'''
+'''
+print('Comparision OPerator')
+
+a = 10
+b = 15
+
+print('Equal :',a==b)
+
+print('Not Equal :',a!=b)
+
+print('Graterthan :',a>b)
+
+print('Less than :',a<b)
+
+print('Graterthan or Equal to :',a>=b)
+
+print('Lessthan or Equal to :',a<=b)
+
+'''
+'''
+print('Logical OPerater')
+a=10
+if (a<5 and a>5):
+  print('AND OPerator')
+
+a=10
+if (a<5 or a>5):
+  print('OR OPerator')
+
+a=10
+if (not(a<5 and a>5)):
+  print('NOT OPerator')
+'''
+

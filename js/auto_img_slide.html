@@ -1,0 +1,47 @@
+<html>
+<head>
+</head>
+<body>
+<h1> Image Slider using js</h1>
+<img src="Screenshot (4).png" id="m1" height="400" width="400"><br><br>
+<button onclick="forword()"> <span>Forword > </span></button>
+<button onclick="backword()"> <span>Backword < </span></button>
+<script>
+x=["Screenshot (1).png", "Screenshot (2).png", "Screenshot (3).png","Screenshot (4).png"];
+ //0                   ,   1         ,            2
+slide=document.getElementById("m1");
+count=-1;
+//slide.src=x[0];
+function forword()
+{
+count=count+1;//count=0
+if (count<=x.length) //0,1,2,3
+{ 
+if (count==x.length) //3=3
+{
+count=0;
+}
+slide.src=x[count]; //0,1,2,0,1,2
+}
+console.log(count);
+}
+
+setInterval(forword,3000);
+
+function backword()
+{
+count=count-1;//count=0
+if (count<x.length) //0,1,2
+{ 
+if (count== -1 || count== -2) 
+{
+index=x.length-1;
+count=index;
+}
+slide.src=x[count]; //2,1,0,-1,
+}
+console.log(count);
+}
+</script>
+</body>
+</html>

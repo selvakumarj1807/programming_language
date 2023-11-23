@@ -1,0 +1,121 @@
+SINGLE ROW FUNCTION
+3.NUMBER FUNCTION
+
+     ROUND
+     FLOOR
+     CEIL
+     MOD
+     SIGN
+     ABS
+     TRUNC
+     
+     1.ROUND
+     
+     SELECT ROUND(3.65) FROM DUAL;
+     SELECT ROUND(3.25) FROM DUAL;
+     SELECT ROUND(7.95) FROM DUAL;
+     
+     2.FLOOR ( PREVIOUS  VALUE)
+     
+      SELECT FLOOR(7.95) FROM DUAL;
+      SELECT FLOOR(15) FROM DUAL;
+      
+     3. CEIL ( NEXT NEAREST VALUE )
+     
+        SELECT CEIL(15.6) FROM DUAL;
+        SELECT CEIL(15.3) FROM DUAL;
+        
+     4. SIGN (-1/1)
+     
+        SELECT SIGN(-444) FROM DUAL;
+        SELECT SIGN(444) FROM DUAL;
+        
+     5.ABS ( GIVE POSITIVE VALUE )
+     
+        SELECT ABS(-444) FROM DUAL;
+        SELECT ABS(444) FROM DUAL;
+
+        
+     6. MOD ( EVEN/ODD)
+     
+       REMAINDER ZERO MEANS EVEN
+       REMAINDER ONE MEANS  ODD
+
+       SELECT MOD(10,2) FROM DUAL; --> 0 ( EVEN )
+       SELECT MOD(10,3) FROM DUAL; --> 1 ( ODD)
+       
+      7. TRUNC
+      
+      SELECT TRUNC(12.7657657,1) FROM DUAL;
+      SELECT TRUNC(12.7657657,2) FROM DUAL;
+      SELECT TRUNC(SYSDATE,'MM') FROM DUAL -- MONTH STARTING DATE
+      SELECT TRUNC(SYSDATE,'YY') FROM DUAL -- YEAR STARTING DATE
+
+         
+      4.DATE FUNCTION
+
+      ADD_MONTHS
+      MONTHS_BETWEEN 
+      NEXT_DAY
+      LAST_DAY
+
+      SYSDATE - DISPLAY THE TODAY DATE
+      SELECT SYSDATE+5 FROM DUAL;
+
+  select add_months(sysdate,1) from dual              ---- NEXT MONTH
+ 
+  SELECT LAST_DAY(ADD_MONTHS(SYSDATE,-1)) FROM DUAL;  ---- LAST MONTH LAST DAY
+
+
+  SELECT TRUNC(SYSDATE,'MM') FROM DUAL                ---- MONTH ODA FIRST DATE
+  SELECT TRUNC(SYSDATE,'YY') FROM DUAL                ---- YEAR ODA FIRST DATE
+
+
+
+  SELECT to_CHAR(SYSDATE,'YY') FROM DUAL     ---21
+  SELECT to_CHAR(SYSDATE,'YyyY') FROM DUAL   ---2021
+  SELECT to_CHAR(SYSDATE,'mm') FROM DUAL     --12
+  SELECT to_CHAR(SYSDATE,'mon') FROM DUAL    -- DEC
+  SELECT to_CHAR(SYSDATE,'month') FROM DUAL   -- DECEMBER 
+
+
+
+jan to dec
+select to_char(sysdate,'mon') from dual;
+select add_months(sysdate,'1') from dual;
+select to_char(add_months(add_months(trunc(sysdate,'YYYY'),-1),level),'mon') from dual connect by level<=11;
+select to_char(trunc(sysdate,'YYYY'),'mon') from dual connect by level<=12;                                                                                    gxfzd     vvv  
+
+
+  ADD_MONTHS
+  SELECT ADD_MONTHS(SYSDATE,-2) FROM DUAL;
+
+  MONTHS_BETWEEN ( IT GIVE HOW MANY MONTH IN BETWEEN )
+  SELECT MONTHS_BETWEEN(SYSDATE,'21-11-2021') FROM DUAL
+
+  NEXT_DAY
+  SELECT NEXT_DAY(SYSDATE,'FRIDAY') FROM DUAL;  === NEXT FRIDAY
+
+  LAST_DAY
+  SELECT LAST_DAY(SYSDATE) FROM DUAL;
+
+
+5. CONVERSION FUNCTION
+
+TO_NUMBER
+TO_CHAR
+TO_DATE
+
+TO_NUMBER
+
+SELECT TO_NUMBER(1) FROM DUAL;
+
+TO_CHAR
+SELECT TO_CHAR(1) FROM DUAL;
+
+TO_DATE
+TO_DATE ( VARCHAR CHANGE TO DATE FORMAT)
+SELECT TO_DATE ( 'JAN-20-2021','MM-DD-YYYY') FROM DUAL;
+     
+      
+       

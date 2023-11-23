@@ -1,0 +1,79 @@
+Stored Procedures In Oracle Database :
+--------------------------------------
+
+		Similar to PL/SQL Functions a stored Procedure is a self-contained subprogram 
+		that is meant to do some specific tasks. Also similar to functions, 
+		procedures are named PL/SQL blocks thus they can be reused because they are stored into the database as a database object. 
+		But unlike PL/SQL functions a stored procedure does not return any value. 
+		
+Syntax of PL/SQL Stored Procedures :
+------------------------------------
+
+CREATE [OR REPLACE] PROCEDURE pro_name (Parameter – List)
+IS 
+	Declare statements
+BEGIN
+	Executable statements 
+END procedure name;
+/ 
+
+_____________________________________________________________________________________________________________________________________
+
+
+How To Create PL/SQL Stored Procedures Without Parameters In Oracle Database :
+------------------------------------------------------------------------------
+
+CREATE OR REPLACE PROCEDURE pr_tit IS
+  var_name VARCHAR2 (30):= 'Tit';
+  var_web VARCHAR2 (30) := 'Tit.com';
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Whats Up Internet? I am '||var_name||' from '||var_web);
+END pr_tit;
+/
+
+How to Call PL/SQL Stored Procedures in Oracle Database :
+---------------------------------------------------------
+
+	1. Call a PL/SQL stored procedure using EXECUTE statement :
+	-----------------------------------------------------------
+	
+		EXECUTE pr_tit;
+
+			or
+
+		EXEC pr_tit;
+	
+	
+	2. Call a PL/SQL stored procedure using an Anonymous PL/SQL block :
+	-------------------------------------------------------------------
+	
+			BEGIN
+			  pr_tit;
+			END;
+			/
+			
+_____________________________________________________________________________________________________________________________________
+
+How To Create PL/SQL Stored Procedures With Parameters In Oracle Database :
+---------------------------------------------------------------------------
+
+
+Stored Procedure for Department Wide Salary Raise :
+---------------------------------------------------
+
+
+CREATE OR REPLACE PROCEDURE emp_sal( dep_id NUMBER, sal_raise NUMBER) 
+IS
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Whats Up Internet? I am '||dep_id||' from '||sal_raise);
+END emp_sal;
+/
+
+
+BEGIN
+    emp_sal(103,2);
+END;
+/
+
+
+_____________________________________________________________________________________________________________________________________

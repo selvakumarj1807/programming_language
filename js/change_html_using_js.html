@@ -1,0 +1,28 @@
+<html>
+<head>
+
+<script type="text/javascript" src="externetfile.js">
+</script>
+<style>
+.myclass{width:200px;background-color:blue;}
+</style>
+
+</head>
+<body>
+<script>alert("hi");
+</script>
+<h1>Select by ID</h1>
+<input id="from" placeholder="enter the name"> <br><br>
+<button onclick="check()">SUBMIT</button> 
+<p id="to"> </p>
+<script>
+function check()
+{
+box=document.getElementById("from").value;
+document.getElementById("to").innerHTML=box;
+to.style.color="red";
+to.className="myclass";
+}
+</script>
+</body>
+</html>

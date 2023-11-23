@@ -1,0 +1,202 @@
+
+
+in / not in
+
+select * from employees where salary not in ( 5000,10000,2600);
+select distinct(first_name) from employees where first_name='Peter'
+
+DUAL TABLE
+____________
+
+ SIMPLE DUMMY TABLE ,
+ IT IS DATA DICTIONARY,
+ ORACLE GIVEN INBUILT , 
+ AS ONLY ONE COLOUMN SO ITS RETURN IN SINGLE VALUE,
+ DUMMY TABLE USER                             
+ varchar datatype
+
+  select * from dual;
+  select (1+2) from dual;
+  select sysdate from dual;
+  
+  
+
+Single Row Function - RETURN ONE RESULT PER ROW
+______________________
+
+   GENERAL FUNCTIONS: ( BASED HANDLE NULL VALUES )
+   ==================
+
+   # NULL IS A UNASSIGNED VALUES
+   # NULL IS NOT EQUAL TO ZERO
+   # NULL IS NOT EQUAL TO SPACE
+   # ALL ARITHMATIC OPERATIONS INVOLVING NULL ALWAYS RETURN NULL
+   
+   SELECT 12+NULL FROM DUAL;
+
+1.NVL FUNCTIONS
+2.NVL2 FUNCTIONS
+3.NULLIF
+4.COALESCE
+
+
+   
+   1.NVL ( 2 ARUGUMENTS OR EXPRESSION )
+   __________________________________
+   
+  
+   NULL - 2 EXP
+   NOT NULL  - 1 EXP
+   
+   SELECT NVL('A',NULL) FROM DUAL 
+   SELECT NVL(NULL,'b') FROM DUAL 
+
+   2.NVL2 ( 3 ARGUMENTS )
+   _____________________
+   
+   NOT NULL - 2ND ARGUMENT 
+   NULL - 3 RD ARUGEMENT
+   
+   SELECT NVL2('A','B','C') FROM DUAL
+   SELECT NVL2(NULL,'B','C') FROM DUAL
+   SELECT NVL2('A',NULL,'C') FROM DUAL
+   SELECT NVL2(NULL,'B',NULL) FROM DUAL
+   select last_name, nvl2(commission_pct,email,last_name) from employees;
+   select last_name, nvl2(employee_id,email,last_name) from employees;
+   select   nvl2(employee_id,email,last_name),nvl2(commission_pct,email,last_name) from employees;
+
+
+
+   3.NULLIF ( COMPARITER FUNCTION )
+   ______________________________
+   
+   BOTH SAME MEANS --> NULL
+   NOT SAME --> I EXP
+   
+   SELECT NULLIF('B','B') FROM DUAL
+   SELECT NULLIF('B','C') FROM DUAL
+   SELECT NULLIF(NULL,'B') FROM DUAL
+   SELECT NULLIF('A',NULL) FROM DUAL
+   
+   4.COALESCE ( N NUMBER ARGUMENTS ) 
+   ________________________________
+   
+   FIRST NOT NULL VALUE
+   
+   SELECT COALESCE('A','B','C','D') FROM DUAL
+   SELECT COALESCE(NULL,NULL,NULL,'B','C','D') FROM DUAL
+
+
+
+2.Character Function
+__________________________
+
+  upper
+  lower
+  initcap
+  length
+  reverse
+  replace
+  translate
+  rpad/lpad
+  rtrim/ltrim/trim
+  substr
+  instr
+  greatest
+  least
+  
+   UPPER
+   ______
+   
+   SELECT UPPER('priya') from dual;
+   
+   LOWER
+   ______
+   
+   SELECT LOWER('PRIYa') from dual;
+
+   INITCAP
+   _______ 
+   
+   SELECT INITCAP('vino') from dual;
+
+   LENGTH
+   ______
+   
+   SELECT length('jhghjgjhgjh') from dual;
+
+   REVERSE
+   ________
+   
+   SELECT reverse('priya') from dual;
+
+   REPLACE 
+   _______
+  
+   (3 Arugument) - total string or charcter replace
+   
+   (input, search pattern, replacing pattern)
+   
+   select replace('oracle is a db object' , 'is','was' ) from dual;
+   
+   TRANSLATE
+   __________
+   
+   - each indizual character translate
+   
+    select translate('oracle is a db object', 'is','was') from dual;
+   
+   LPAD
+   _____
+  
+   select lpad('oracle',10,'@') from dual;
+   
+   Rpad
+   _____
+   
+   select rpad('oracle',10,'e') from dual;
+   
+   Ltrim
+   _____
+   
+   select ltrim('oracleor','or') from dual;
+  
+   Rtrim
+   _____
+  
+   select Rtrim('oracle','le') from dual;
+    
+   trim
+   _____
+    
+   select trim('   oracle ')from dual;
+    
+   Greatest
+   _________
+    
+    select greatest(100,10000, 200) from dual;
+    
+   least
+   _______
+  
+    select least(100,10000,10) from dual;
+    
+   substr 
+   _______
+	
+   ( extract some character from a string set as per user need )
+    
+        select substr('oracle is a db',5) from dual ;
+        select substr('oracle is a db',1,5) from dual ;
+        
+   Instr
+   ______
+   
+	 ( return the position)
+     
+     (input, search_character, starting position,number of occurence)
+     
+     select instr('oracle is a dba','a',1,3) from dual
+
+3.Number Function
+4.Date Function

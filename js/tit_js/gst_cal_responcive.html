@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GST Calculator</title>
+    <style>
+        /* Additional CSS properties */
+.container {
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+label {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+}
+
+select, input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 18px;
+    color: #555;
+}
+
+select {
+    background-color: #f5f5f5;
+}
+
+p {
+    font-size: 20px;
+    color: #333;
+}
+
+@media screen and (min-width: 768px) {
+    .container {
+        max-width: 800px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>GST Calculator</h1>
+        <label for="originalPrice">Original Price: </label>
+        <input type="text" id="originalPrice">
+        <label for="gstRate">GST Rate (%): </label>
+        <input type="text" id="gstRate">
+        <label for="calculateMode">Calculate Mode: </label>
+        <select id="calculateMode">
+            <option value="exclusive">Exclusive</option>
+            <option value="inclusive">Inclusive</option>
+        </select>
+        <p>GST Amount: <span id="gstAmount">0.00</span></p>
+        <p>Total Price: <span id="totalPrice">0.00</span></p>
+        <p>Tax Amount: <span id="taxAmount">0.00</span></p>
+    </div>
+<script>
+    // Get input elements
+    var originalPriceInput = document.getElementById("originalPrice");
+    var gstRateInput = document.getElementById("gstRate");
+    var calculateModeSelect = document.getElementById("calculateMode");
+    var gstAmountOutput = document.getElementById("gstAmount");
+    var totalPriceOutput = document.getElementById("totalPrice");
+    var taxAmountOutput = document.getElementById("taxAmount");
+
+    // Add event listeners to the input fields
+    originalPriceInput.addEventListener("input", calculateGST);
+    gstRateInput.addEventListener("input", calculateGST);
+    calculateModeSelect.addEventListener("change", calculateGST);
+
+    // Function to calculate GST
+    function calculateGST() {
+        var originalPrice = parseFloat(originalPriceInput.value) || 0;
+        var gstRate = parseFloat(gstRateInput.value) || 0;
+        var calculateMode = calculateModeSelect.value;
+
+        if (calculateMode === "exclusive") {
+            var gstAmount = (originalPrice * gstRate) / 100;
+            var totalPrice = originalPrice + gstAmount;
+            var taxAmount = gstAmount;
+        } else {
+            var gstAmount = (originalPrice * gstRate) / (100 + gstRate);
+            var totalPrice = originalPrice;
+            var taxAmount = originalPrice - gstAmount;
+        }
+
+        gstAmountOutput.textContent = gstAmount.toFixed(2);
+        totalPriceOutput.textContent = totalPrice.toFixed(2);
+        taxAmountOutput.textContent = taxAmount.toFixed(2);
+    }
+
+    // Initial calculation
+    calculateGST();
+</script>
+
+</body>
+</html>

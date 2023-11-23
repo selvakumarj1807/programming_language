@@ -1,0 +1,151 @@
+Types of Methods in Java :
+
+	A Java method is a collection of statements that are grouped together to perform an operation. 
+	A method in Java is a block of code that, when called, performs specific actions mentioned in it. 
+	For instance, if you have written instructions to draw a circle in the method, it will do that task.
+	
+	
+		1. It allows code re-usability (define once and use multiple times)
+		2. You can break a complex program into smaller chunks of code
+		3. It increases code readability
+		
+Two Types of Methods :
+
+        1. User-defined Methods : We can create our own method based on our requirements.
+        2. Standard Library Methods : These are built-in methods in Java that are available to use.
+		
+Syntax:
+
+		 Access_ specifier Return_type Method_name ( Parameter list )
+		   {
+				// body of method ;
+		   }
+		   
+		   
+Access specifier :
+
+		1. Public : You can access it from any class
+		2. Private : You can access it within the class where it is defined
+		3. Protected : Accessible only in the same package or other subclasses in another package
+		
+Return type :
+
+		1. Int : Int as the return type if the method returns value.
+		2. Void : Void as the return type if the method returns no value.
+		
+		
+Parameter list :
+
+		It is a list of arguments (data_type variable_name) that will be used in the method.
+		
+
+
+Example :
+
+
+class Methods {
+    //No Return W/o args
+    public void add() {
+        int a = 123;
+        int b = 10;
+        System.out.println("Addition : " + (a + b));
+    }
+ 
+    //No Return With Args
+    public void sub(int x, int y) {
+        System.out.println("Subtraction : " + (x - y));
+    }
+    //Return Without Args
+    public int mul() {
+        int a = 123;
+        int b = 10;
+        return a * b;
+    }
+ 
+    //Return With Args
+    public float div(int x, int y) {
+        return (x / y);
+    }
+ 
+    //Recursion Function
+    public  int factorial(int n)//5!  =1*2*3*4*5=120
+    {
+        if(n==1)
+            return 1;
+        else
+            return (n*factorial(n-1));
+    }
+    /*
+factorial(5)
+factorial(4)
+factorial(3)
+factorial(2)
+factorial(1)
+ 
+return 1;
+return 2*1;
+return 3*2;
+return 4*6;
+return 5*24;
+ 
+ 
+* */
+ 
+}
+ 
+//Type of User Define Methods in Java
+class functions {
+    public static void main(String args[]) {
+        Methods o = new Methods();
+        o.add();
+        o.sub(123, 10);
+        System.out.println("Muli : "+o.mul());
+        System.out.println("Division : "+o.div(123,10));
+    }
+}
+ 
+ 
+ 
+____________________________________________________________________________________________________________________________
+
+Example 2:
+
+Returning Arrays from Method in Java :
+
+	This Java program defines a function called sortArray() that prompts the user to input an integer limit n, 
+	creates an integer array a of size n, and populates the array with n integers inputted by the user. 
+	It then sorts the array in ascending order using the Arrays.sort() method and returns the sorted array.
+	
+	
+import java.util.Arrays;
+import java.util.Scanner;
+ 
+class function_array {
+ 
+    public static int[] sortArray() {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter The Limit : ");
+        int n = in.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter The Value " + i + " : ");
+            a[i] = in.nextInt();
+        }
+        Arrays.sort(a);
+        // returning  array
+        return a;
+    }
+ 
+    //Returning Arrays from Method
+    public static void main(String args[]) {
+        int arr[] = sortArray();
+        for (int a : arr)
+            System.out.println(a);
+    }
+ 
+ 
+}
+
+
+____________________________________________________________________________________________________________________________
+

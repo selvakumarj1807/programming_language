@@ -1,0 +1,112 @@
+<!--
+	In HTML, the following tags are used to create tables:
+
+		1. <table>: Defines a table
+		2. <tr>: Defines a table row
+		3. <th>: Defines a header cell in a table
+		4. <td>:Defines a regular cell in a table
+		5. <thead>: Groups the header content in a table
+		6. <tbody>: Groups the body content in a table
+		7. <tfoot>: Groups the footer content in a table
+		8. <colgroup>: Specifies a group of one or more columns in a table for formatting
+		9. <col>: Specifies column properties for each column within a <colgroup> element.
+	   10. <caption>: Defines the caption for a table.
+
+
+
+
+-->
+
+
+
+<html>
+    <head>
+        <title> HTML - TABLES</title>
+        <link rel="icon" type="image/x-icon" href="img/logo.png">
+    </head>
+    <body>
+        <table border='3' cellpadding='10' cellspacing='5'>
+            <caption>Table 1.1</caption>
+                <colgroup>
+                    <col span="2">
+                    <col span="5" bgcolor="#e2ddb8">
+                </colgroup>
+            <thead>
+                <tr>
+                    <th colspan='7'>Mark List</th>
+                </tr>
+                <tr>                
+                    <th>SNO</th>
+                    <th>NAME</th>
+                    <th>ROLLNO</th>
+                    <th>TAMIL</th>
+                    <th>ENGLISH</th>
+                    <th>MATHS</th>
+                    <th>TOTAL</th>
+                </tr>
+				 </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><sup>2</sup>&#8730; x</td>
+                    <td>101</td>
+                    <td>76</td>
+                    <td>96</td>
+                    <td>90</td>
+                    <td>272</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Sam</td>
+                    <td>102</td>
+                    <td bgcolor='red'><font color='white'>85</font></td>
+                    <td>79</td>
+                    <td>99</td>
+                    <td>282</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Ram</td>
+                    <td>101</td>
+                    <td>76</td>
+                    <td>96</td>
+                    <td>90</td>
+					<td>272</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Sam</td>
+                    <td>102</td>
+                    <td>85</td>
+                    <td>79</td>
+                    <td>99</td>
+                    <td>282</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Ram</td>
+                    <td>101</td>
+                    <td>76</td>
+                    <td>96</td>
+                    <td>90</td>
+                    <td>272</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Sam</td>
+                    <td>102</td>
+                    <td>85</td>
+                    <td>79</td>
+                    <td>99</td>
+					<td>282</td>
+                </tr>
+            </tbody>
+            <tfoot>            
+                <tr>
+                    <th colspan='6'>Total</th>
+                    <th>850</th>
+                </tr>
+            </tfoot>        
+        </table>
+    </body>
+</html>

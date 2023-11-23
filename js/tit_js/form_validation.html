@@ -1,0 +1,59 @@
+<html>
+<head>
+<style>
+body{background-color:#8BFC6F;}
+input{background-color:#EAFAF1;color:blue;width:100%;height:35px;font-size:23px;}
+
+h1{color:#030DE6;}
+table{border:0px solid blue;border-collapse:collapse;}
+td{border:0px solid blue;width:250;height:70;text-align:center;font-size:30px;background-color:#cbb9b1;
+	color:blue;text-align:left;padding:10px;}
+span{color:red;}
+</style>
+</head>
+<body>
+<h1>Form validation in JS </h1>
+<table>
+<form action="calculater.html" onsubmit="return check()" autocomplete="off">
+
+<tr> 
+<td> Name:<span>**</span> </td>
+<td><input id="name"/> </td>
+</tr>
+<tr> 
+<td> FatherName: </td>
+<td><input id="fname"/> </td>
+</tr>
+<tr> 
+<td> MotherName: </td>
+<td><input id="mname"/> </td>
+</tr>
+<tr> 
+<td> Mobile number: <span>**</span></td>
+<td><input id="mobile"/> </td>
+</tr>
+<tr>
+<td colspan="2"><input type="submit" value="signup"/></td>
+</tr>
+</form>
+</table>
+
+<script>
+function check()
+{
+name=document.getElementById("name").value;
+mobile=document.getElementById("mobile").value;
+if(name=="")
+{
+alert("pls fill the name");
+return false;
+}
+else if(mobile=="")
+{
+alert("pls fill the mobile");
+return false;
+}
+}
+</script>
+</body>
+</html>

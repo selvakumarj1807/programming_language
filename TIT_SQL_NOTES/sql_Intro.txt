@@ -1,0 +1,66 @@
+SQL ( structured Query language ) / sequal 
+_____________________________________________________ 
+
+SQL is Language that Communicates with database
+Accessing and Manipulating database
+
+DATABASE 
+_________
+
+Collection of data stored in database
+database is a table that contains rows and columns
+
+Project --> Full stock developers( front end developers + Backend end developers) ==> Communicates
+
+SQL DATABASE 
+____________
+
+Mysql
+MsAccess
+Sybase
+Oracle ----------- ( Our Using database )
+Postgres
+Sql Server 
+
+Oracle Databse version like 10g,11g,12c,18c Like that Mostly used in 10g,11g 
+
+
+TOOL:
+___________
+
+Sql developer tool --------- ( Our Using tool )
+toad 
+
+what Sql can do ?
+__________________
+
+   # Insert records in database ( Using insert Query )
+   # Retrive data from database ( Using Select Query ) 
+   # update records in database ( Using Update Query )
+   # delete records in database ( Using delete Query )
+   # create new database
+   # create new table
+   
+Execute query in oracle background what happend ?
+__________________________________________________
+ 
+   # Syntax error ( select  from , where )
+   # Symantic error ( relationship check )
+   # passing
+   
+     * hard passing  : if we execute one Query in first time in a session , it will go to 
+	                  hard passing , then create SQL_id create then 
+					  execute the plan and give the output
+					  
+	 * Soft passing : that query running repeatedly in a session , it will go to soft passing		
+                      fast one , already SQL_id create then 
+					  execute the plan and give the output	 
+
+   # Execute plan
+   # output
+   
+
+ Questions 
+ __________________________
+ 1.What is sql ?
+ 2.differnce between Oracle database 10g and 11g ?

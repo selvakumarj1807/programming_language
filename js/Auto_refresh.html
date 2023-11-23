@@ -1,0 +1,24 @@
+<html>
+<head>
+</head>
+<body>
+<h1 id="h1id"> Auto Refresh the web page</h2>
+<input id="id1" placeholder="Assign time to refresh the web page"> </input><br> <br>
+<button onclick="refresh()">Click</button>
+<script> 
+function refresh(){
+//time=document.getElementById("id1").value;
+//time=parseInt(time);
+time=3;
+setTimeout("location.reload(true)",time*1000);//milli second(1000)
+console.log(window.location.href);
+if(setTimeout("location.reload(true)",time*1000))
+{
+document.getElementById("h1id").style.color="red";
+}
+
+}
+setInterval(refresh,3000);
+</script>
+</body>
+</html>

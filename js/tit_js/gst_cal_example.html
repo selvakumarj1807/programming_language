@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GST Calculator</title>
+	<script>
+	function calculateGST() {
+    // Get input values
+    var originalPrice = parseFloat(document.getElementById("originalPrice").value);
+    var gstRate = parseFloat(document.getElementById("gstRate").value);
+    var calculateMode = document.getElementById("calculateMode").value;
+
+    // Initialize variables for results
+    var gstAmount, totalPrice, taxAmount;
+
+    if (calculateMode === "exclusive") {
+        // Calculate GST Amount
+        gstAmount = (originalPrice * gstRate) / 100;
+
+        // Calculate Total Price
+        totalPrice = originalPrice + gstAmount;
+
+        // Calculate Tax Amount
+        taxAmount = gstAmount;
+    } else {
+        // Calculate GST Amount
+        gstAmount = (originalPrice * gstRate) / (100 + gstRate);
+
+        // Calculate Total Price
+        totalPrice = originalPrice;
+
+        // Calculate Tax Amount
+        taxAmount = originalPrice - gstAmount;
+    }
+
+    // Display results on the webpage
+    document.getElementById("gstAmount").textContent = gstAmount.toFixed(2);
+    document.getElementById("totalPrice").textContent = totalPrice.toFixed(2);
+    document.getElementById("taxAmount").textContent = taxAmount.toFixed(2);
+}
+	</script>
+
+</head>
+<body>
+    <h1>GST Calculator</h1>
+    <label for="originalPrice">Original Price: </label>
+    <input type="text" id="originalPrice"><br><br>
+    <label for="gstRate">GST Rate (%): </label>
+    <input type="text" id="gstRate"><br><br>
+    <label for="calculateMode">Calculate Mode: </label>
+    <select id="calculateMode">
+        <option value="exclusive">Exclusive</option>
+        <option value="inclusive">Inclusive</option>
+    </select><br><br>
+    <button onclick="calculateGST()">Calculate GST</button><br><br>
+    <p>GST Amount: <span id="gstAmount"></span></p>
+    <p>Total Price: <span id="totalPrice"></span></p>
+    <p>Tax Amount: <span id="taxAmount"></span></p>
+	
+</body>
+</html>

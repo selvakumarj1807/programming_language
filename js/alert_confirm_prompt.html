@@ -1,0 +1,27 @@
+<html>
+<head>
+</head>
+<body>
+<h1> alert, confirm, promptbox in js </h1>
+<p id="id1"> </p>
+<button onclick="check()">Click </button>
+<script>
+function check(){
+//alert("dont open this");
+/*
+if (confirm("r u ok"))
+{
+document.getElementById("id1").innerHTML="TQ";
+}
+else
+{
+document.getElementById("id1").innerHTML="ok";
+}
+*/
+password=prompt("enter 1234","");
+if (password==1234){document.getElementById("id1").innerHTML="TQ 1234"; }
+else {document.getElementById("id1").innerHTML="sorry enter crt";}
+}
+</script>
+</body>
+</html>

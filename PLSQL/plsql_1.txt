@@ -1,0 +1,68 @@
+ORACLE PL/SQL  :
+
+
+	What is PL/SQL :
+		
+		1. It is a procedural language extension to SQL with design features 
+		2. It is logically related to SQL Statements
+		
+	Advantages :
+		
+		1. Portability 
+		2. Simplicity
+		
+	Structure of PL/SQL Block :
+			
+			PL/SQL are like blocks structure and each block has its own purpose
+			
+		1. DECLARE      -- Used to declare the variables 
+		2. BEGIN        -- Beginning of the program 
+		3. PL/SQL Logic -- Actual SQL & PL/SQL Logic 
+		4. EXCEPTION    -- Used to handle the exception 
+		5. END          -- End of the program 
+		6. /            --To compile the program
+		
+	Mandatory :
+	
+		BEGIN 		  
+		PL/SQL Logic  
+		END 
+		
+	Commenting :
+		
+		1. Single line comment (--) 
+		2. Multi line comment (/*....*/) 
+		
+		
+________________________________________________________________________________________________________________________________________________
+
+
+Printing Output :
+
+		1. DBMS_OUTPUT() is the package used to print the output
+		
+		
+			DBMS_OUTPUT.PUT_LINE (Parameter)
+			
+			
+Example 1:
+
+
+begin 
+dbms_output.put_line(1); 
+end;
+/
+
+________________________________________________________________________________________________________________________________________________
+Example 2:
+
+
+begin 
+dbms_output.put_line('Welcome to oracle'); 
+end;
+/
+
+
+________________________________________________________________________________________________________________________________________________
+
+

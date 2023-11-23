@@ -1,0 +1,106 @@
+print('identity operator')
+x = ["apple", "banana"]
+y = ["apple", "banana"]
+z = x
+
+print(x is z)
+
+# returns True because z is the same object as x
+
+print(x is y)
+
+# returns False because x is not the same object as y, even if they have the same content
+
+print(x == y)
+
+# to demonstrate the difference betweeen "is" and "==": this comparison returns True because x is equal to y
+
+print('--------------------------------')
+
+
+x = ["apple", "banana"]
+y = ["apple", "banana"]
+z = x
+
+print(x is not z)
+
+# returns True because z is the same object as x
+
+print(x is not y)
+
+# returns False because x is not the same object as y, even if they have the same content
+
+print(x != y)
+
+# to demonstrate the difference betweeen "is" and "==": this comparison returns True because x is equal to y
+
+print('--------------------------------')
+
+print('Python Membership Operators')
+
+x = ["apple", "banana"]
+
+print("banana" in x)
+
+print("banana" not in x)
+
+print('--------------------------------')
+
+print('bit wise operator')
+
+a=10
+b=2
+
+c=a & b
+
+print('bitwise And :',c)
+print('-------------------')
+
+a=10
+b=2
+
+c=a | b
+
+print('bitwise or :',c)
+
+print('-----------')
+print('bitwise xor :',c)
+
+print('-----------')
+a=10
+b=2
+
+c = a ^ b
+
+print('bitwise xor :',c)
+
+print('-----------')
+
+
+
+a=10
+
+c= ~a 
+
+print('bitwise not',c)
+print('-------------------')
+a=10
+
+b = a << 2
+
+print('Left shift opretor',b)
+
+print('----------------------')
+
+a=10
+
+b = a >> 2
+
+print('Right shift opretor',b)
+print('---------------------')
+
+
+
+
+
+

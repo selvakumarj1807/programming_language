@@ -1,0 +1,869 @@
+1. python install
+
+2. vs code install
+
+	1. extension ---> python install
+	
+_____________________________________________________________________________________________________________
+
+create folder :
+---------------
+
+go to terminal :
+----------------
+
+		1. python --version
+		
+		2. pip install pipenv
+		
+		3. pipenv shell
+		
+				any error to run this method .go to path setting and change it. 
+				next ,
+				
+				check the
+						pipenv --version
+					
+					if its ok then run the 
+					
+						pipenv shell
+						
+					if its not propper or have a error
+						
+						pip uninstall pipenv
+						
+						pip install pipenv
+						
+					and close the terminal or vs code next
+					
+						pipenv --version
+						
+						pipenv shell
+						
+					if its ok the continue the 4.
+
+			
+		
+		4. pip install django
+		
+		5. django-admin
+
+
+_____________________________________________________________________________________________________________
+
+create project folder :
+-----------------------
+
+	django-admin startproject shopkartsk .
+	
+_____________________________________________________________________________________________________________
+
+go to (view) in menu bar :
+--------------------------
+
+	command pallete --> python select intrepeter --> virtual column path
+	
+	
+_____________________________________________________________________________________________________________
+
+run the python in server :
+--------------------------
+
+	python manage.py runserver
+	
+	
+				
+_____________________________________________________________________________________________________________
+
+
+
+									--------python django installation is over-----------
+									
+									
+_____________________________________________________________________________________________________________
+22/09/23
+
+
+Run new app in django project :
+-------------------------------
+
+
+		python manage.py startapp my_app
+		
+		
+		python manage.py runserver
+		
+		
+_____________________________________________________________________________________________________________
+
+
+24 / 09 / 23
+
+
+Download and install xampp
+--------------------------
+
+	go to your type here to search field and type xampp controll panel:
+               -------------------                --------------------
+			   
+					And start the apache,mysql.And click the mysql - admin in your xampp controll panel.
+
+step 1:
+-------
+
+	1. create new database :
+	------------------------
+	
+				django
+				
+				
+_____________________________________________________________________________________________________________
+
+Database Configuration :
+------------------------
+
+step 1:
+-------
+
+	go to the terminal :
+	--------------------
+		
+		pip install mysqlclient
+		
+		
+step 2:
+-------
+
+	change the particular code in(settings.py) :
+	--------------------------------------------
+	
+	
+					# Application definition
+					
+					INSTALLED_APPS = [
+						'django.contrib.admin',
+						'django.contrib.auth',
+						'django.contrib.contenttypes',
+						'django.contrib.sessions',
+						'django.contrib.messages',
+						'django.contrib.staticfiles',
+						'my_app', #add myapp
+					]
+					
+					
+					# Database
+					# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+					
+					DATABASES = {
+						'default': {
+							'ENGINE': 'django.db.backends.mysql',
+							'NAME': 'django',
+							'USER': 'root',
+							'PASSWORD': '',
+							'HOST': 'localhost',
+							'PORT': '3306'
+						}
+					}
+_____________________________________________________________________________________________________________
+
+Run the server:
+---------------
+
+		
+		python manage.py runserver
+		
+		
+_____________________________________________________________________________________________________________
+
+Create Model :
+--------------
+
+	step 1:
+	-------
+		
+			myapp/models.py
+			
+	step 2:
+	-------
+	
+			from django.db import models
+			 
+			# Create your models here.
+			class Employee(models.Model):  
+				name = models.CharField(max_length=100)  
+				email = models.EmailField()  
+				contact = models.CharField(max_length=15) 
+			   
+				class Meta:  
+					db_table = "tblemployee"
+
+		
+_____________________________________________________________________________________________________________
+
+Make Migrations :
+-----------------
+
+		Go to terminal :
+		----------------
+
+Run the commands below to make migrations in terminal :
+-------------------------------------------------------
+
+			python manage.py makemigrations
+			
+			python manage.py migrate
+			
+			
+_____________________________________________________________________________________________________________
+
+check your database in xampp :
+------------------------------
+
+	go to your type here to search field and type xampp controll panel:
+               -------------------                --------------------
+			   
+					And start the appachee,mysql.And click the mysql - admin in your xampp controll panel.
+					
+		database name : django
+
+
+_____________________________________________________________________________________________________________
+
+my_app --> views.py :
+---------------------
+
+
+			from django.shortcuts import render
+
+			# Create your views here.
+
+			def index(request):
+				return render(request,"show.html")
+
+
+_____________________________________________________________________________________________________________
+
+my_app --> create folder (templates) --> create file (show.htmml):
+------------------------------------------------------------------
+
+
+			{% extends "base.html" %}
+
+
+			{% block title %} Employee Records {% endblock title %}
+
+			{% block content %}
+
+			<div class ="col-md-12">
+				<span><a href="/addnew" class="btn btn-primary">Add New Record</a></span>
+			</div>
+
+
+			{% endblock content %}
+
+_____________________________________________________________________________________________________________
+
+my_app --> create folder (templates) --> create file (base.htmml):
+------------------------------------------------------------------
+
+
+			<!DOCTYPE html>
+			<html lang="en">
+			<head>
+				<meta charset="UTF-8">
+				<meta name="viewport" content="width=device-width, initial-scale=1.0">
+				<title>{% block title %}{% endblock %}</title>
+				{% load static %}
+			</head>
+			<body>
+				<div class="container">
+					<div class="row">
+						<h4>Django Mysql CRUD with Databases</h4>
+						{% block content %}{% endblock %}
+					</div>
+				</div>
+			</body>
+			</html>
+			
+			
+_____________________________________________________________________________________________________________
+change particular code:
+-----------------------
+
+urls.py :
+---------
+
+			from django.contrib import admin
+			from django.urls import path
+
+			from my_app import views
+
+			urlpatterns = [
+				path('admin/', admin.site.urls),
+				path('', views.index, name='index'),
+			]
+
+_____________________________________________________________________________________________________________
+
+Run the server:
+---------------
+
+		
+		python manage.py runserver
+		
+		
+_____________________________________________________________________________________________________________
+
+change the particular code :
+----------------------------
+
+
+step 1:
+-------
+
+my_app/views.py :
+-----------------
+
+from django.shortcuts import render
+
+from my_app.forms import EmployeeForm  
+from my_app.models import Employee  
+
+# Create your views here.
+
+def index(request):
+    return render(request,"show.html")
+
+
+def addnew(request):
+    form = EmployeeForm()
+    return render(request,"index.html",{'form':form})
+	
+	
+step 2:
+-------
+
+my_app/forms.py :
+-----------------
+
+from django import forms  
+from my_app.models import Employee  
+class EmployeeForm(forms.ModelForm):  
+    class Meta:  
+        model = Employee  
+        fields = ['name', 'contact', 'email']
+		widgets = { 'name': forms.TextInput(attrs={ 'class': 'form-control' }), 
+            'email': forms.EmailInput(attrs={ 'class': 'form-control' }),
+            'contact': forms.TextInput(attrs={ 'class': 'form-control' }),
+      }
+		
+		
+		
+step 3:
+-------
+
+my_app/templates/index.html :
+-----------------------------
+
+{% extends "base.html" %}
+
+
+{% block title %} Add new Employee Records {% endblock title %}
+
+{% block content %}
+
+<div class ="col-md-12">
+    <form method="post" class="post-form" action="/addnew">
+        {% csrf_token %}  
+    <div class="container">  
+        <div class="col-12">  
+        <h3>Enter Details</h3>  
+        </div>    
+     
+        <div class="mb-3"> 
+            <label>Name:</label>  
+            {{ form.name }}   
+        </div> 
+        <div class="mb-3"> 
+            <label>Email:</label>  
+            {{ form.email }}   
+        </div>  
+        <div class="mb-3"> 
+            <label>Contact:</label>  
+            {{ form.contact }}   
+        </div>
+        <div class="mb-3"> 
+            <button type="submit" class="btn btn-primary">Submit</button>    
+        </div> 
+    </div>  
+
+    </form>
+</div>
+
+
+{% endblock content %}
+
+
+step 4:
+-------
+
+urls.py :
+---------
+
+from django.contrib import admin
+from django.urls import path
+
+from my_app import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', views.index, name='index'),
+    path('addnew',views.addnew, name='addnew'),
+]
+
+
+_____________________________________________________________________________________________________________
+
+Run the server:
+---------------
+
+		
+		python manage.py runserver
+		
+_____________________________________________________________________________________________________________
+
+Add Bootstrup :
+---------------
+
+	go to google chrome --> bootstrup --> introduction --> copy the css path and paste in the (my_app/templates/base.html) file
+	---------------------------------------------------------------------------------------------------------------------------
+	
+	
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    {% load static %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h4>Django Mysql CRUD with Databases</h4>
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</body>
+</html>
+
+_____________________________________________________________________________________________________________
+
+Run the server:
+---------------
+
+		
+		python manage.py runserver
+		
+_____________________________________________________________________________________________________________
+
+Add JavaScript:
+---------------
+
+	go to google chrome --> bootstrup --> introduction --> copy the js_bundle path and paste in the (my_app/templates/base.html) file
+	---------------------------------------------------------------------------------------------------------------------------------
+	
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    {% load static %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h4>Django Mysql CRUD with Databases</h4>
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
+
+_____________________________________________________________________________________________________________
+
+Insert the values into the table :
+----------------------------------
+
+	just change the particular code 
+	-------------------------------
+	
+my_app/views.py :
+-----------------
+
+from django.shortcuts import render, redirect
+
+from my_app.forms import EmployeeForm  
+from my_app.models import Employee  
+
+# Create your views here.
+
+def index(request):
+    return render(request,"show.html")
+
+
+def addnew(request):
+    if request.method == "POST":  
+        form = EmployeeForm(request.POST)  
+        if form.is_valid():  
+            try:  
+                form.save()  
+                return redirect('/')  
+            except:  
+                pass
+    else:  
+        form = EmployeeForm()
+    return render(request,"index.html",{'form':form})
+
+
+_____________________________________________________________________________________________________________
+
+select the table values in the database:
+----------------------------------------
+
+step 1:
+-------
+
+my_app/views.py :
+-----------------
+
+from django.shortcuts import render, redirect
+
+from my_app.forms import EmployeeForm  
+from my_app.models import Employee  
+
+# Create your views here.
+
+def index(request):
+    employees = Employee.objects.all()  
+    return render(request,"show.html",{'employees':employees})
+
+
+def addnew(request):
+    if request.method == "POST":  
+        form = EmployeeForm(request.POST)  
+        if form.is_valid():  
+            try:  
+                form.save()  
+                return redirect('/')  
+            except:  
+                pass
+    else:  
+        form = EmployeeForm()
+    return render(request,"index.html",{'form':form})
+	
+	
+step 2:
+-------
+
+my_app/templates/show.html :
+----------------------------
+
+{% extends "base.html" %}
+
+
+{% block title %} Employee Records {% endblock title %}
+
+{% block content %}
+
+<div class ="col-md-12">
+    <span><a href="/addnew" class="btn btn-primary">Add New Record</a></span>
+    <div class="table-responsive">
+        <table id="bootstrapdatatable" class="table table-striped table-bordered" width="100%">
+        <thead>
+            <th><input type="checkbox" id="checkall" /></th>
+            <th>ID</th>
+            <th>Employee Name</th>
+            <th>Employee Email</th>
+            <th>Employee Contact</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </thead>
+        <tbody>
+            {% for employee in employees %}  
+                <tr>  
+                <td><input type="checkbox" class="checkthis" /></td>
+                <td>{{ employee.id }}</td>  
+                <td>{{ employee.name }}</td>  
+                <td>{{ employee.email }}</td>  
+                <td>{{ employee.contact }}</td>  
+                <td><a href="/edit/{{ employee.id }}" class="btn btn-primary">Edit</a></td>
+                <td><a href="/delete/{{ employee.id }}" class="btn btn-danger">Delete</a></td>  
+                </tr>  
+            {% endfor %} 
+        </tbody>
+        </table>
+    </div>
+        
+</div>
+
+
+{% endblock content %}
+
+
+_____________________________________________________________________________________________________________
+
+save and refresh the web page
+
+_____________________________________________________________________________________________________________
+
+
+Update the Records :
+--------------------
+
+step 1:
+-------
+
+my_app/views.py :
+-----------------
+
+from django.shortcuts import render, redirect
+
+from my_app.forms import EmployeeForm  
+from my_app.models import Employee  
+
+# Create your views here.
+
+def index(request):
+    employees = Employee.objects.all()  
+    return render(request,"show.html",{'employees':employees})
+
+
+def addnew(request):
+    if request.method == "POST":  
+        form = EmployeeForm(request.POST)  
+        if form.is_valid():  
+            try:  
+                form.save()  
+                return redirect('/')  
+            except:  
+                pass
+    else:  
+        form = EmployeeForm()
+    return render(request,"index.html",{'form':form})
+
+def edit(request, id):  
+    employee = Employee.objects.get(id=id)  
+    return render(request,'edit.html', {'employee':employee})  
+
+def update(request, id):  
+    employee = Employee.objects.get(id=id)  
+    form = EmployeeForm(request.POST, instance = employee)  
+    if form.is_valid():  
+        form.save()  
+        return redirect("/")  
+    return render(request, 'edit.html', {'employee': employee})  
+	
+	
+step 2:
+-------
+
+my_app/templates/edit.html :
+----------------------------
+
+{% extends "base.html" %}
+  
+{% block title %}Update the Employee Records{% endblock title %}
+  
+{% block content %}
+<div class="col-md-12">
+    <form method="POST" class="post-form" action="/update/{{employee.id}}">  
+    {% csrf_token %}  
+    <div class="container">   
+        <div class="col-12">  
+            <h3>Update Details</h3>  
+        </div> 
+        <div class="mb-3"> 
+            <label>Employee ID:</label>  
+            <input type="text" class="form-control" name="id" id="id_id" required maxlength="20" value="{{ employee.id }}"/>    
+        </div> 
+        <div class="mb-3"> 
+            <label>Name:</label>  
+            <input type="text" class="form-control" name="name" id="id_name" required maxlength="100" value="{{ employee.name }}" />  
+        </div> 
+        <div class="mb-3"> 
+            <label>Email:</label>  
+            <input type="email" class="form-control" name="email" id="id_email" required maxlength="254" value="{{ employee.email }}" />  
+        </div> 
+        <div class="mb-3"> 
+            <label>Contact:</label>  
+            <input type="text" class="form-control" name="contact" id="id_contact" required maxlength="15" value="{{ employee.contact }}" />  
+        </div> 
+        <div class="mb-3"> 
+            <button type="submit" class="btn btn-success btn-lg">Update</button>  
+        </div> 
+    </div>  
+    </form>  
+{% endblock content %}   
+
+
+step 3:
+-------
+
+urls.py :
+---------
+
+from django.contrib import admin
+from django.urls import path
+
+from my_app import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', views.index, name='index'),
+    path('addnew',views.addnew, name='addnew'),
+    path('edit/<int:id>', views.edit, name='edit'),
+    path('update/<int:id>', views.update, name='update'),
+]
+
+
+_____________________________________________________________________________________________________________
+
+refresh the page and update the record
+
+_____________________________________________________________________________________________________________
+
+Delete the record :
+-------------------
+
+step 1:
+-------
+
+my_app/views.py :
+-----------------
+
+from django.shortcuts import render, redirect
+
+from my_app.forms import EmployeeForm  
+from my_app.models import Employee  
+
+# Create your views here.
+
+def index(request):
+    employees = Employee.objects.all()  
+    return render(request,"show.html",{'employees':employees})
+
+
+def addnew(request):
+    if request.method == "POST":  
+        form = EmployeeForm(request.POST)  
+        if form.is_valid():  
+            try:  
+                form.save()  
+                return redirect('/')  
+            except:  
+                pass
+    else:  
+        form = EmployeeForm()
+    return render(request,"index.html",{'form':form})
+
+def edit(request, id):  
+    employee = Employee.objects.get(id=id)  
+    return render(request,'edit.html', {'employee':employee})  
+
+def update(request, id):  
+    employee = Employee.objects.get(id=id)  
+    form = EmployeeForm(request.POST, instance = employee)  
+    if form.is_valid():  
+        form.save()  
+        return redirect("/")  
+    return render(request, 'edit.html', {'employee': employee})  
+
+def destroy(request, id):  
+    employee = Employee.objects.get(id=id)  
+    employee.delete()  
+    return redirect("/")  
+	
+	
+step 2 :
+--------
+
+urls.py :
+---------
+
+from django.contrib import admin
+from django.urls import path
+
+from my_app import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', views.index, name='index'),
+    path('addnew',views.addnew, name='addnew'),
+    path('edit/<int:id>', views.edit, name='edit'),
+    path('update/<int:id>', views.update, name='update'),
+    path('delete/<int:id>', views.destroy, name='destroy'),
+]
+
+_____________________________________________________________________________________________________________
+
+save and run the program
+
+
+_____________________________________________________________________________________________________________
+
+Data tables | table plug-in for jquery :
+----------------------------------------
+
+ my_app/templates/base.html :
+ ----------------------------
+ 
+ 
+ 
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<title>{% block title %}{% endblock %}</title>
+{% load static %}  
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
+<link rel = "stylesheet" type = "text/css" href = "https://cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css"/>
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/>
+</head> 
+<body>
+<div class="container">
+ <div class="row">
+    <h4>Django Mysql CRUD (Create Read Update Delete) with Datatables</h4> 
+    {% block content %}{% endblock %}
+ </div>
+</div>
+ 
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src = "https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#bootstrapdatatable').DataTable({     
+      "aLengthMenu": [[3, 5, 10, 25, -1], [3, 5, 10, 25, "All"]],
+        "iDisplayLength": 3
+       } 
+    );
+} );
+</script>
+</body> 
+</html>
+
+
+_____________________________________________________________________________________________________________
+
+
+refresh and run the program
+
+_____________________________________________________________________________________________________________
+		
+		

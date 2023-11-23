@@ -1,0 +1,78 @@
+Triggers :
+
+		Triggers are named PL/SQL blocks which are stored in the database.  
+		We can also say that they are specialized stored programs which execute implicitly when a triggering event occurs. 
+		This means we cannot call and execute them directly instead they only get triggered by events in the database.
+		
+Events Which Fires the Database Triggers :
+
+	1. These events can be anything such as
+		
+		
+		1. A DML Statement :
+		
+			An Update, Insert or Delete statement executing on any table of your database. 
+			You can program your trigger to execute either BEFORE or AFTER executing your DML statement. 
+			For example, you can create a trigger which will get fired Before the Update. 
+			Similarly, you can create a trigger which will get triggered after the execution of your INSERT DML statement.
+		
+		2. A DDL Statement :
+		
+			Next type of triggering statement can be a DDL Statement such as CREATE or ALTER. 
+			These triggers can also be executed either BEFORE or AFTER the execution of your DDL statement. 
+			These triggers are generally used by DBAs for auditing purposes. 
+			And they really come in handy when you want to keep an eye on the various changes on your schema. 
+			For instance, who created the object or which user. Just like some cool spy tricks.
+		
+		3. A system event :
+		
+			Yes, you can create a trigger on a system event. 
+			And by a system event, I mean shut down or startup of your database.
+		
+		4. A User Events :
+		
+			 Another type of triggering event can be User Events such as log off or log on onto your database. 
+			 You can create a trigger which will either execute before or after the event. 
+			 Furthermore, it will record the information such as time of event occur, the username who created it.
+			 
+			 
+Types of Database Triggers :
+
+
+	1. Data Manipulation Language Triggers or DML triggers
+		
+	2. Data Definition Language Triggers or DDL triggers.
+
+	3. System or Database Event triggers.
+	
+	4. Instead-of Trigger
+	
+	5. Compound triggers
+	
+	
+The Syntax Of Database Trigger :
+
+CREATE [OR REPLACE] TRIGGER Ttrigger_name
+{BEFORE|AFTER} Triggering_event ON table_name
+[FOR EACH ROW]
+[FOLLOWS another_trigger_name]
+[ENABLE/DISABLE]
+[WHEN condition]
+DECLARE
+  declaration statements
+BEGIN
+  executable statements
+EXCEPTION
+  exception-handling statements
+END;
+
+
+
+Uses of Database triggers :
+
+	1. Using database triggers we can enforce business rules that can’t be defined by using integrity constants.
+	2. Using triggers we can gain strong control over the security.
+	3. We can also collect statistical information on the table access.
+	4. We can automatically generate values for derived columns such as auto increment numeric primary key.
+	5. Using database triggers we can prevent the invalid transactions.
+	

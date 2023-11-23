@@ -1,0 +1,133 @@
+Introduction To PL/SQL Packages In Oracle Database :
+----------------------------------------------------
+
+
+What are PL/SQL Packages in Oracle Database? :
+----------------------------------------------
+
+		1. Packages are stored libraries in the database which allow us to group related PL/SQL objects under one name. 
+		2. Packages are logical groups of related PL/SQL objects. 
+		3. Packages are named PL/SQL Blocks which mean they are permanently stored into the database schema and can be referenced or reused by your program.
+		
+What are the contents included in a package? :
+----------------------------------------------
+
+	A package can hold multiple database objects such as
+
+			1. Stored Procedures
+			2. PL/SQL Functions
+			3. Database Cursors
+			4. Type declarations as well as
+			5. Variables
+			
+Package Architecture :
+----------------------
+
+PL/SQL package is divided into two parts:
+-----------------------------------------
+
+			1. The Package Specification, also known as the Header and
+			2. The Package Body
+			
+Package Specification :
+-----------------------
+
+		1. Package specification is also known as the package header. 
+		2. It is the section where we put the declaration of all the package elements.
+		
+Syntax of Package specification :
+---------------------------------
+
+			CREATE OR REPALCE PACKAGE pkg_name IS
+				Declaration of all the package element…;
+			END [pkg_name]; 
+			
+Package Body :
+--------------
+
+		1. A package body contains the implementation of the elements listed in the package specification.
+		2. A package body can contain both declaration of the variable as well as the definition of all the package elements. 
+		3. Any package elements such as PL/SQL Function, a cursor or a stored procedure which is not in the package specification 
+			but coded in the package body is called Private Package Elements 
+			
+
+Syntax of the package body :
+----------------------------
+
+
+			CREATE OR REPALCE PACKAGE BODY pkg_name IS
+				Variable declaration;
+				Type Declaration;
+			BEGIN
+				Implementation of the package elements…
+			END [pkg_name];
+			
+			
+___________________________________________________________________________________________________________________________________________
+
+How To Create PL/SQL Packages In Oracle Database :
+--------------------------------------------------
+
+How to Create Package? :
+------------------------
+
+		1. Package header and
+		2. The package body
+		
+		
+Package Header :
+----------------
+
+CREATE OR REPLACE PACKAGE pkg_tit IS
+  FUNCTION prnt_strng RETURN VARCHAR2;
+  PROCEDURE proc_superhero(f_name VARCHAR2, l_name VARCHAR2);
+END pkg_tit;
+
+
+Package Body :
+--------------
+
+create table new_superheroes (f_name VARCHAR2(20), l_name VARCHAR2(20));
+
+
+--Package Body
+CREATE OR REPLACE PACKAGE BODY pkg_tit IS
+  --Function Implimentation
+  FUNCTION prnt_strng RETURN VARCHAR2 IS
+    BEGIN
+      RETURN 'RebellionRider.com';
+    END prnt_strng;
+  
+  --Procedure Implimentation
+   PROCEDURE proc_superhero(f_name VARCHAR2, l_name VARCHAR2) IS
+     BEGIN
+      INSERT INTO new_superheroes (f_name, l_name) VALUES(f_name, l_name);
+     END;
+  
+END pkg_tit;
+
+
+
+How to access the package elements? :
+-------------------------------------
+Example 1:
+----------
+
+SET SERVEROUTPUT ON;
+--Package Calling Function
+BEGIN
+  DBMS_OUTPUT.PUT_LINE (pkg_tit.PRNT_STRNG);
+END;
+
+
+Example 2:
+----------
+
+SELECT * FROM new_superheroes;
+
+BEGIN
+    pkg_tit.proc_superhero('Black','Thander');
+END;
+
+
+___________________________________________________________________________________________________________________________________________

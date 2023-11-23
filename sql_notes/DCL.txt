@@ -1,0 +1,165 @@
+DCL (DATA CONTROL LANGUAGE)
+
+	Grant
+	Revoke
+	
+
+
+	create user <user_name> identified by <password>; - to create user
+	
+	grant connect,resource to <user_name>; - to grant privilege to the user
+	
+	grant select on <table_name> to <user_name>; - to grant select privilege to the user
+	
+	revoke select on <table_name> from <user_name>; - to revoke select privilege from the user
+	
+	revoke all on <table_name> from <user_name>; - to revoke all privilege from the user
+	
+	
+How to crate user in Database
+
+Open CMD
+
+	sqlplus / as sysdba
+	
+	create user sample identified by samplepass;
+	
+	grant connect , resource to sample;
+	
+Open Sql developer
+
+	 click the connection
+	 
+	 click the +
+	 
+	 connection name : SAMPLE
+	 
+	 user name       : SAMPLE
+	 
+	 password        : samplepass
+	 
+	 role            : default
+	 
+	 click the connection button
+	 
+______________________
+
+Grant  :
+______________________
+
+
+First sample User  :
+
+	select * from all_tables where owner = 'SAMPLE';
+
+	select * from employees;
+	
+	
+Next HR user  :
+
+	select * from employees;
+
+	grant select on employees to SAMPLE; 
+	
+Next sample user  :
+
+	select * from HR.employees;
+	
+Next sample user  :
+
+	create table sample_table(tab_id number (10),tab_name varchar2 (20));
+
+	select * from sample_table;
+
+	insert into sample_table values (103,'name3');
+
+	grant select,insert,update,delete on sample_table to HR;
+	
+Next HR user  :
+
+	select * from sample_table;
+
+	select * from SAMPLE.sample_table;
+
+	insert into SAMPLE.sample_table values(104,'name4');
+
+	update SAMPLE.sample_table set tab_name='name5' where tab_id='103';
+
+	select * from SAMPLE.sample_table;
+
+Next sample user  :
+
+	select * from sample_table;
+	
+Next HR user  :
+
+	commit;
+	
+Next sample user  :
+
+	select * from sample_table;
+	
+______________________
+
+Revoke
+
+______________________
+
+sample user  :
+
+	revoke insert,update,delete on sample_table from HR;
+	
+HR user   :
+
+	select * from SAMPLE.sample_table;
+
+	insert into SAMPLE.sample_table values(104,'name4');
+
+	update SAMPLE.sample_table set tab_name='name5' where tab_id='103';
+	
+_________________________________________________________________________________________________________________________________
+
+Public  :
+
+	Grant  :
+	
+		grant all on sample_table to public; - to grant all privilege to all users
+		 
+	Revoke  :
+	
+		Revoke all on sample_table from public; - to revoke all privilege from all users
+		
+_________________________________________________________________________________________________________________________________
+
+Role    :
+
+	create role <role_name> - to crate a role
+	
+	grant <role_name> to <user1><user2>,,..;  - to add users to the role
+	
+	revoke <role_name> from <user1>;   - to remove users to the role
+	
+	Grant  :
+	
+		grant all on sample_table to <role_name>; - to grant all privilege to <role_name>
+		 
+	Revoke  :
+	
+		Revoke all on sample_table from <role_name>; - to revoke all privilege from <role_name>
+		
+_________________________________________________________________________________________________________________________________
+	
+	
+grant all possible are :
+
+	select
+	insert
+	update
+	delete
+	references
+	alter
+	index
+	
+	
+_________________________________________________________________________________________________________________________________
+	

@@ -1,0 +1,38 @@
+Collections In Oracle Database :
+--------------------------------
+
+		A homogeneous single dimension data structure which is made up of elements of same datatype is called collection in Oracle Database. 
+		In simple language we can say that, an array in Oracle Database is called Collection.
+		
+Why we call collection a homogeneous data structure? :
+------------------------------------------------------
+
+		1. As we know that array consists data of same datatype and so does the PL/SQL collection 
+			which is why we call them homogeneous data structure.
+			
+		2. The structure of PL/SQL collections consist of a cell with subscript called index. 
+			Data is stored into these cells and can be identified and accessed using the index number. 
+			This is again very similar to the structure of arrays, but unlike array PL/SQL Collections are strictly one-dimensional.
+			
+Types of PL/SQL Collections in Oracle Database :
+------------------------------------------------
+
+				1. Persistent and
+				2. Non-persistent.
+
+
+		Persistent collection, as the name suggests, are those which physically store the collection structure with 
+		the data into the database and can be accessed again if needed. Whereas non-persistent collection only stores data 
+		and structure for one session.
+
+
+1. Persistent :
+---------------
+				
+		1. Nested Tables
+		2. Variable Sized Arrays or VARRAY's
+		
+2. Non-persistent :
+-------------------
+
+		1. Associative arrays.

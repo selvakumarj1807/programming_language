@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GST Calculator</title>
+</head>
+<body>
+    <h1>GST Calculator</h1>
+    <label for="originalPrice">Original Price: </label>
+    <input type="text" id="originalPrice"><br><br>
+    <label for="gstRate">GST Rate (%): </label>
+    <input type="text" id="gstRate"><br><br>
+    <label for="calculateMode">Calculate Mode: </label>
+    <select id="calculateMode">
+        <option value="exclusive">Exclusive</option>
+        <option value="inclusive">Inclusive</option>
+    </select><br><br>
+    <p>GST Amount: <span id="gstAmount">0.00</span></p>
+    <p>Total Price: <span id="totalPrice">0.00</span></p>
+    <p>Tax Amount: <span id="taxAmount">0.00</span></p>
+    
+    <script>
+        // Get input elements
+        var originalPriceInput = document.getElementById("originalPrice");
+        var gstRateInput = document.getElementById("gstRate");
+        var calculateModeSelect = document.getElementById("calculateMode");
+        var gstAmountOutput = document.getElementById("gstAmount");
+        var totalPriceOutput = document.getElementById("totalPrice");
+        var taxAmountOutput = document.getElementById("taxAmount");
+
+        // Add event listeners to the input fields
+        originalPriceInput.addEventListener("input", calculateGST);
+        gstRateInput.addEventListener("input", calculateGST);
+        calculateModeSelect.addEventListener("change", calculateGST);
+
+        // Function to calculate GST
+        function calculateGST() {
+            var originalPrice = parseFloat(originalPriceInput.value) || 0;
+            var gstRate = parseFloat(gstRateInput.value) || 0;
+            var calculateMode = calculateModeSelect.value;
+
+            if (calculateMode === "exclusive") {
+                var gstAmount = (originalPrice * gstRate) / 100;
+                var totalPrice = originalPrice + gstAmount;
+                var taxAmount = gstAmount;
+            } else {
+                var gstAmount = (originalPrice * gstRate) / (100 + gstRate);
+                var totalPrice = originalPrice;
+                var taxAmount = originalPrice - gstAmount;
+            }
+
+            gstAmountOutput.textContent = gstAmount.toFixed(2);
+            totalPriceOutput.textContent = totalPrice.toFixed(2);
+            taxAmountOutput.textContent = taxAmount.toFixed(2);
+        }
+
+        // Initial calculation
+        calculateGST();
+    </script>
+</body>
+</html>

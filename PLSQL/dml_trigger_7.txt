@@ -1,0 +1,240 @@
+Data Manipulation Language (DML) Triggers :
+
+		As the name suggests these are the triggers which execute on DML events or say depend on DML statements such as Update, 
+		Insert or Delete. Using DML trigger you can control the behavior of your DML statements.
+		
+		
+_________________________________________________________________________________________________________________________
+
+Example 1:
+
+
+
+Step1 :
+
+CREATE TABLE superheroes (
+  sh_name VARCHAR2 (15)
+);   
+
+
+Step 2:
+
+SET SERVEROUTPUT ON -- This is required to enable DBMS_OUTPUT
+CREATE OR REPLACE TRIGGER bi_Superheroes
+BEFORE INSERT ON superheroes
+FOR EACH ROW
+ENABLE
+DECLARE
+  v_user  VARCHAR2 (15);
+BEGIN
+ SELECT user INTO v_user FROM dual;
+ DBMS_OUTPUT.PUT_LINE('You Just Inserted a Row Mr.'|| v_user); 
+END;
+/
+
+
+Step 3:
+
+INSERT INTO superheroes VALUES ('Ironman');
+
+
+_________________________________________________________________________________________________________________________
+
+Example 2:
+
+
+CREATE OR REPLACE TRIGGER bu_Superheroes
+BEFORE UPDATE ON superheroes
+FOR EACH ROW
+ENABLE
+DECLARE
+  v_user  VARCHAR2 (15);
+BEGIN
+ SELECT user INTO v_user FROM dual;
+ DBMS_OUTPUT.PUT_LINE('You Just Updated a Row Mr.'|| v_user); 
+END;
+/
+
+
+
+UPDATE superheroes SET SH_NAME = 'Superman' WHERE SH_NAME='Ironman';
+
+
+_________________________________________________________________________________________________________________________
+
+Example 3:
+
+CREATE OR REPLACE TRIGGER tr_superheroes
+BEFORE INSERT OR DELETE OR UPDATE ON superheroes
+FOR EACH ROW
+ENABLE
+DECLARE
+  v_user  VARCHAR2(15);
+BEGIN
+
+  SELECT 
+    user INTO v_user FROM dual;
+  IF INSERTING THEN
+    DBMS_OUTPUT.PUT_LINE('one line inserted by '||v_user);
+  ELSIF DELETING THEN
+    DBMS_OUTPUT.PUT_LINE('one line Deleted by '||v_user);
+  ELSIF UPDATING THEN
+    DBMS_OUTPUT.PUT_LINE('one line Updated by '||v_user);
+  END IF;
+END;
+/
+
+
+
+
+
+INSERT INTO superheroes VALUES ('Ironman');
+
+UPDATE superheroes SET SH_NAME = 'Superman' WHERE SH_NAME='Ironman';
+
+DELETE FROM superheroes WHERE sh_name = 'Superman';
+
+
+_________________________________________________________________________________________________________________________
+
+drop TRIGGER tr_superheroes;
+
+drop table superheroes;
+
+
+_________________________________________________________________________________________________________________________
+
+
+Example 4 Table auditing:
+
+CREATE TABLE superheroes (
+  sh_name VARCHAR2 (15)
+);
+
+SET SERVEROUTPUT ON -- This is required to enable DBMS_OUTPUT
+CREATE OR REPLACE TRIGGER tr_superheroes
+BEFORE INSERT OR DELETE OR UPDATE ON superheroes
+FOR EACH ROW
+ENABLE
+DECLARE
+  v_user  VARCHAR2(15);
+BEGIN
+
+  SELECT 
+    user INTO v_user FROM dual;
+  IF INSERTING THEN
+    DBMS_OUTPUT.PUT_LINE('one line inserted by '||v_user);
+  ELSIF DELETING THEN
+    DBMS_OUTPUT.PUT_LINE('one line Deleted by '||v_user);
+  ELSIF UPDATING THEN
+    DBMS_OUTPUT.PUT_LINE('one line Updated by '||v_user);
+  END IF;
+END;
+/
+
+
+CREATE TABLE sh_audit(
+  new_name varchar2(30),
+  old_name varchar2(30),
+  user_name varchar2(30),
+  entry_date varchar2(30),
+  operation  varchar2(30)
+);
+
+
+SET SERVEROUTPUT ON -- This is required to enable DBMS_OUTPUT
+CREATE OR REPLACE trigger superheroes_audit
+BEFORE INSERT OR DELETE OR UPDATE ON superheroes
+FOR EACH ROW
+ENABLE
+DECLARE
+  v_user varchar2 (30);
+  v_date  varchar2(30);
+BEGIN
+  SELECT user, TO_CHAR(sysdate, 'DD/MON/YYYY HH24:MI:SS') INTO v_user, v_date  FROM dual;
+  IF INSERTING THEN
+    INSERT INTO sh_audit (new_name,old_name, user_name, entry_date, operation) 
+    VALUES(:NEW.SH_NAME, Null , v_user, v_date, 'Insert');  
+  ELSIF DELETING THEN
+    INSERT INTO sh_audit (new_name,old_name, user_name, entry_date, operation)
+    VALUES(NULL,:OLD.SH_NAME, v_user, v_date, 'Delete');
+  ELSIF UPDATING THEN
+    INSERT INTO sh_audit (new_name,old_name, user_name, entry_date, operation) 
+    VALUES(:NEW.SH_NAME, :OLD.SH_NAME, v_user, v_date,'Update');
+  END IF;
+END;
+/
+
+
+
+
+INSERT INTO superheroes VALUES ('Superman');
+
+
+UPDATE SUPERHEROES SET SH_NAME = 'Ironman' WHERE SH_NAME='Superman';
+
+DELETE FROM superheroes WHERE SH_NAME = 'Ironman';
+
+
+
+select * from superheroes;
+
+select * from sh_audit;
+
+
+drop table superheroes;
+
+drop table sh_audit;
+
+_________________________________________________________________________________________________________________________
+
+How To Create Synchronized Table Backup Using DML Trigger In Oracle PL/SQL :
+
+
+Example 5:
+
+
+CREATE TABLE superheroes(
+	Sh_name VARCHAR2(30)
+);
+
+CREATE TABLE superheroes_backup AS SELECT * FROM superheroes ;
+
+
+CREATE or REPLACE trigger Sh_Backup
+BEFORE INSERT OR DELETE OR UPDATE ON superheroes
+FOR EACH ROW
+ENABLE 
+BEGIN
+  IF INSERTING THEN
+    INSERT INTO superheroes_backup (SH_NAME) VALUES (:NEW.SH_NAME);  
+  ELSIF DELETING THEN
+    DELETE FROM superheroes_backup WHERE SH_NAME =:old.sh_name; 
+  ELSIF UPDATING THEN
+    UPDATE superheroes_backup 
+    SET SH_NAME =:new.sh_name WHERE SH_NAME =:old.sh_name;
+  END IF;
+END;
+/
+
+
+INSERT INTO superheroes VALUES ('Superman');
+
+
+UPDATE SUPERHEROES SET SH_NAME = 'Ironman' WHERE SH_NAME='Superman';
+
+DELETE FROM superheroes WHERE SH_NAME = 'Ironman';
+
+
+select * from superheroes;
+
+select * from superheroes_backup;
+
+
+drop table superheroes;
+
+drop table superheroes_backup;
+
+
+
+_________________________________________________________________________________________________________________________

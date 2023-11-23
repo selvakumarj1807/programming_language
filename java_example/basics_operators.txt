@@ -1,0 +1,641 @@
+Java Introduction :
+
+What is Java?
+
+	Java is a popular programming language, created in 1995.
+
+It is used for:
+	1.Mobile applications (specially Android apps)
+	2.Desktop applications
+	3.Web applications
+	4.Web servers and application servers
+	5.Games
+	6.Database connection
+	7.And much, much more!
+	
+Why Use Java?
+	1.Java works on different platforms (Windows, Mac, Linux, Raspberry Pi, etc.)
+	2.It is one of the most popular programming language in the world
+	3.It has a large demand in the current job market
+	4.It is easy to learn and simple to use
+	
+Basic Program in Java
+
+//01 Hello World
+class basic {
+    public static void main(String args[])
+    {
+        System.out.println("Hello World");
+    }
+}
+
+
+Single and Multi Line Comments in Java
+
+//03 Single and Multi Line Comment in Java
+import java.lang.*;
+ 
+class comments
+{
+	public static void main(String args[])
+	{
+		System.out.println("single line and multi line argument");
+		/*
+		In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate 
+		the visual form of a document or a typeface without relying on meaningful content. 
+		Lorem ipsum may be used as a placeholder before final copy is available.
+		*/
+	}
+}
+
+Java Variables
+
+	Variables are containers for storing data values.
+
+In Java, there are different types of variables, for example:
+
+	1.String - stores text, such as "Hello". String values are surrounded by double quotes
+	2.int - stores integers (whole numbers), without decimals, such as 123 or -123
+	3.float - stores floating point numbers, with decimals, such as 19.99 or -19.99
+	4.char - stores single characters, such as 'a' or 'B'. Char values are surrounded by single quotes
+	5.boolean - stores values with two states: true or false
+	
+	
+To create a variable, you must specify the type and assign it a value:
+	
+	type variableName = value;
+	
+ 
+ 
+import java.lang.*;
+ 
+class variables
+{
+	public static void main(String args[])
+	{
+		String name="Tutor Joes";
+		int age=25;
+		float percent=25.25f;
+		char gender='M';
+		boolean married=false;
+		System.out.println("Name 		: "+name);
+		System.out.println("Age  		: "+age);
+		System.out.println("Percent     : "+percent);
+		System.out.println("Gender      : "+gender);
+		System.out.println("Married     : "+married);
+	}
+}
+
+Type Casting in Java
+
+	1.Type casting is a way of converting data from one data type to another data type.
+	2.This process of data conversion is also known as type conversion.
+	
+import java.lang.*;
+ 
+class casting
+{
+	public static void main(String args[])
+	{
+		int a=10;
+		double b=a,d=25.5385;
+		int c=(int)d;
+		System.out.println("Int : "+a);
+		System.out.println("Double : "+b);
+		System.out.println("Double : "+d);
+		System.out.println("Int : "+c);
+	}
+}
+
+Arithmetic Operators in Java
+
+	1.Addition(+): This operator is a binary operator and is used to add two operands.
+	2.Subtraction(-): This operator is a binary operator and is used to subtract two operands.
+	3.Multiplication(*): This operator is a binary operator and is used to multiply two operands.
+	4.Division(/): This is a binary operator that is used to divide the first operand(dividend)
+		by the second operand(divisor) and give the quotient as result.
+	5.Modulus(%):This is a binary operator that is used to return the remainder when the first operand(dividend) 
+		is divided by the second operand(divisor).
+		
+//Arithmetic Operators
+class variables
+{
+	public static void main(String args[])
+	{
+		int a=123,b=10;
+        System.out.println("Addition : "+(a+b));
+        System.out.println("Subtraction : "+(a-b));
+        System.out.println("Multiplication : "+(a*b));
+        System.out.println("Division : "+(a/b));
+        System.out.println("Modulus  : "+(a%b));
+ 
+	}
+}
+
+Arithmetic Assignment operators in Java
+
+Compound Operator	Sample Expression	Expanded Form
+		+=					x+=2				x=x+2
+		-=					y -=6				y=y-6
+		*=					z *=7				z=z*7
+		/=					a /=4				a=a/4
+		%=					b %=9				b= b%9
+		
+
+public class Main {
+  public static void main(String[] args) {
+    int a=123;
+        System.out.println(a);
+        a+=10;
+        System.out.println(a);
+        a-=10;//a=a-10
+        System.out.println(a);
+        a*=10;
+        System.out.println(a);
+        a/=10;
+        System.out.println(a);
+        a%=10;
+        System.out.println(a);
+  }
+}
+
+Relational Operators in Java
+
+Operator	-	uses
+
+	==		-	equality operator
+	!=		-	non-equality operator
+	<		-	less than operator
+	>		-	greater than operator
+	<=		-	less than or equal to operator
+	>=		-	greater than or equal to operator
+	
+class variables
+{
+	public static void main(String args[])
+	{
+		int a=100,b=50;
+        System.out.println(a+"=="+b+" - Equal to : "+(a==b));
+        System.out.println(a+"!="+b+" - Not Equal to : "+(a!=b));
+        System.out.println(a+">"+b+" - Greater than : "+(a>b));
+        System.out.println(a+"<"+b+" - Less than : "+(a<b));
+        System.out.println(a+">="+b+" - Greater than or equal to : "+(a>=b));
+        System.out.println(a+"<="+b+" - Less than or equal to : "+(a<=b));
+	}
+}
+
+Logical Operators in Java
+
+class variables
+{
+	public static void main(String args[])
+	{
+		int m1=25,m2=75;
+        System.out.println("And  &&  : "+(m1>=35 && m2>=35));
+        System.out.println("Or   ||  : "+(m1>=35 || m2>=35));
+	}
+}
+
+Conditional or Ternary Operators in Java
+
+public class Conditional {
+    public static void main(String args[])
+    {
+      //Conditional or Ternary Operators in Java  ?:
+        int a=25,b=35,c;
+        c=a>b?a:b;
+        System.out.println("The Greatest Number is : "+c);
+ 
+    }
+}
+
+_________________________________________________________
+
+Unary operator
+
+class Unary {
+    public static void main(String args[])
+    {
+        //Unary Operators in Java ++ --
+        int a=10;
+        System.out.println(a);
+        //a++; //a=a+1
+        System.out.println(a++);//post increment
+        System.out.println(a);
+        System.out.println(++a);//pre increment
+
+		int b=20;
+		System.out.println(b);
+		b--;
+		System.out.println(b);
+		System.out.println(--b);
+ 
+    }
+}
+
+_______________________________________________________________
+
+Bitwise & Shift Operators in Java
+
+class Bitwise {
+    public static void main(String args[])
+    {
+        //Bitwise & Shift Operators in Java
+        int a=25,b=45;
+        System.out.println("Bitwise And : "+(a&b));
+        System.out.println("Bitwise Or : "+(a|b));
+        System.out.println("Bitwise Xor : "+(a^b));
+        System.out.println("Bitwise Not : "+(~a));
+		System.out.println("Bitwise Left shift : "+(a<<2));//a * 2^2
+		System.out.println("Bitwise Right shift : "+(a>>2));//a / 2^2
+		System.out.println("Bitwise Right shift : "+(a>>3));//a / 2^3
+ 
+    }
+}
+
+
+_____________________________________________________________________________
+
+Scanner class in java
+
+Example 1:
+
+import java.util.Scanner;
+
+class inputscanner {
+    public static void main(String args[])
+    {
+        Scanner in = new Scanner (System.in);
+        int a,b,c;
+        System.out.println("Enter the number :");
+        a = in.nextInt();
+        System.out.println("Enter the number :");
+        b = in.nextInt();
+        c = a+b;
+        System.out.println("The sum of a+b is :"+c);
+        System.out.print(a+"+"+b+"="+c);
+    }
+}
+
+Example 2:
+
+import java.util.Scanner;
+
+class inputscanner {
+    public static void main(String args[])
+    {
+        Scanner in = new Scanner (System.in);
+        float a,b,c;
+        System.out.println("Enter the number :");
+        a = in.nextFloat();
+        System.out.println("Enter the number :");
+        b = in.nextFloat();
+        c = a+b;
+        System.out.println("The sum of a+b is :"+c);
+        System.out.print(a+"+"+b+"="+c);
+    }
+}
+
+Example 3:
+
+import java.util.Scanner;
+
+class inputscanner {
+    public static void main(String args[])
+    {
+        Scanner in = new Scanner (System.in);
+        System.out.println("Enter your name with space:");
+        String a = in.next();
+        in.nextLine();
+        System.out.println("Enter your name with space:");
+        String b = in.nextLine();
+        System.out.println("Your name is :"+a);
+        System.out.print("Your name is :"+b);
+    }
+}
+
+Example 4:
+
+import java.util.Scanner;
+
+class inputscanner {
+    public static void main(String args[])
+    {
+        Scanner in = new Scanner (System.in);
+        System.out.println("Enter your name with space:");
+        String a = in.nextLine();
+        System.out.println("Enter your age :");
+        int b =in.nextInt();
+        in.nextLine();
+        System.out.println("Enter your email");
+        String c = in.nextLine();
+        System.out.println("Your name is :"+a);
+        System.out.println("Your name is :"+b);
+        System.out.println("Your email is :"+c);
+
+    }
+}
+
+
+______________________________________________________________________________________________
+
+IF Statement in Java
+
+ Syntax:
+     if( condition )
+     {
+        // body of the statements;
+     }
+	 
+Example 1:
+
+import java.util.Scanner;
+ 
+class if_statement {
+    public static void main(String args[]) {
+        int age;
+        System.out.println("Enter Your Age : ");
+        Scanner in = new Scanner(System.in);
+        age=in.nextInt();
+        if(age>=18)
+        {
+            System.out.println("You are Eligible For Vote...");
+        }
+    }
+}
+
+______________________________________________________________________________________________
+
+IF ELSE Statement in Java
+
+Syntax:
+     if( condition )
+     {
+        // body of the statement if condition is true ;
+     }
+     else
+     {
+        // body of the statement if condition is false ;
+     }
+	 
+Example 1 :
+
+import java.util.Scanner;
+ 
+class if_statement {
+    public static void main(String args[]) {
+        int age;
+        System.out.println("Enter Your Age : ");
+        Scanner in = new Scanner(System.in);
+        age=in.nextInt();
+        if(age>=18)
+        {
+            System.out.println("You are Eligible For Vote...");
+        }
+        else
+        {
+            System.out.println("You are not Eligible For Vote...");
+        }
+    }
+}
+
+Example 2 :
+
+import java.util.Scanner;
+ 
+class if_else_statement {
+    public static void main(String args[]) {
+        int year;
+        System.out.println("Enter Year : ");
+        Scanner in = new Scanner(System.in);
+        year = in.nextInt();
+        if (year % 4 == 0 || (year % 100 == 0 && year % 400 == 0)) {
+            System.out.println("Year " + year + " is a leap year");
+        } else {
+            System.out.println("Year " + year + " is not a leap year");
+        }
+ 
+    }
+}
+
+______________________________________________________________________________________________
+
+ELSE IF Ladder in Java
+
+Syntax :
+   if ( condition 1 )
+   {
+       // block of statement to be executed if condition is true ;
+   }
+   else if ( condition 2 )
+   {
+       // block of statement to be executed if the condition1 is false condition2 is true ;
+   }
+   else
+   {
+       block of statement to be executed if the condition1 is false condition2 is False ;
+   }
+   
+   
+Example 1 :
+
+import java.util.Scanner;
+ 
+/*
+Else If Ladder
+90-100 Grade-A
+80-89  Grade-B
+70-79  Grade-C
+<70    Grade-D
+*/
+class else_if {
+    public static void main(String args[]) {
+        float avg;
+        System.out.println("Enter The Average Mark : ");
+        Scanner in = new Scanner(System.in);
+        avg = in.nextFloat();
+        if (avg >= 90 && avg <= 100) {
+            System.out.println("Grade A");
+        } else if (avg >= 80 && avg <= 89) {
+            System.out.println("Grade B");
+        } else if (avg >= 70 && avg <= 79) {
+            System.out.println("Grade C");
+        } else {
+            System.out.println("Grade D");
+        }
+    }
+
+}
+
+______________________________________________________________________________________________
+
+Nested If in Java
+
+Syntax:
+if(Expression 1)
+{
+    // Executes when the Expression 1 is true
+     if(Expression 2)
+     {
+        // Executes when the Expression 2 is true
+     }
+}
+
+Example :
+
+import java.util.Scanner;
+ 
+class nested_if {
+    public static void main(String args[])
+    {
+        /*
+            Nested if Statement
+            A company insures its drivers in the following cases:
+                a.	If the driver is married.
+                b.	If the driver is unmarried, male & above 30 years of age.
+                c.	If the driver is unmarried, female & above 25 years of age.
+        */
+        Scanner in =new Scanner(System.in);
+        System.out.println("Enter The Marital Status M/U: ");
+        char marital=in.next().charAt(0);
+        if(marital=='u' || marital=='U' )
+        {
+            System.out.println("Enter The Gender M/F: ");
+            char gender=in.next().charAt(0);
+            System.out.println("Enter The Age : ");
+            int age=in.nextInt();
+            if((gender=='M'||gender=='m')&& age>=30)
+            {
+                System.out.println("You are Eligible for Insurance");
+            }
+            else if((gender=='F'||gender=='f')&& age>=25)
+            {
+                System.out.println("You are Eligible for Insurance");
+            }
+            else
+            {
+                System.out.println("You are Not Eligible for Insurance");
+            }
+ 
+        }
+        else if(marital=='m' || marital=='M' )
+        {
+            System.out.println("You are Eligible for Insurance");
+        }
+        else {
+            System.out.println("Invalid Input");
+        }
+    }
+}
+
+______________________________________________________________________________________________
+
+Switch Statement in Java
+
+Syntax:
+     switch ( expression )
+    {
+    case 1 :
+         // Block of Statement
+         break;
+    case 2 :
+         // Block of Statement
+         break;
+    case 3 :
+         // Block of Statement
+         break;
+    case 4 :
+         // Block of Statement
+         break;
+     .
+     .
+     default :
+         // Block of Statement
+         break;
+    }
+	
+Example :
+
+import java.util.Scanner;
+ 
+//Switch Case Statement in Java
+class switch_demo {
+    public static void main(String args[]) {
+        int a,b,c,ch;
+        System.out.println("1.Addition");
+        System.out.println("2.Subtraction");
+        System.out.println("3.Multiplication");
+        System.out.println("4.Division");
+        System.out.println("Enter Your Choice : ");
+        Scanner in =new Scanner(System.in);
+        ch=in.nextInt();
+        System.out.println("Enter 2 Nos : ");
+        a=in.nextInt();
+        b=in.nextInt();
+        switch (ch)
+        {
+            case 1:
+                c=a+b;
+                System.out.println("Addition : " +c);
+                break;
+            case 2:
+                c=a-b;
+                System.out.println("Subtraction : "+c);
+                break;
+            case 3:
+                c=a*b;
+                System.out.println("Multiplication : "+c);
+                break;
+            case 4:
+                c=a/b;
+                System.out.println("Division : "+c);
+                break;
+            default:
+                System.out.println("Invalid Selection");
+                break;
+        }
+    }
+}
+
+______________________________________________________________________________________________
+
+Group Switch Statement in Java
+
+Example :
+
+import java.util.Scanner;
+ 
+//Group Switch
+class group_switch {
+    public static void main(String args[]) {
+       char c;
+        System.out.println("Enter The Character : ");
+        Scanner in =new Scanner(System.in);
+        c=in.next().charAt(0);
+ 
+        switch (c)
+        {
+            case 'a':
+            case 'e':
+            case 'i':
+            case '0':
+            case 'u':
+            case 'A':
+            case 'E':
+            case 'I':
+            case 'O':
+            case 'U':
+                System.out.println(c + " is a Vowels");
+                break;
+            default:
+                System.out.println(c + " is not a Vowels");
+                break;
+        }
+ 
+    }
+}
+ 
+ 
+ ______________________________________________________________________________________________
+ 
+ 

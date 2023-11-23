@@ -1,0 +1,32 @@
+<html>
+<head>
+
+<script type="text/javascript" src="externetfile.js">
+</script>
+
+</head>
+<body>
+<script>alert("hi");
+</script>
+<h1>Select by tag name</h1>
+<input  placeholder="enter the name"> <br>
+<input  placeholder="enter the age"> <br>
+<input  placeholder="enter the mobile number"> <br><br>
+<button onclick="check()">SUBMIT</button> 
+<p > </p>
+<p > </p>
+<p > </p>
+<script>
+function check()
+{
+box=document.getElementsByTagName("input");
+data=document.getElementsByTagName("p");
+//data[0].innerHTML=box[0].value;
+/*data[1].innerHTML=box[1].value;
+data[2].innerHTML=box[2].value;*/
+for(i=0;i<box.length;i++){
+data[i].innerHTML=box[i].value;}
+}
+</script>
+</body>
+</html>

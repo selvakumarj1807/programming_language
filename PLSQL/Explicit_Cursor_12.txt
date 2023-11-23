@@ -1,0 +1,167 @@
+How To Create An Explicit Cursor In Oracle Database :
+-----------------------------------------------------
+
+SET SERVEROUTPUT ON;
+DECLARE
+  v_name VARCHAR2(30);
+  --Declare Cursor 
+  CURSOR cur_tit IS 
+  SELECT first_name FROM EMPLOYEES 
+  WHERE employee_id < 105;
+BEGIN
+  OPEN cur_tit; 
+  LOOP 
+    FETCH cur_tit INTO v_name; 
+    DBMS_OUTPUT.PUT_LINE (v_name); 
+    EXIT WHEN cur_tit%NOTFOUND; 
+  END LOOP;--Simple Loop End
+  CLOSE cur_tit;
+END;
+/
+
+
+__________________________________________________________________________________________________________________
+
+
+How To Create Cursor Parameter In Oracle Database :
+---------------------------------------------------
+
+What is Parameterized cursor?
+-----------------------------
+
+		1. Unlike simple explicit cursor, parameterized cursors accept values as parameter. 
+		2. You specify the list of parameters separated by comma (,) while declaring the cursor and 
+		3. supply the corresponding argument for each parameter in the list while opening the cursor.
+		
+Syntax of Parameterized Cursor in Oracle Database :
+---------------------------------------------------
+			
+			CURSOR cur _ name (parameter list) IS SELECT statement;
+			
+			OPEN cur _ name (argument list)
+			
+			
+			
+Example :
+---------
+
+
+SET SERVEROUTPUT ON;
+DECLARE
+  v_name VARCHAR2 (30);
+  --Declare Cursor 
+  CURSOR p_cur_tit (var_e_id VARCHAR2) IS 
+  SELECT first_name FROM EMPLOYEES 
+  WHERE employee_id < var_e_id;
+BEGIN
+  OPEN p_cur_tit (105); 
+LOOP 
+    FETCH p_cur_tit INTO v_name; 
+    EXIT WHEN p_cur_tit%NOTFOUND; 
+    DBMS_OUTPUT.PUT_LINE(v_name );  
+  END LOOP;
+  CLOSE p_cur_tit;
+END;
+/
+
+
+__________________________________________________________________________________________________________________
+
+How To Create Cursor Parameterized default value In Oracle Database :
+---------------------------------------------------------------------
+
+
+SET SERVEROUTPUT ON;
+DECLARE
+  v_name VARCHAR2 (30);
+  v_eid NUMBER(10);
+  --Declare Cursor 
+  CURSOR p_cur_tit (var_e_id number := 190) IS 
+  SELECT first_name,employee_id FROM EMPLOYEES 
+  WHERE employee_id > var_e_id;
+BEGIN
+  OPEN p_cur_tit (); --put the value (200)
+LOOP 
+    FETCH p_cur_tit INTO v_name,v_eid; 
+    EXIT WHEN p_cur_tit%NOTFOUND; 
+    DBMS_OUTPUT.PUT_LINE(v_eid||' name is '||v_name );  
+  END LOOP;
+  CLOSE p_cur_tit;
+END;
+/
+
+__________________________________________________________________________________________________________________
+
+Cursor For Loop :
+-----------------
+
+		As the name suggests Cursor For Loop is a type of For loop provided by oracle PL/SQL 
+		which makes working with cursors in oracle database a lot easier by executing OPEN, 
+		FETCH & CLOSE Cursor statements implicitly in the background for you.
+		
+Syntax of Cursor For Loop :
+---------------------------
+
+			FOR loop_index IN cursor_name 
+				LOOP
+					Statements…
+				END LOOP;
+				
+Example :
+---------
+
+Example 1: Cursor For Loop With Simple Explicit Cursor :
+--------------------------------------------------------
+
+SET SERVEROUTPUT ON;
+DECLARE
+ CURSOR cur_tit IS 
+ SELECT first_name, last_name FROM employees
+ WHERE employee_id >200;
+BEGIN
+  FOR L_IDX IN cur_tit
+  LOOP
+    DBMS_OUTPUT.PUT_LINE(L_IDX.first_name||' --- '||L_IDX.last_name);
+  END LOOP;
+END;
+/
+
+Example 2: Cursor For Loop With Inline Cursor :
+-----------------------------------------------
+
+SET SERVEROUTPUT ON;
+BEGIN
+  FOR  L_IDX  IN (SELECT first_name, last_name FROM employees
+  WHERE employee_id >200)
+  LOOP
+     DBMS_OUTPUT.PUT_LINE (L_IDX.first_name||' - '||L_IDX.last_name);
+  END LOOP;
+END;
+/
+
+__________________________________________________________________________________________________________________
+
+Cursor For Loop With Parameterized Explicit Cursor In Oracle Database :
+-----------------------------------------------------------------------
+
+
+Example1. Cursor For Loop With Parameterized Cursor :
+-----------------------------------------------------
+
+
+DECLARE
+  CURSOR cur_tit( var_e_id NUMBER) IS 
+  SELECT first_name, employee_id FROM employees
+  WHERE employee_id > var_e_id;
+BEGIN
+  FOR l_idx IN cur_tit(200)
+  LOOP
+    DBMS_OUTPUT.PUT_LINE(l_idx.employee_id||' '||l_idx.first_name);
+  END LOOP;
+END;
+/
+
+__________________________________________________________________________________________________________________
+
+
+

@@ -1,0 +1,59 @@
+/*
+1.Static - default
+2.Relative
+    Left ,Right ,Top ,Bottom
+
+    Example:
+    .box1{
+        position: relative;
+        left: 50px;
+        top: 25px;
+    }
+3.Absolute
+    Relative ,Left ,Right ,Top ,Bottom
+
+    Example:
+    .main{
+    position: relative;
+
+    }
+
+    .box1{
+        position: absolute;
+        bottom: 0px;
+        left: 100px;
+
+    }
+
+4.Fixed
+
+    Example:
+    .box1{
+    position: fixed;
+    top: 200px;
+    right: 200px;
+
+}
+
+
+5.Sticky
+*/
+
+.main{
+    
+}
+
+.box1{
+    position: fixed;
+    top: 200px;
+    right: 200px;
+
+}
+
+.box2{
+    
+}
+
+.box3{
+    
+}

@@ -1,0 +1,23 @@
+<html>
+<head>
+</head>
+<body>
+<h1> Create New HTML element</h1>
+<div id="mydiv">
+
+</div>
+
+<input placeholder="Enter data" id="myinput"><br><br>
+<button onclick="create()"> Submit </button>
+<script>
+function create(){
+value=document.getElementById("myinput").value;
+element =document.createElement("p");// <p>  </p>
+text = document.createTextNode(value);//hi 
+element.appendChild(text);//<p> hi </p>
+mydiv = document.getElementById("mydiv");
+mydiv.appendChild(element);
+}
+</script>
+</body>
+</html>

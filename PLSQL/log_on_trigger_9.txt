@@ -1,0 +1,133 @@
+Schema Level Database LOGON Trigger In PL/SQL :
+
+		Database event triggers also known as system event triggers come into action 
+		when some system event occurs such as database log on, log off, start up or shut down. 
+		These types of triggers are majorly used for monitoring activity of the system events 
+		and have been proved quite a powerful tool for a DBA.
+		
+Types of Database Event Triggers :
+
+		1. Schema Level Event Triggers
+		2. Database Level Event Triggers
+		
+			Schema level event triggers can work on some specific schemas while the database 
+			event triggers have database wide scope. In other words database event triggers can be 
+			created to monitor the system event activities of either a specific user/schema or the whole database.
+			
+Object/System Privileges :
+
+go to cmd :
+
+		1. sqlplus / as sysdba
+		
+		2. grant connect to hr;
+		
+		3. grant connect to hr identified by admin;
+		
+		4. grant all privilege to hr identified by admin;
+		
+
+
+
+LOGON Trigger :
+Example :
+-------------------
+
+CREATE TABLE hr_evnt_audit
+  (
+    event_type VARCHAR2(30),
+    logon_date DATE,
+    logon_time VARCHAR2(15),
+    logof_date DATE,
+    logof_time VARCHAR2(15)
+  );
+  
+  
+CREATE OR REPLACE TRIGGER hr_lgon_audit
+AFTER LOGON ON SCHEMA
+BEGIN
+  INSERT INTO hr_evnt_audit VALUES(
+    ora_sysevent,
+    sysdate,
+    TO_CHAR(sysdate, 'hh24:mi:ss'),
+    NULL,
+    NULL
+  );
+  COMMIT;
+END;
+/
+
+select * from hr_evnt_audit;
+
+DISC;
+
+conn hr/admin;
+
+
+select * from hr_evnt_audit;
+
+
+
+_______________________________________________________________________________________________________________________
+
+LOGOFF Trigger :
+-----------------
+
+CREATE OR REPLACE TRIGGER log_off_audit
+BEFORE LOGOFF ON SCHEMA
+BEGIN
+  INSERT INTO hr_evnt_audit VALUES(
+    ora_sysevent,
+    NULL,
+    NULL,
+    SYSDATE,
+    TO_CHAR(sysdate, 'hh24:mi:ss')
+  );
+  COMMIT;
+END;
+/
+
+select * from hr_evnt_audit;
+
+-- once check the log off and log on your schema
+
+_______________________________________________________________________________________________________________________
+
+ Logoff to the database :
+ 
+		As only the user with ADMINISTER DATABASE TRIGGER system privilege can create a 
+		database level event trigger thus we need to make sure that this time we should 
+		log on to the database using one of these users.
+		
+------------------------------------------------
+		
+CREATE TABLE db_evnt_audit
+  (
+User_name VARCHAR2(15),
+    event_type VARCHAR2(30),
+    logon_date DATE,
+    logon_time VARCHAR2(15),
+    logof_date DATE,
+    logof_time VARCHAR2(15)
+  );
+  
+  
+CREATE OR REPLACE TRIGGER db_lgof_audit
+BEFORE LOGOFF ON DATABASE
+BEGIN
+  INSERT INTO db_evnt_audit 
+  VALUES(
+    user,
+    ora_sysevent,
+    NULL,
+    NULL,
+    SYSDATE,
+    TO_CHAR(sysdate, 'hh24:mi:ss')
+    );
+COMMIT;
+END;
+/
+
+select * from db_evnt_audit;
+
+_______________________________________________________________________________________________________________________

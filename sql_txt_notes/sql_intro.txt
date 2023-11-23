@@ -1,0 +1,86 @@
+SQL ( structured Query language ) / sequal 
+_____________________________________________________ 
+
+SQL is Language that Communicates with database
+Accessing and Manipulating database
+
+DATABASE 
+_________
+
+Collection of data stored in database
+database is a table that contains rows and columns
+
+Project --> Full stock developers( front end developers + Backend end developers) ==> Communicates
+
+SQL DATABASE 
+____________
+
+Mysql
+MsAccess
+Sybase
+Oracle ----------- ( Our Using database )
+Postgres
+Sql Server 
+
+Oracle Databse version like 10g,11g,12c,18c Like that Mostly used in 10g,11g 
+
+
+TOOL:
+___________
+
+Sql developer tool --------- ( Our Using tool )
+toad 
+
+what Sql can do ?
+__________________
+
+   # Insert records in database ( Using insert Query )
+   # Retrive data from database ( Using Select Query ) 
+   # update records in database ( Using Update Query )
+   # delete records in database ( Using delete Query )
+   # create new database
+   # create new table
+   
+DATA TYPES
+______________________
+
+NUMBER-38 digits
+CHAR-2000 Bytes
+VARCHAR2-4000 Bytes
+VARCHAR-2000 Bytes
+DATE
+
+ Questions 
+ __________________________
+ 1.What is sql ?
+ 2.differnce between Oracle database 10g and 11g ?
+ 
+ -----------------------------------------
+ 
+ SQL Topics
+
+1.Basic SQL Select Statement
+2.Restricting and Sorting Data
+3.Single Row Functions
+4.Group Functions
+5.Analytical Functions	
+6.Set Operators
+7.Pseudo Columns
+8.Constraints
+9. DCL
+10.DDL
+11.DML
+12.TCL
+13.Sub Queries
+14.Joins
+15.Views
+16.Materialized Views
+17.Synonyms
+18.Sequence
+19.Index
+20.SQL Loader
+21.External Tables
+22.Global Temporary Table
+23.SQL PLUS Commands
+24.Table Partitioning
+25.Virtual Column

@@ -1,0 +1,64 @@
+Class & object in Java :
+
+	1. A class is often defined as the blueprint or template for an object. We can create multiple objects from a class.
+
+	2. An object is an identifiable entity with some characteristics, state and behaviour.
+
+	3. Memory is allocated when we create the objects of a class type. 
+		A class contains properties and methods to define the state and behaviour of its object. 
+		It defines the data and the methods that act upon that data.
+		
+Example :
+
+   A dog has states - color, name, breed as well as behaviors – wagging the tail, barking, eating. An object is an instance of a class.
+   
+   
+Syntax Of Class :
+
+		   class class_name
+		   {
+				Variables ;
+				Methods ;
+		   }
+		   
+Syntax Of Object :
+
+			Class_Name ReferenceVariable ( or ) Object = new Class_Name ( ) ;
+			
+			
+
+
+Example 1:
+
+
+//Class & Object in Java
+class Rectangle
+{
+    int length, width;
+ 
+    void getDetails(int x, int y) {
+        length = x;
+        width = y;
+    }
+    int area() {
+        int a = length * width;
+        return a;
+    }
+}
+class class_object {
+    public static void main(String args[]) {
+        Rectangle o1 =new Rectangle();
+        o1.length=10;
+        o1.width=20;
+        System.out.println("Area of Rectangle : "+o1.area());
+ 
+ 
+        Rectangle o2=new Rectangle();
+        o2.getDetails(20,30);
+        System.out.println("Area of Rectangle : "+o2.area());
+ 
+    }
+}
+
+
+______________________________________________________________________________________________________________________________
