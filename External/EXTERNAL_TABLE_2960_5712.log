@@ -1,0 +1,17 @@
+
+
+ LOG file opened at 09/20/23 10:39:47
+
+Field Definitions for table EXTERNAL_TABLE
+  Record format DELIMITED BY NEWLINE
+  Data in file has same endianness as the platform
+  Rows with all null fields are accepted
+
+  Fields in Data Source: 
+
+    V_NUM                           CHAR (255)
+      Terminated by ","
+      Trim whitespace same as SQL Loader
+    V_NAME                          CHAR (255)
+      Terminated by ","
+      Trim whitespace same as SQL Loader

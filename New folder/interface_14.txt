@@ -1,0 +1,118 @@
+What is interface in Java :
+---------------------------
+
+	Interface looks like a class but it is not a class. 
+	An interface can have methods and variables just like the class but the methods declared in 
+	interface are by default abstract (only method signatures, no body, see: Java abstract method). 
+	As mentioned above they are used for full abstraction. Since methods in interfaces do not have body, 
+	they have to be implemented by the class before you can access them.
+
+	The class that implements interface must implement all the methods of that interface. 
+	Also, java programming language does not allow you to extend more than one class, 
+	however you can implement more than one interface in your class.
+	
+Example :
+---------
+
+interface Animal {
+    void Sound();
+    void sleep();
+}
+class Dog implements Animal
+{
+    @Override
+    public void Sound() {
+        System.out.println("The Dog Sounds like : woof");
+    }
+ 
+    @Override
+    public void sleep() {
+        System.out.println("Dog Sleeping");
+    }
+}
+class interfaceDemo{
+    public static void main(String args[]) {
+        Dog o =new Dog();
+        o.Sound();
+        o.sleep();
+    }
+}
+
+_______________________________________________________________________________________________________________________________
+
+Implement multiple interfaces in Java :
+---------------------------------------
+
+How Multiple inheritance can be achieved by implement multiple interfaces :
+---------------------------------------------------------------------------
+
+//How Multiple inheritance can be achieved by implement multiple interfaces
+class Phone
+{
+    void voiceCall()
+    {
+        System.out.println("Make VoiceClass");
+    }
+    void sms()
+    {
+        System.out.println("We Can send SMS");
+    }
+}
+interface Camera
+{
+    void click();
+    void record();
+}
+ 
+interface player
+{
+    void play();
+    void pause();
+    void stop();
+}
+ 
+class SmartPhone extends Phone implements Camera,player
+{
+ 
+    @Override
+    public void click() {
+        System.out.println("Take a Selfi");
+    }
+ 
+    @Override
+    public void record() {
+        System.out.println("Take a video");
+    }
+ 
+    @Override
+    public void play() {
+        System.out.println("Play Music");
+    }
+ 
+    @Override
+    public void pause() {
+        System.out.println("Pause Music");
+    }
+ 
+    @Override
+    public void stop() {
+        System.out.println("Stop Music");
+    }
+}
+ 
+class interfaceDemo2 {
+    public static void main(String[] args) {
+        SmartPhone o =new SmartPhone();
+        o.voiceCall();
+        o.sms();
+        o.click();
+        o.record();
+        o.play();
+        o.pause();
+        o.stop();
+    }
+}
+ 
+ 
+_______________________________________________________________________________________________________________________________
+

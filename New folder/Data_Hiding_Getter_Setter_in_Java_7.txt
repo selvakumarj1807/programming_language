@@ -1,0 +1,57 @@
+Data Hiding Getter & Setter in Java :
+
+		This Java program demonstrates the usage of getter and setter methods to set and retrieve 
+		the length and width of a rectangle, and to calculate its area. The program defines a class 
+		ShapeRectangle with private instance variables length and width, and getter and setter methods to 
+		access and modify these variables.
+		
+Example :
+
+//Data Hiding Getter and Setter in Java
+ 
+class ShapeRectangle {
+    private int length, width;
+ 
+    //Getter Method
+    int getLength() {
+        return length;
+    }
+ 
+    int getWidth() {
+        return width;
+    }
+ 
+    //Setter Method
+    void setLength(int l) {
+        if (l > 0)
+            length = l;
+        else
+            length = 0;
+    }
+ 
+    void setWidth(int w) {
+        if (w > 0)
+            width = w;
+        else
+            width = 0;
+    }
+    
+    int area() {
+        int a = length * width;
+        return a;
+    }
+}
+
+class get_set {
+    public static void main(String args[]) {
+        ShapeRectangle o = new ShapeRectangle();
+        o.setLength(10);
+        o.setWidth(20);
+        System.out.println("Length : " + o.getLength());
+        System.out.println("Width  : " + o.getWidth());
+        System.out.println("Area of Rectangle : " + o.area());
+    }
+}
+
+
+______________________________________________________________________________________________________________________________

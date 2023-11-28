@@ -1,0 +1,20 @@
+Introduction of Object Oriented Programming in Java :
+
+		1. OOP stands for Object-Oriented Programming.. The popular object-oriented languages are Java, C#, PHP, Python, C++, etc.
+		
+		2. The main aim of object-oriented programming is to implement real-world entities, 
+			for example, object, classes, abstraction, inheritance, polymorphism, etc. 
+			Object-Oriented Programming is a methodology or paradigm to design a program using classes and objects. 
+			It simplifies software development and maintenance by providing some concepts.
+			
+			1. Object - Any entity that has state and behaviour is known as an object.
+			
+			2. Class - Collection of objects is called class. It is a logical entity.
+			
+			3. Inheritance - When one object acquires all the properties and behaviours of a parent object, it is known as inheritance.
+			
+			4. Polymorphism - If one task is performed in different ways, it is known as polymorphism.
+			
+			5. Abstraction- Hiding internal details and showing functionality is known as abstraction.
+			
+			6. Encapsulation - Binding (or wrapping) code and data together into a single unit are known as encapsulation.

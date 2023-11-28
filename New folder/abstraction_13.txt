@@ -1,0 +1,112 @@
+Abstract Class in Java :
+------------------------
+
+	An abstract class is a class marked with the abstract keyword. 
+	It, contrary to non-abstract class, may contain abstract - implementation-less - methods. 
+	It is, however, valid to create an abstract class without abstract methods.
+
+	An abstract class cannot be instantiated. 
+	It can be sub-classed (extended) as long as the sub-class is either also abstract, 
+	or implements all methods marked as abstract by super classes.
+
+Abstraction can be achieved with either abstract classes or interfaces :
+------------------------------------------------------------------------
+
+			1. Abstract class must have one abstract method.
+			2. We can’ts create object using abstract class.
+			3. Abstract class can have abstract and non abstract methods.
+				
+	
+Example :
+---------
+
+//Abstract Class in Java Programming
+abstract class Shape
+{
+    abstract void draw();
+    void message()
+    {
+        System.out.println("Message From Shape");
+    }
+}
+class rectangleShape extends Shape
+{
+    @Override
+    void draw() {
+        System.out.println("Draw Rectangle Using Length & Breadth..");
+    }
+}
+ 
+class abstractDemo {
+    public static void main(String args[]) {
+        rectangleShape o =new rectangleShape();
+        o.draw();
+        o.message();
+    }
+}
+
+_________________________________________________________________________________________________________________________________
+
+Smart Phone Example using Abstract Class in Java :
+--------------------------------------------------
+
+//Example for Abstract Class in Java Programming
+abstract class Mobile {
+    void VoiceCall() {
+        System.out.println("You can Make Voice Call");
+    }
+    abstract void camera();
+    abstract void touchDisplay();
+ 
+}
+class samsung extends Mobile
+{
+ 
+    @Override
+    void camera() {
+        System.out.println("16 Mega Pixel Camera");
+    }
+ 
+    @Override
+    void touchDisplay() {
+        System.out.println("5.5 inch Display");
+    }
+}
+ 
+class Nokia extends  Mobile
+{
+ 
+    @Override
+    void camera() {
+        System.out.println("8 Mega Pixel Camera");
+    }
+ 
+    @Override
+    void touchDisplay() {
+        System.out.println("5 inch Display");
+    }
+ 
+    void fingerPrint() {
+        System.out.println("Fast Finger Sensor..");
+    }
+}
+
+class abstractDemo2 {
+    public static void main(String args[]) {
+ 
+        samsung M32 =new samsung();
+        M32.VoiceCall();
+        M32.touchDisplay();
+        M32.camera();
+        System.out.println("-------------------------");
+        Nokia N1= new Nokia();
+        N1.VoiceCall();
+        N1.camera();
+        N1.touchDisplay();
+        N1.fingerPrint();
+ 
+    }
+}
+  
+  
+_________________________________________________________________________________________________________________________________

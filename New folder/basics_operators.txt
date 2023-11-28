@@ -1,0 +1,1364 @@
+Java Introduction :
+
+What is Java?
+
+	Java is a popular programming language, created in 1995.
+
+It is used for:
+	1.Mobile applications (specially Android apps)
+	2.Desktop applications
+	3.Web applications
+	4.Web servers and application servers
+	5.Games
+	6.Database connection
+	7.And much, much more!
+	
+Why Use Java?
+	1.Java works on different platforms (Windows, Mac, Linux, Raspberry Pi, etc.)
+	2.It is one of the most popular programming language in the world
+	3.It has a large demand in the current job market
+	4.It is easy to learn and simple to use
+	
+Basic Program in Java
+
+//01 Hello World
+class basic {
+    public static void main(String args[])
+    {
+        System.out.println("Hello World");
+    }
+}
+
+
+Single and Multi Line Comments in Java
+
+//03 Single and Multi Line Comment in Java
+import java.lang.*;
+ 
+class comments
+{
+	public static void main(String args[])
+	{
+		System.out.println("single line and multi line argument");
+		/*
+		In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate 
+		the visual form of a document or a typeface without relying on meaningful content. 
+		Lorem ipsum may be used as a placeholder before final copy is available.
+		*/
+	}
+}
+
+Java Variables
+
+	Variables are containers for storing data values.
+
+In Java, there are different types of variables, for example:
+
+	1.String - stores text, such as "Hello". String values are surrounded by double quotes
+	2.int - stores integers (whole numbers), without decimals, such as 123 or -123
+	3.float - stores floating point numbers, with decimals, such as 19.99 or -19.99
+	4.char - stores single characters, such as 'a' or 'B'. Char values are surrounded by single quotes
+	5.boolean - stores values with two states: true or false
+	
+	
+To create a variable, you must specify the type and assign it a value:
+	
+	type variableName = value;
+	
+ 
+ 
+import java.lang.*;
+ 
+class variables
+{
+	public static void main(String args[])
+	{
+		String name="Tutor Joes";
+		int age=25;
+		float percent=25.25f;
+		char gender='M';
+		boolean married=false;
+		System.out.println("Name 		: "+name);
+		System.out.println("Age  		: "+age);
+		System.out.println("Percent     : "+percent);
+		System.out.println("Gender      : "+gender);
+		System.out.println("Married     : "+married);
+	}
+}
+
+Type Casting in Java
+
+	1.Type casting is a way of converting data from one data type to another data type.
+	2.This process of data conversion is also known as type conversion.
+	
+import java.lang.*;
+ 
+class casting
+{
+	public static void main(String args[])
+	{
+		int a=10;
+		double b=a,d=25.5385;
+		int c=(int)d;
+		System.out.println("Int : "+a);
+		System.out.println("Double : "+b);
+		System.out.println("Double : "+d);
+		System.out.println("Int : "+c);
+	}
+}
+
+Arithmetic Operators in Java
+
+	1.Addition(+): This operator is a binary operator and is used to add two operands.
+	2.Subtraction(-): This operator is a binary operator and is used to subtract two operands.
+	3.Multiplication(*): This operator is a binary operator and is used to multiply two operands.
+	4.Division(/): This is a binary operator that is used to divide the first operand(dividend)
+		by the second operand(divisor) and give the quotient as result.
+	5.Modulus(%):This is a binary operator that is used to return the remainder when the first operand(dividend) 
+		is divided by the second operand(divisor).
+		
+//Arithmetic Operators
+class variables
+{
+	public static void main(String args[])
+	{
+		int a=123,b=10;
+        System.out.println("Addition : "+(a+b));
+        System.out.println("Subtraction : "+(a-b));
+        System.out.println("Multiplication : "+(a*b));
+        System.out.println("Division : "+(a/b));
+        System.out.println("Modulus  : "+(a%b));
+ 
+	}
+}
+
+Arithmetic Assignment operators in Java
+
+Compound Operator	Sample Expression	Expanded Form
+		+=					x+=2				x=x+2
+		-=					y -=6				y=y-6
+		*=					z *=7				z=z*7
+		/=					a /=4				a=a/4
+		%=					b %=9				b= b%9
+		
+
+public class Main {
+  public static void main(String[] args) {
+    int a=123;
+        System.out.println(a);
+        a+=10;
+        System.out.println(a);
+        a-=10;//a=a-10
+        System.out.println(a);
+        a*=10;
+        System.out.println(a);
+        a/=10;
+        System.out.println(a);
+        a%=10;
+        System.out.println(a);
+  }
+}
+
+Relational Operators in Java
+
+Operator	-	uses
+
+	==		-	equality operator
+	!=		-	non-equality operator
+	<		-	less than operator
+	>		-	greater than operator
+	<=		-	less than or equal to operator
+	>=		-	greater than or equal to operator
+	
+class variables
+{
+	public static void main(String args[])
+	{
+		int a=100,b=50;
+        System.out.println(a+"=="+b+" - Equal to : "+(a==b));
+        System.out.println(a+"!="+b+" - Not Equal to : "+(a!=b));
+        System.out.println(a+">"+b+" - Greater than : "+(a>b));
+        System.out.println(a+"<"+b+" - Less than : "+(a<b));
+        System.out.println(a+">="+b+" - Greater than or equal to : "+(a>=b));
+        System.out.println(a+"<="+b+" - Less than or equal to : "+(a<=b));
+	}
+}
+
+Logical Operators in Java
+
+class variables
+{
+	public static void main(String args[])
+	{
+		int m1=25,m2=75;
+        System.out.println("And  &&  : "+(m1>=35 && m2>=35));
+        System.out.println("Or   ||  : "+(m1>=35 || m2>=35));
+	}
+}
+
+Conditional or Ternary Operators in Java
+
+public class Conditional {
+    public static void main(String args[])
+    {
+      //Conditional or Ternary Operators in Java  ?:
+        int a=25,b=35,c;
+        c=a>b?a:b;
+        System.out.println("The Greatest Number is : "+c);
+ 
+    }
+}
+
+_________________________________________________________
+
+Unary operator
+
+class Unary {
+    public static void main(String args[])
+    {
+        //Unary Operators in Java ++ --
+        int a=10;
+        System.out.println(a);
+        //a++; //a=a+1
+        System.out.println(a++);//post increment
+        System.out.println(a);
+        System.out.println(++a);//pre increment
+
+		int b=20;
+		System.out.println(b);
+		b--;
+		System.out.println(b);
+		System.out.println(--b);
+ 
+    }
+}
+
+_______________________________________________________________
+
+Bitwise & Shift Operators in Java
+
+class Bitwise {
+    public static void main(String args[])
+    {
+        //Bitwise & Shift Operators in Java
+        int a=25,b=45;
+        System.out.println("Bitwise And : "+(a&b));
+        System.out.println("Bitwise Or : "+(a|b));
+        System.out.println("Bitwise Xor : "+(a^b));
+        System.out.println("Bitwise Not : "+(~a));
+		System.out.println("Bitwise Left shift : "+(a<<2));//a * 2^2
+		System.out.println("Bitwise Right shift : "+(a>>2));//a / 2^2
+		System.out.println("Bitwise Right shift : "+(a>>3));//a / 2^3
+ 
+    }
+}
+
+
+_____________________________________________________________________________
+
+Scanner class in java
+
+Example 1:
+
+import java.util.Scanner;
+
+class inputscanner {
+    public static void main(String args[])
+    {
+        Scanner in = new Scanner (System.in);
+        int a,b,c;
+        System.out.println("Enter the number :");
+        a = in.nextInt();
+        System.out.println("Enter the number :");
+        b = in.nextInt();
+        c = a+b;
+        System.out.println("The sum of a+b is :"+c);
+        System.out.print(a+"+"+b+"="+c);
+    }
+}
+
+Example 2:
+
+import java.util.Scanner;
+
+class inputscanner {
+    public static void main(String args[])
+    {
+        Scanner in = new Scanner (System.in);
+        float a,b,c;
+        System.out.println("Enter the number :");
+        a = in.nextFloat();
+        System.out.println("Enter the number :");
+        b = in.nextFloat();
+        c = a+b;
+        System.out.println("The sum of a+b is :"+c);
+        System.out.print(a+"+"+b+"="+c);
+    }
+}
+
+Example 3:
+
+import java.util.Scanner;
+
+class inputscanner {
+    public static void main(String args[])
+    {
+        Scanner in = new Scanner (System.in);
+        System.out.println("Enter your name with space:");
+        String a = in.next();
+        in.nextLine();
+        System.out.println("Enter your name with space:");
+        String b = in.nextLine();
+        System.out.println("Your name is :"+a);
+        System.out.print("Your name is :"+b);
+    }
+}
+
+Example 4:
+
+import java.util.Scanner;
+
+class inputscanner {
+    public static void main(String args[])
+    {
+        Scanner in = new Scanner (System.in);
+        System.out.println("Enter your name with space:");
+        String a = in.nextLine();
+        System.out.println("Enter your age :");
+        int b =in.nextInt();
+        in.nextLine();
+        System.out.println("Enter your email");
+        String c = in.nextLine();
+        System.out.println("Your name is :"+a);
+        System.out.println("Your name is :"+b);
+        System.out.println("Your email is :"+c);
+
+    }
+}
+
+
+______________________________________________________________________________________________
+
+IF Statement in Java
+
+ Syntax:
+     if( condition )
+     {
+        // body of the statements;
+     }
+	 
+Example 1:
+
+import java.util.Scanner;
+ 
+class if_statement {
+    public static void main(String args[]) {
+        int age;
+        System.out.println("Enter Your Age : ");
+        Scanner in = new Scanner(System.in);
+        age=in.nextInt();
+        if(age>=18)
+        {
+            System.out.println("You are Eligible For Vote...");
+        }
+    }
+}
+
+______________________________________________________________________________________________
+
+IF ELSE Statement in Java
+
+Syntax:
+     if( condition )
+     {
+        // body of the statement if condition is true ;
+     }
+     else
+     {
+        // body of the statement if condition is false ;
+     }
+	 
+Example 1 :
+
+import java.util.Scanner;
+ 
+class if_statement {
+    public static void main(String args[]) {
+        int age;
+        System.out.println("Enter Your Age : ");
+        Scanner in = new Scanner(System.in);
+        age=in.nextInt();
+        if(age>=18)
+        {
+            System.out.println("You are Eligible For Vote...");
+        }
+        else
+        {
+            System.out.println("You are not Eligible For Vote...");
+        }
+    }
+}
+
+Example 2 :
+
+import java.util.Scanner;
+ 
+class if_else_statement {
+    public static void main(String args[]) {
+        int year;
+        System.out.println("Enter Year : ");
+        Scanner in = new Scanner(System.in);
+        year = in.nextInt();
+        if (year % 4 == 0 || (year % 100 == 0 && year % 400 == 0)) {
+            System.out.println("Year " + year + " is a leap year");
+        } else {
+            System.out.println("Year " + year + " is not a leap year");
+        }
+ 
+    }
+}
+
+______________________________________________________________________________________________
+
+ELSE IF Ladder in Java
+
+Syntax :
+   if ( condition 1 )
+   {
+       // block of statement to be executed if condition is true ;
+   }
+   else if ( condition 2 )
+   {
+       // block of statement to be executed if the condition1 is false condition2 is true ;
+   }
+   else
+   {
+       block of statement to be executed if the condition1 is false condition2 is False ;
+   }
+   
+   
+Example 1 :
+
+import java.util.Scanner;
+ 
+/*
+Else If Ladder
+90-100 Grade-A
+80-89  Grade-B
+70-79  Grade-C
+<70    Grade-D
+*/
+class else_if {
+    public static void main(String args[]) {
+        float avg;
+        System.out.println("Enter The Average Mark : ");
+        Scanner in = new Scanner(System.in);
+        avg = in.nextFloat();
+        if (avg >= 90 && avg <= 100) {
+            System.out.println("Grade A");
+        } else if (avg >= 80 && avg <= 89) {
+            System.out.println("Grade B");
+        } else if (avg >= 70 && avg <= 79) {
+            System.out.println("Grade C");
+        } else {
+            System.out.println("Grade D");
+        }
+    }
+
+}
+
+______________________________________________________________________________________________
+
+Nested If in Java
+
+Syntax:
+if(Expression 1)
+{
+    // Executes when the Expression 1 is true
+     if(Expression 2)
+     {
+        // Executes when the Expression 2 is true
+     }
+}
+
+Example :
+
+import java.util.Scanner;
+ 
+class nested_if {
+    public static void main(String args[])
+    {
+        /*
+            Nested if Statement
+            A company insures its drivers in the following cases:
+                a.	If the driver is married.
+                b.	If the driver is unmarried, male & above 30 years of age.
+                c.	If the driver is unmarried, female & above 25 years of age.
+        */
+        Scanner in =new Scanner(System.in);
+        System.out.println("Enter The Marital Status M/U: ");
+        char marital=in.next().charAt(0);
+        if(marital=='u' || marital=='U' )
+        {
+            System.out.println("Enter The Gender M/F: ");
+            char gender=in.next().charAt(0);
+            System.out.println("Enter The Age : ");
+            int age=in.nextInt();
+            if((gender=='M'||gender=='m')&& age>=30)
+            {
+                System.out.println("You are Eligible for Insurance");
+            }
+            else if((gender=='F'||gender=='f')&& age>=25)
+            {
+                System.out.println("You are Eligible for Insurance");
+            }
+            else
+            {
+                System.out.println("You are Not Eligible for Insurance");
+            }
+ 
+        }
+        else if(marital=='m' || marital=='M' )
+        {
+            System.out.println("You are Eligible for Insurance");
+        }
+        else {
+            System.out.println("Invalid Input");
+        }
+    }
+}
+
+______________________________________________________________________________________________
+
+Switch Statement in Java
+
+Syntax:
+     switch ( expression )
+    {
+    case 1 :
+         // Block of Statement
+         break;
+    case 2 :
+         // Block of Statement
+         break;
+    case 3 :
+         // Block of Statement
+         break;
+    case 4 :
+         // Block of Statement
+         break;
+     .
+     .
+     default :
+         // Block of Statement
+         break;
+    }
+	
+Example :
+
+import java.util.Scanner;
+ 
+//Switch Case Statement in Java
+class switch_demo {
+    public static void main(String args[]) {
+        int a,b,c,ch;
+        System.out.println("1.Addition");
+        System.out.println("2.Subtraction");
+        System.out.println("3.Multiplication");
+        System.out.println("4.Division");
+        System.out.println("Enter Your Choice : ");
+        Scanner in =new Scanner(System.in);
+        ch=in.nextInt();
+        System.out.println("Enter 2 Nos : ");
+        a=in.nextInt();
+        b=in.nextInt();
+        switch (ch)
+        {
+            case 1:
+                c=a+b;
+                System.out.println("Addition : " +c);
+                break;
+            case 2:
+                c=a-b;
+                System.out.println("Subtraction : "+c);
+                break;
+            case 3:
+                c=a*b;
+                System.out.println("Multiplication : "+c);
+                break;
+            case 4:
+                c=a/b;
+                System.out.println("Division : "+c);
+                break;
+            default:
+                System.out.println("Invalid Selection");
+                break;
+        }
+    }
+}
+
+______________________________________________________________________________________________
+
+Group Switch Statement in Java
+
+Example :
+
+import java.util.Scanner;
+ 
+//Group Switch
+class group_switch {
+    public static void main(String args[]) {
+       char c;
+        System.out.println("Enter The Character : ");
+        Scanner in =new Scanner(System.in);
+        c=in.next().charAt(0);
+ 
+        switch (c)
+        {
+            case 'a':
+            case 'e':
+            case 'i':
+            case '0':
+            case 'u':
+            case 'A':
+            case 'E':
+            case 'I':
+            case 'O':
+            case 'U':
+                System.out.println(c + " is a Vowels");
+                break;
+            default:
+                System.out.println(c + " is not a Vowels");
+                break;
+        }
+ 
+    }
+}
+ 
+ 
+ ______________________________________________________________________________________________
+ 
+ While Loop in Java
+ 
+ Syntax:
+   while(Condition)
+   {
+       // body of loop;
+       // Increment (or) Decrement;
+   }
+   
+   
+Example 1 :
+
+import java.util.Scanner;
+ 
+class while_loop {
+    public static void main(String args[])
+    {
+        System.out.println("Enter The Limit : ");
+        Scanner in =new Scanner(System.in);
+        int n=in.nextInt();
+        int i=1;
+        while(i<=n)
+        {
+            System.out.println(i);
+            i++;
+        }
+    }
+}
+
+______________________________________________________________________________________________
+
+Do While Loop in Java
+
+ do
+   {
+        // body of loop;
+        // Increment (or) Decrement;
+   }  while(Condition) ;
+   
+   
+Example 1 :
+
+import java.util.Scanner;
+ 
+class do_while {
+    public static void main(String args[])
+    {
+        System.out.println("Enter The Limit : ");
+        Scanner in =new Scanner(System.in);
+        int n=in.nextInt();
+        int i=2;
+        do {
+            System.out.println(i);
+            i=i+2;
+        }while (i<=n);
+    }
+}
+
+______________________________________________________________________________________________
+
+For Loop in Java
+
+Syntax:
+   for( initial ; condition ; increment / decrement)
+   {
+        // body of loop;
+   }
+   
+Example 1 :
+
+import java.util.Scanner;
+ 
+class for_loop {
+    public static void main(String args[])
+    {
+        System.out.println("Enter The Limit : ");
+        Scanner in =new Scanner(System.in);
+        int n=in.nextInt();
+        for(int i=1;i<=n;i++)
+        {
+            System.out.println(i);
+        }
+    }
+}
+
+______________________________________________________________________________________________
+
+Enhanced for loop in Java
+
+Syntax:
+   for( Datatype item : array )
+   {
+        // body of loop;
+   }
+   
+ Example 1 :
+ 
+ class Enhanced_for {
+    public static void main(String args[])
+    {
+        int numbers[]={10,20,30,40,50,60,70};
+        for(int n : numbers)
+        {
+            System.out.println(n);
+        }
+    }
+}
+
+______________________________________________________________________________________________
+
+Nested For Loop in Java
+
+Example 1:
+
+class nested_for {
+    public static void main(String args[]) {
+ 
+        for(int i=1;i<=5;i++)//1<=5 2<=5
+        {
+            for(int j=1;j<=i;j++)
+            {
+                System.out.print("*");
+            }
+            System.out.println("");
+        }
+    }
+}
+
+______________________________________________________________________________________________
+
+Break & Continue in Java
+
+Example 1:
+
+class break_continue {
+    public static void main(String args[]) {
+        for (int i = 1; i <= 10; i++) {
+            if(i==5)
+                continue;
+            System.out.println(i);
+            if(i==8)
+                break;
+        }
+    }
+}
+
+______________________________________________________________________________________________
+
+Interview based Questions :
+
+	Example : 1.Factorial in Java
+	
+	
+import java.util.Scanner;
+ 
+class Factorial {
+    public static void main(String args[])
+    {
+        //1.Write a program to find the factorial of given number.
+        Scanner in =new Scanner(System.in);
+        System.out.println("Enter The Number : ");
+        int n=in.nextInt();//5! = 1*2*3*4*5 = 120
+        int f=1;
+        for(int i=1;i<=n;i++)
+        {
+            f=f*i;
+        }
+        System.out.println("Factorial of "+n+" is "+f);
+    }
+}
+
+
+
+--------------------------------------------------------------------------
+
+	Example : 2.Sum and Average of N Numbers in Java
+	
+	
+import java.util.Scanner;
+//Write a program to find the sum and average of given n numbers.
+//Enter a number = 5
+//the sum of the entered numbers is 10+20+30+40+50=150 and the average of the entered numbers is 150/5=30.
+class sum_avg {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter The Limit: ");
+        int n=in.nextInt();
+        int sum=0,a;
+        for(int i=1;i<=n;i++)
+        {
+            System.out.println("Enter The Number "+i+": ");
+            a=in.nextInt();
+            sum+=a;//sum=sum+a;
+        }
+        System.out.println("The sum of given numbers is : "+sum);
+        System.out.println("The Average of given numbers is : "+sum/n);
+    }
+}
+ 
+ 
+--------------------------------------------------------------------------
+
+	Example : 3.Fibonacci Series in Java
+	
+
+import java.util.Scanner;
+//Write a program to find the fibonacci series of given number.
+class Fibonacci {
+    public static void main(String args[])
+    {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter The Number : ");
+        int n=in.nextInt();//5
+        int a=-1,b=1,c;
+        for(int i=1;i<=n;i++)//1<=5 2<=5 3<=5 4<=5  5<=5  6<=5
+        {
+            c=a+b;//-1+1=>0  1+0=>1  0+1=1  1+1=2  1+2=3
+            System.out.println(c); //0  1  1 2  3
+            a=b;//1 0  1  1  2
+            b=c;//0 1  1  2  3
+        }
+    }
+}
+
+--------------------------------------------------------------------------
+
+	Example : 3.Reverse of n digit number in Java
+	
+
+import java.util.Scanner;
+class reverse_number {
+    //Write a program to find the reverse of N digit Number
+    public static void main(String args[])
+    {
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter The Number : ");
+        int n = in.nextInt(); //123
+        int reverse=0, rem;
+        while(n!=0) //123 != 0
+        {
+            rem=n%10;  //3 - is reminder
+            reverse=(reverse*10)+rem;  // ((0 * 10) + 3) -->3..
+            n=n/10;   //12 - is quasent
+        }
+        System.out.println("Reversed Number: "+reverse);
+    }
+}
+
+--------------------------------------------------------------------------
+
+Array in Java :
+
+	An array is a collection of elements of the same type placed in contiguous memory locations 
+	that can be individually referenced by using an index to a unique identifier.
+	
+ Syntax:
+     Datatype variable_name [ ] ;
+     (or)
+     Datatype [ ] variable_name ;
+  Example :
+    Int [ ] array = new int [ 5 ] ;
+	
+	
+Example 1:
+
+import java.util.Scanner;
+class One_Array {
+    //Arrays in Java
+    public static void main(String args[])
+    {
+        int a[]={10,20,30,40,50,60,70,80,90,100};
+        //Accessing Elements in array
+        System.out.println(a[2]);
+ 
+        //Print all Elements using for loop
+        for(int i=0;i<a.length;i++)
+        {
+            System.out.println(a[i]);
+        }
+    //Print all Elements using Enhanced for loop
+       for(int element : a)
+       {
+           System.out.println(element);
+       }
+ 
+        
+    }
+}
+
+______________________________________________________________________________________________
+
+Example 2:
+
+import java.util.Scanner;
+class One_Array {
+    //Arrays in Java
+    public static void main(String args[])
+    {
+        int b[]; // Declaring array
+        b=new int[10]; // Allocating Memory to Array
+        int [] c =new int[10]; //Combining Both Statement
+ 
+        //Buy default all element have zero value
+        for(int element : b)
+        {
+            System.out.println(element);
+        }
+ 
+        for(int i=0;i<3;i++)
+        {
+            Scanner in =new Scanner(System.in);
+            System.out.println("Enter The Number");
+            c[i]=in.nextInt();
+        }
+        for(int element : c)
+        {
+            System.out.println(element);
+        }
+        
+    }
+}
+
+______________________________________________________________________________________________
+15-09023
+
+Example 3 :
+
+
+import java.util.Scanner;
+ 
+class even_odd {
+    //Write a program to count even and odd numbers in an array
+    public static void main(String[] args) {
+        int e = 0, o = 0;
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter The Limit : ");
+        int n = in.nextInt();
+        int a[] = new int[n];
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter a[" + i + "] value : ");
+            a[i] = in.nextInt();
+        }
+        for (int element : a) {
+            if (element % 2 == 0) {
+                e++;
+            } else {
+                o++;
+            }
+        }
+        System.out.println("Total Even Nos : " + e);
+        System.out.println("Total Odd Nos  : " + o);
+    }
+}
+
+
+______________________________________________________________________________________________
+
+
+Example 4:
+
+import java.util.Arrays;
+ 
+class ascendingOrder {
+    public static void main(String args[])
+    {
+        // Ascending order
+        int[] a = new int[]{8, 2, 9, 7, 33, 3, 87};
+        System.out.println("Before Sort : "+Arrays.toString(a));
+        int temp;
+        for(int i=0;i<a.length;i++)
+        {
+            for(int j=i+1;j<a.length;j++)
+            {
+                if(a[i]>a[j])
+                {
+                    temp=a[i];
+                    a[i]=a[j];
+                    a[j]=temp;
+                }
+            }
+        }
+        System.out.println("After Sort : "+Arrays.toString(a));
+    }
+}
+
+______________________________________________________________________________________________
+
+
+Two Dimension Arrays in Java :
+
+		The Java Program is 2D array is organized as matrices which can be represented as the collection of rows and column.
+		
+		
+Syntax:
+
+     Datatype variable_name [ ] [ ] ;
+     (or)
+     Datatype [ ][ ] variable_name ;
+
+
+Example 1:
+
+class Two_Array {
+    public static void main(String args[]) {
+        //Two Dimension array in Java
+        int a[][] = {
+                {10, 20, 30},
+                {40, 50, 60},
+                {70, 80, 90}
+        };
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.print(" "+a[i][j]);
+            }
+            System.out.println("");
+        }
+        
+    }
+}
+
+______________________________________________________________________________________________
+
+Jagged-Array in Java :
+
+		A jagged array is an array of arrays such that member arrays can be of different row sizes and column sizes.
+		
+Example :
+        
+		int [ ] [ ] a = { { 10,20,30,40 } , { 10,20,30 } , { 10,20,30,50 } } ;
+		
+		
+_________________________________________________________
+
+Example 1:
+
+
+class jagged_Array {
+    public static void main(String args[]) {
+        //Jagged Array using For Loop in Java Programming
+        int a[][] = {
+                {10, 20, 30, 40},//4
+                {10, 20, 30},//3
+                {10, 20, 30, 50}//4
+        };
+ 
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a[i].length; j++) {
+                System.out.print(" "+a[i][j]);
+            }
+            System.out.println("");
+        }
+    }
+}
+
+______________________________________________________________________________________________
+
+
+ASCII in Java :
+
+class ascii {
+    public static void main(String args[])
+    {
+        /*
+            ASCII  -  American Standard Code For Information Interchange
+ 
+            Computers can only understand numbers,
+            so an ASCII code is the numerical representation of a character such as 'a' or '@' etc.
+ 
+            The first 32 characters in the ASCII-table
+            are unprintable control codes and are used to control peripherals such as printers.
+ 
+            Codes 32-127 are common for all the different variations of the ASCII table, they are
+            called printable characters, represent letters, digits, punctuation marks,
+            and a few miscellaneous symbols.
+ 
+            65-90  A-Z
+            97-122 a-z
+            48-57  0-9
+            Space  32
+        */
+        for(int i=65;i<=90;i++)
+        {
+            System.out.println(i+" "+(char)i);
+        }
+ 
+    }
+}
+
+______________________________________________________________________________________________
+
+
+String in Java :
+
+
+		1. String is a java object
+		2. It is use to represents a sequence of character
+		3. java.lang.String class is use to create and manipulate strings
+		4. By default string is immutable
+		
+		
+Example :
+
+
+class stringsConcept {
+    public static void main(String args[])
+    {
+        //String in Java
+        String a="Tutor Joes";
+        String b="tutor Joes";
+        System.out.println("A : "+a);
+        System.out.println("B : "+b);
+ 
+        System.out.println("A HashCode "+a.hashCode());
+        System.out.println("B HashCode "+b.hashCode());
+        System.out.println("Equals : "+a.equals(b));
+        System.out.println("Equals Ignore Case: "+a.equalsIgnoreCase(b));
+        System.out.println("Length: "+a.length());
+        System.out.println("CharAt: "+a.charAt(0));
+        System.out.println("Uppercase: "+a.toUpperCase());
+        System.out.println("Lowercase: "+a.toLowerCase());
+        System.out.println("Replace: "+a.replace("Joes","Stanley"));
+        System.out.println("Contains : " + a.contains("Joes"));
+        System.out.println("Empty : " + a.isEmpty());
+        System.out.println("EndWith : " + a.endsWith("es"));
+        System.out.println("StartWith : " + a.startsWith("Tut"));
+        System.out.println("Substring : " + a.substring(5));
+        System.out.println("Substring : " + a.substring(0, 5));
+        char[] carray = a.toCharArray();
+        for(char c : carray){
+            System.out.print(c+ "   ");
+        }
+        String c=" Tutor ";
+        System.out.println("Length: "+c.length());
+        System.out.println("C:"+c);
+        System.out.println("C Trim :"+c.trim());
+        System.out.println("C Trim Length:"+c.trim().length());
+ 
+    }
+}
+
+
+______________________________________________________________________________________________
+
+19/09/23
+
+
+StringBuffer & StringBuilder in Java :
+
+		The StringBuffer and StringBuilder classes are suitable for both assembling and modifying strings; 
+		i.e they provide methods for replacing and removing characters as well as adding them in various.
+		
+		
+The code demonstrates the usage of StringBuffer and StringBuilder in Java.
+
+	1. A StringBuilder object is created with the initial value "Tutor". 
+		The append() method is used to concatenate the string "Joes" to it. 
+		The resulting string is printed to the console.
+	2. The insert() method is used to insert the string "Computer" at the 10th index of the StringBuilder object.
+	3. The replace() method is used to replace the characters between the 9th and 11th index with "@@@".
+	4. The delete() method is used to delete the characters between the 9th and 11th index.
+	5. The reverse() method is used to reverse the order of the characters in the StringBuilder object.
+	6. The charAt() method is used to retrieve the character at the 2nd index of the StringBuilder object.
+	7. The length() method is used to retrieve the length of the StringBuilder object.
+	8. The substring() method is used to retrieve a portion of the StringBuilder object. 
+		The first call retrieves the entire string starting from the 0th index, 
+		while the second call retrieves the string starting from the 0th index up to (but not including) the 5th index.
+	9. The setCharAt() method is used to set the character at the 0th index of the StringBuilder object to "@".
+	10. A StringBuffer object is created and its capacity is printed to the console. 
+		The append() method is used to concatenate the string "Hello" to it, and its capacity is printed again. 
+		Finally, the append() method is used to concatenate the string "java is my favourite language" to it, and its capacity is printed once more.
+	
+______________________________________________________________________________________________
+
+
+Example 1:
+
+
+
+import java.lang.String;
+class stringBuffer_stringBuilder {
+    public static void main(String args[])
+    {
+        //StringBuffer & StringBuilder in Java
+ 
+        StringBuffer buffer =new StringBuffer("Tamil");
+        System.out.println(buffer);
+        buffer.append("Info ");
+        System.out.println(buffer);
+        buffer.insert(10," Technology ");
+        System.out.println(buffer);
+        buffer.replace(9,11,"@@@");
+        System.out.println(buffer);
+        buffer.delete(9,11);
+        System.out.println(buffer);
+        buffer.reverse();
+        System.out.println(buffer);
+        buffer.reverse();
+        System.out.println(buffer.charAt(2));
+        System.out.println(buffer.length());
+        System.out.println(buffer.substring(0));
+        System.out.println(buffer.substring(0,5));
+        buffer.setCharAt(0,'@');
+        System.out.println(buffer);
+        StringBuffer sb=new StringBuffer();
+        System.out.println(sb.capacity());//default 16
+        sb.append("Hello");
+        System.out.println(sb.capacity());//now 16
+        sb.append("java is my favourite language");
+        System.out.println(sb.capacity());//now (16*2)+2=34 i.e (oldcapacity*2)+2
+ 
+    }
+}
+ 
+ 
+ ______________________________________________________________________________________________
+ 
+ 
+ Count Vowels,Capital letters,small letters,numbers and space in Java :
+ 
+ 
+ class countCharacter {
+    public static void main(String args[])
+    {
+        //Program to Count Uppercase,Lowercase,Space,Number,Vowels and Symbols in a String
+        StringBuilder a = new StringBuilder("Ram-age is 12@");
+        System.out.println(a);
+        int upper = 0, lower = 0, space = 0, number = 0, vowels = 0;
+        for (int i = 0; i < a.length(); i++) {
+            if (a.charAt(i) >= 97 && a.charAt(i) <= 122) {
+                lower++;
+            }
+            if (a.charAt(i) >= 65 && a.charAt(i) <= 90) {
+                upper++;
+            }
+            if (a.charAt(i) == 32) {
+                space++;
+            }
+            if (a.charAt(i) >= 48 && a.charAt(i) <= 57) {
+                number++;
+            }
+            if (a.charAt(i) == 'A' || a.charAt(i) == 'E' || a.charAt(i) == 'I' || a.charAt(i) == 'O' ||
+                    a.charAt(i) == 'U' || a.charAt(i) == 'a' || a.charAt(i) == 'e' || a.charAt(i) == 'i' ||
+                    a.charAt(i) == 'o' || a.charAt(i) == 'u') {
+                vowels++;
+            }
+        }
+        System.out.println("Uppercase   : "+upper);
+        System.out.println("Lowercase   : "+lower);
+        System.out.println("Space       : "+space);
+        System.out.println("Number      : "+number);
+        System.out.println("Vowels      : "+vowels);
+        System.out.println("Symbols      : "+(a.length()-(upper+lower+space+number)));
+    }
+}
+
+
+______________________________________________________________________________________________
+
+
+Reverse a String in Java :
+
+class Reverse {
+    public static void main(String args[])
+    {
+        //Program to reverse a given string
+        StringBuilder a = new StringBuilder("Tamil info Training and placements");
+        System.out.println(a);
+        StringBuilder b=new StringBuilder();
+        for(int i=a.length()-1;i>=0;i--)
+        {
+            b.append(a.charAt(i));
+        }
+        System.out.println(b);
+    }
+} 
+
+
+______________________________________________________________________________________________
+
+Math Functions in Java :
+
+		The Java Math class has many methods that allows you to perform mathematical tasks on numbers. 
+		The class Math contains methods for performing basic numeric operations such as the elementary exponential, 
+		logarithm, square and root. The java.lang.Math contains a set of basic math functions for obtaining the absolute value, 
+		highest and lowest of two values, rounding of values.
+		
+Methods:
+	1. abs() : absolute value of return to the positive value
+	2. sqrt() : The square root of the argument
+	3. max() : Maximum of the two values passed in the argument
+	4. min() : Minimum of the two values passed in the argument
+	5. ceil() : Rounds float value up to an integer value
+	6. floor() : Rounds float value down to an integer value
+	7. pow() : Value of the first parameter raised to the second parameter
+	
+	
+Example :
+
+class MathFunctions {
+    public static void main(String[] args)
+    {
+        //Built-in Math Function in Java
+        System.out.println("Absolute value : " +Math.abs(-45));
+        System.out.println("Round value : " +Math.round(2.288));
+        System.out.println("Ceil value : " +Math.ceil(2.588));
+        System.out.println("Floor value : " +Math.floor(2.588));
+ 
+        double a = 2;
+        double b = 3;
+        System.out.println("Maximum number of a and b is: " +Math.max(a, b));
+        System.out.println("Square root of b is: " + Math.sqrt(b));
+        System.out.println("Power of a and b is: " + Math.pow(a, b));
+        System.out.println("Logarithm of a is: " + Math.log(a));
+        System.out.println("log10 of a is: " + Math.log10(a));
+        System.out.println("Sine value of a is: " +Math.sin(a));
+        System.out.println("Cosine value of a is: " +Math.cos(a));
+        System.out.println("Tangent value of a is: " +Math.tan(a));
+ 
+    }
+}
+
+______________________________________________________________________________________________
+
+

@@ -1,0 +1,52 @@
+Constructor in Java :
+
+		Constructors are special methods named after the class and without a return type, 
+		and are used to construct objects. Constructors, like methods, can take input parameters. 
+		Constructors are used to initialize objects. Abstract classes can have constructors also.
+		
+Constructors are different from methods:
+
+	1. Constructors can only take the modifiers public, private, and protected, and cannot be declared abstract, final, static, or synchronized.
+	2. Constructors do not have a return type
+	3. Constructors MUST be named the same as the class name.
+	4. This Java program demonstrates the usage of constructors in a class to initialize the instance variables of an object when it is created.
+	
+Types of constructor :
+
+	1. Default constructor
+	2. Parametrized constructor
+	3. Copy constructor
+	4. Constructor Overloading
+	
+	
+1. use for memory allocation and variable declaration for member function.	
+Example :
+
+//Constructor in Java
+class RectangleShape {
+    int length, width;
+ 
+ // default constructor. Constructor helps for initialize the variable for member function.
+    public RectangleShape() {
+        System.out.println("Constructor Called");
+        length=2;
+        width=10;
+    }
+ 
+    int area() {
+        int a = length * width;
+        return a;
+    }
+}
+ 
+class constructor {
+    public static void main(String args[]) {
+        RectangleShape o1 = new RectangleShape();
+        System.out.println("Area of Rectangle : " + o1.area());
+ 
+    }
+}
+ 
+ 
+___________________________________________________________________________________________________________________
+	

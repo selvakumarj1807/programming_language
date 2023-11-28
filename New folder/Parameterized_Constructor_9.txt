@@ -1,0 +1,109 @@
+Parametrized Constructor or Constructor Overloading in Java :
+-------------------------------------------------------------
+
+
+		The parameterized constructors are the constructors having a specific number of arguments to be passed. 
+		The purpose of a parameterized constructor is to assign user-wanted specific values to the instance variables of different objects.
+		
+Constructor overloading:
+------------------------
+		Constructors are special methods named after the class and without a return type, and are used to construct objects. 
+		Constructors, like methods, can take input parameters. Constructors are used to initialize objects. 
+		Constructor overloading in Java means to more than one constructor in an instance class.
+		
+Example :
+---------
+
+
+//Parameterized Constructor & Constructor Overloading
+class Box
+{
+    float length,breadth;
+    public Box(){  //Default
+        length=2;
+        breadth=5;
+    }
+    public  Box(float x,float y) //Parameterized
+    {
+        length=x;
+        breadth=y;
+    }
+    Box(float x) //parameterized constractor
+    {
+        length=breadth=x;
+    }
+    float area()
+    {
+        return  length*breadth;
+    }
+}
+class constructor_overloading {
+    public static void main(String args[]) {
+        Box o =new Box();
+        System.out.println("Defaul Area : "+o.area() );
+ 
+        Box o1 =new Box(3,6);
+        System.out.println("parameterized Area : "+o1.area() );
+ 
+        Box o2 =new Box(3);
+        System.out.println("parametarized Area : "+o2.area() );
+    }
+}
+
+______________________________________________________________________________________________________________________________________
+
+Copy Constructor in Java :
+--------------------------
+
+
+		A copy constructor is a constructor that creates a new object using an existing object of the 
+		same class and initializes each instance variable of newly created object with corresponding instance variables 
+		of the existing object passed as argument.
+		
+Syntax :
+--------
+   public class_Name(const className old_object)
+
+Example :
+---------
+   Public student(student o)
+   
+   
+Example :
+---------
+
+
+import java.util.Scanner;
+class CopyConstructor
+{
+	int age;
+	String name;
+	CopyConstructor(int a,String n)
+	{
+		age=a;
+		name=n;
+	}
+	CopyConstructor(CopyConstructor cc) // object is called in a constractor so that is a copy constractor
+	{
+		age=cc.age;
+		name=cc.name;
+	}
+	void display()
+	{
+		System.out.println("Your name is : "+name + "\nAge is : "+age);
+	}
+	public static void main(String[] arg)
+	{
+		System.out.print("Enter your name and age :");
+		Scanner scan  = new Scanner(System.in);
+		String name =scan.nextLine();
+		int age =scan.nextInt();
+		CopyConstructor cc = new CopyConstructor(age,name);
+		CopyConstructor c2=new CopyConstructor(cc);
+		cc.display();
+		c2.display();
+
+    }
+}
+
+______________________________________________________________________________________________________________________________________
