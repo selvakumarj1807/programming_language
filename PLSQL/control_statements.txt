@@ -95,6 +95,19 @@ DBMS_OUTPUT.PUT_LINE ('If Then Else Construct Complete');
 END;
 /
 
+Example 2 :
+
+SET SERVEROUTPUT ON;
+
+DECLARE 
+    v_name VARCHAR2(100); -- Assuming a maximum length of 100 characters for the name
+BEGIN 
+    v_name := '&enter_a_name'; -- Prompting the user to enter a name
+    
+    DBMS_OUTPUT.PUT_LINE('Entered Name: ' || v_name); 
+END;
+/
+
 ____________________________________________________________________________________________________________________________
 
 
