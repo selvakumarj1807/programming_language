@@ -78,3 +78,66 @@ END;
 
 
 _______________________________________________________________________________________________________________________
+
+--Pass-by-Value Functions
+
+CREATE OR REPLACE FUNCTION add_numbers(a IN NUMBER, b IN NUMBER)
+RETURN NUMBER
+IS
+    result NUMBER;
+BEGIN
+    result := a + b;
+    RETURN result;
+END;
+/
+
+-- Example usage of add_numbers function (pass-by-value)
+DECLARE
+    sum_result NUMBER;
+BEGIN
+    sum_result := add_numbers(10, 20);
+    DBMS_OUTPUT.PUT_LINE('Sum is: ' || sum_result);
+END;
+/
+
+---------------------------------------------------------------
+
+--Pass-by-Reference Functions
+--Here’s an example of a pass-by-reference function using OUT:
+
+CREATE OR REPLACE PROCEDURE multiply_by_two(x IN NUMBER, result OUT NUMBER)
+IS
+BEGIN
+    result := x * 2;
+END;
+/
+
+-- Example usage of multiply_by_two procedure (pass-by-reference with OUT)
+DECLARE
+    number_to_multiply NUMBER := 5;
+    multiplied_result NUMBER;
+BEGIN
+    multiply_by_two(number_to_multiply, multiplied_result);
+    DBMS_OUTPUT.PUT_LINE('Multiplied result is: ' || multiplied_result);
+END;
+/
+
+---------------------------------------------------------------
+--Pass-by-Reference Functions
+--Another example using IN OUT:
+
+CREATE OR REPLACE PROCEDURE increment_value(x IN OUT NUMBER)
+IS
+BEGIN
+    x := x + 1;
+END;
+/
+
+-- Example usage of increment_value procedure (pass-by-reference with IN OUT)
+DECLARE
+    number_to_increment NUMBER := 10;
+BEGIN
+    increment_value(number_to_increment);
+    DBMS_OUTPUT.PUT_LINE('Incremented value is: ' || number_to_increment);
+END;
+/
