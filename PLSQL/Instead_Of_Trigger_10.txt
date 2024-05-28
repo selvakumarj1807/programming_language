@@ -36,7 +36,6 @@ SELECT * FROM vw_rebellionrider;
 
 insert into vw_rebellionrider VALUES ('bala','python');
 
-
 CREATE OR REPLACE TRIGGER tr_Io_Insert
 INSTEAD OF INSERT ON vw_rebellionrider
 FOR EACH ROW
@@ -53,6 +52,23 @@ select * from trainer;
 
 select * from subject;
 
+SELECT * FROM vw_rebellionrider;
+
+WITH TrainerRanked AS (
+  SELECT full_name, ROWNUM AS rn
+  FROM trainer
+),
+SubjectRanked AS (
+  SELECT subject_name, ROWNUM AS rn
+  FROM subject
+)
+SELECT t.full_name, s.subject_name
+FROM TrainerRanked t
+JOIN SubjectRanked s ON t.rn = s.rn;
+
+
+drop table trainer;
+drop table subject;
 _________________________________________________________________________________________________________________________
 
 Example 2:
