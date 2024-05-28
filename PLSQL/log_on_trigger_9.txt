@@ -27,8 +27,6 @@ go to cmd :
 		4. grant all privilege to hr identified by admin;
 		
 
-
-
 LOGON Trigger :
 Example :
 -------------------
@@ -61,11 +59,13 @@ select * from hr_evnt_audit;
 
 DISC;
 
-conn hr/admin;
-
+conn hr/hr;
 
 select * from hr_evnt_audit;
 
+drop trigger hr_lgon_audit;
+
+drop table hr_evnt_audit;
 
 
 _______________________________________________________________________________________________________________________
