@@ -136,4 +136,19 @@ END;
 
 select * from db_evnt_audit;
 
+DISC;
+
+conn hr/hr;
+
+select * from db_evnt_audit;
+
+-- check if the over all close the oracle and re open the oracle
+
+select * from db_evnt_audit;
+
+drop table db_evnt_audit;
+
+drop trigger db_lgof_audit; 
+
+
 _______________________________________________________________________________________________________________________
