@@ -87,9 +87,15 @@ BEGIN
 END;
 /
 
+DISC;
+
+conn hr/hr;
+
 select * from hr_evnt_audit;
 
--- once check the log off and log on your schema
+drop trigger log_off_audit;
+
+drop table hr_evnt_audit;
 
 _______________________________________________________________________________________________________________________
 
