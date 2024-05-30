@@ -1,155 +1,356 @@
- PL/SQL Cursors In Oracle Database :
- -----------------------------------
- 
- What is Database Cursor?
- ------------------------
- 
-		Cursor is a pointer to a memory area called context area. 
-		This context area is a memory region inside the Process Global Area or 
-		PGA assigned to hold the information about the processing of a SELECT statement or DML Statement 
-		such as INSERT, DELETE, UPDATE or MERGE.
-		
-What is the Context Area?
--------------------------
+/*
+Cursor
+------
 
-		The context area is a special memory region inside the Process Global Area .
-		
-This information includes:
---------------------------
+In Oracle SQL, cursors are used to process query results row-by-row. 
+There are two types of cursors: implicit cursors and explicit cursors. 
 
-		1. Rows returned by a query.
-		2. Number of rows processed by a query.
-		3. A pointer to the parsed query in the shared pool.
-		
-	Using cursor you can control the context area as it is a pointer to the same.
-	
-Advantages of Cursors :
------------------------
+Implicit Cursor :
+-----------------
+Implicit cursors are automatically created by Oracle whenever an SQL statement is executed. 
+implicit cursors are used for single-row queries such as 'SELECT INTO'.
+*/
+--Example of Implicit Cursor:
+-----------------------------
 
-	There are two main advantages of a cursor:
+CREATE TABLE company (
+    employee_id NUMBER PRIMARY KEY,
+    first_name VARCHAR2(50),
+    last_name VARCHAR2(50),
+    salary NUMBER
+);
 
-		1. Cursor is names thus you can reference it in your program whenever you want.
-		2. Cursor allows you to fetch and process rows returned by a SELECT statement by a row at a time.
-		
-Types of cursors in oracle database:
-------------------------------------
-	There are two types of cursors in oracle database:
+INSERT INTO company (employee_id, first_name, last_name, salary) VALUES (1, 'John', 'Doe', 50000);
+INSERT INTO company (employee_id, first_name, last_name, salary) VALUES (2, 'Jane', 'Smith', 60000);
 
-			1. Implicit cursor
-			2. Explicit cursor
-			
-Implicit Cursors in Oracle Database :
--------------------------------------
-		As the name suggests these are the cursors which are automatically created by the oracle server every 
-		time an SQL DML statement is executed. User cannot control the behavior of these cursors. 
-		Oracle server creates an implicit cursor in the background for any PL/SQL block which executes an SQL statement 
-		as long as an explicit cursor does not exist for that SQL statement.
-		
-Explicit Cursor in oracle database :
-------------------------------------
+SELECT * FROM company;
 
-		Explicit cursors are user defined cursors which means user has to create these 
-		cursors for any statement which returns more than one row of data. Unlike implicit cursor 
-		user has full control of explicit cursor. An explicit cursor can be generated only by naming 
-		the cursor in the declaration section of the PL/SQL block.
-		
-Advantages of Explicit Cursor:
+--Use an implicit cursor to fetch data :
+----------------------------------------
+
+SET SERVEROUTPUT ON;
+DECLARE
+    v_first_name company.first_name%TYPE;
+    v_last_name company.last_name%TYPE;
+    v_salary company.salary%TYPE;
+BEGIN
+    SELECT first_name, last_name, salary INTO v_first_name, v_last_name, v_salary
+    FROM company
+    WHERE employee_id = 1;
+
+    DBMS_OUTPUT.PUT_LINE('First Name: ' || v_first_name);
+    DBMS_OUTPUT.PUT_LINE('Last Name: ' || v_last_name);
+    DBMS_OUTPUT.PUT_LINE('Salary: ' || v_salary);
+END;
+/
+
+drop table company;
+-----------------------------------------------------------------------------------
+
+/*
+Explicit Cursor :
+-----------------
+Explicit cursors provide more control over the context area and allow you to handle query results that return multiple rows. 
+They require more steps to use: declare, open, fetch, and close.
+*/
+
+--Example of Explicit Cursor :
 ------------------------------
 
-		Since Explicit cursors are user defined hence they give you more programmatic control on your program.
-		Explicit cursors are more efficient as compared to implicit cursors as in latters case it is hard to track data errors.
-		
-Steps for creating an Explicit Cursor :
----------------------------------------
-	To create an explicit cursor you need to follow 4 steps. These 4 steps are:
+CREATE TABLE company (
+    employee_id NUMBER PRIMARY KEY,
+    first_name VARCHAR2(50),
+    last_name VARCHAR2(50),
+    salary NUMBER
+);
 
-			1. Declare
-			2. Open
-			3. Fetch
-			4. Close
-			
-1. Declare: How To Declare a Database Cursor?
----------------------------------------------
+INSERT INTO company (employee_id, first_name, last_name, salary) VALUES (1, 'John', 'Doe', 50000);
+INSERT INTO company (employee_id, first_name, last_name, salary) VALUES (2, 'Jane', 'Smith', 60000);
+INSERT INTO company (employee_id, first_name, last_name, salary) VALUES (3, 'Jim', 'Brown', 55000);
 
-		1. Declaring a cursor means initializing a cursor into memory. 
-		2. You define explicit cursor in declaration section of your PL/SQL block and associate it with the SELECT statement.
+SELECT * FROM company;
 
-Syntax:
--------
+--Use an explicit cursor to fetch data :
+----------------------------------------
 
-			CURSOR cursor_name IS select_statement;
+DECLARE
+    CURSOR emp_cursor IS
+        SELECT employee_id, first_name, last_name, salary
+        FROM company;
 
-2. Open :
+    v_employee_id company.employee_id%TYPE;
+    v_first_name company.first_name%TYPE;
+    v_last_name company.last_name%TYPE;
+    v_salary company.salary%TYPE;
+BEGIN
+    OPEN emp_cursor;
 
-		1. In order to put that cursor to work we have to open it first.
-		2. when you open a cursor the memory will be allotted to it.
-		
-Syntax :
---------
-			OPEN cursor_name;
+    LOOP
+        FETCH emp_cursor INTO v_employee_id, v_first_name, v_last_name, v_salary;
+        EXIT WHEN emp_cursor%NOTFOUND;
 
-3. Fetch: How to retrieve data from cursor?
--------------------------------------------
-		1. The process of retrieving the data from the cursor is called fetching. 
-		2. Once the cursor is declared and opened then you can retrieve the data from it.
-		
-Syntax :
---------
-			FETCH cursor_name INTO PL/SQL variable;
-			Or 
-			FETCH cursor_name INTO PL/SQL record;
+        DBMS_OUTPUT.PUT_LINE('Employee ID: ' || v_employee_id);
+        DBMS_OUTPUT.PUT_LINE('First Name: ' || v_first_name);
+        DBMS_OUTPUT.PUT_LINE('Last Name: ' || v_last_name);
+        DBMS_OUTPUT.PUT_LINE('Salary: ' || v_salary);
+        DBMS_OUTPUT.PUT_LINE(' ');
+    END LOOP;
 
-4. Close:
----------			
-		1. Once you are done working with your cursor it’s advisable to close it. 
-		2. As soon as the server comes across the closing statement of a cursor it will relinquish all the resources associated with it.
+    CLOSE emp_cursor;
+END;
+/
 
-Syntax:
--------
-			CLOSE cursor_name;
-			
+-----------------------------------------------------------------------------------
 
-Basic Programming Structure of the Cursor :
---------------------------------------------
-	Here is the basic programming structure of the cursor in oracle database.
+/*
+cursor FOR loop:
+----------------
 
-			DECLARE
-				CURSOR cursor_name IS select_statement; 
-			BEGIN
-				 OPEN cursor_name;
-				 FETCH cursor_name INTO PL/SQL variable [PL/SQL record]; 
-			CLOSE cursor_name; 
-			END;
-			/
-			
-			
-			
-Cursor Attributes :
+In Oracle PL/SQL, the cursor FOR loop simplifies cursor handling by implicitly declaring,
+opening, fetching, and closing the cursor. 
+*/
+
+DECLARE
+    CURSOR emp_cursor IS
+        SELECT employee_id, first_name, last_name, salary
+        FROM company;
+BEGIN
+    FOR emp_record IN emp_cursor LOOP
+        DBMS_OUTPUT.PUT_LINE('Employee ID: ' || emp_record.employee_id);
+        DBMS_OUTPUT.PUT_LINE('First Name: ' || emp_record.first_name);
+        DBMS_OUTPUT.PUT_LINE('Last Name: ' || emp_record.last_name);
+        DBMS_OUTPUT.PUT_LINE('Salary: ' || emp_record.salary);
+        DBMS_OUTPUT.PUT_LINE(' ');
+    END LOOP;
+END;
+/
+
+-----------------------------------------------------------------------------------
+/*
+cursor attributes :
 -------------------
-Oracle provides four attributes which work in correlation with cursors. These attributes are:
 
-			1. %FOUND
-			2. %NOTFOUND
-			3. %ISOPEN
-			4. %ROWCOUNT
-			
-1. %Found :
+In Oracle PL/SQL, cursor attributes are used to get information about the state of the cursor.
+These attributes include %FOUND, %NOTFOUND, %ISOPEN, and %ROWCOUNT.
 
-		Cursor attribute ‘Found’ is a Boolean attribute which returns TRUE if the previous FETCH command returned a row otherwise it returns FALSE.
+Summary of Cursor Attributes:
+-----------------------------
+1. %FOUND: Checks if the last fetch returned a row.
+2. %NOTFOUND: Checks if the last fetch did not return a row.
+3. %ISOPEN: Checks if the cursor is open.
+4. %ROWCOUNT: Returns the number of rows fetched so far.
 
-2. %NotFound :
+These cursor attributes provide useful information about the cursor's state and the rows fetched,
+allowing you to control the flow of your PL/SQL program more effectively.
+*/
 
-		‘Not Found’ cursor attribute is also a Boolean attribute which returns TRUE only when previous 
-		FETCH command of the cursor did not return a row otherwise this attribute will return FALSE.
+--1. %FOUND :
+-------------
 
-3. %IsOpen :
+DECLARE
+    CURSOR emp_cursor IS
+        SELECT employee_id, first_name, last_name, salary
+        FROM company;
+    v_employee_id company.employee_id%TYPE;
+    v_first_name company.first_name%TYPE;
+    v_last_name company.last_name%TYPE;
+    v_salary company.salary%TYPE;
+BEGIN
+    OPEN emp_cursor;
 
-		Again ‘Is Open’ Cursor attribute is a Boolean attribute which you can use to check 
-		whether your cursor is open or not. It returns TRUE if the cursor is open otherwise it returns FALSE.
+    FETCH emp_cursor INTO v_employee_id, v_first_name, v_last_name, v_salary;
+    
+    IF emp_cursor%FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('First row found:');
+        DBMS_OUTPUT.PUT_LINE('Employee ID: ' || v_employee_id);
+        DBMS_OUTPUT.PUT_LINE('First Name: ' || v_first_name);
+        DBMS_OUTPUT.PUT_LINE('Last Name: ' || v_last_name);
+        DBMS_OUTPUT.PUT_LINE('Salary: ' || v_salary);
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('No rows found.');
+    END IF;
 
-4. %RowCount :
+    CLOSE emp_cursor;
+END;
+/
 
-		Row count cursor attribute is a numeric attribute which means it returns a 
-		numeric value as a result and that value will be the number of records fetched from a cursor at that point in time.
+-----------------------------------------------------------------------------------
+--2. %NOTFOUND :
+----------------
 
-________________________________________________________________________________________________________________________________________
+DECLARE
+    CURSOR emp_cursor IS
+        SELECT employee_id, first_name, last_name, salary
+        FROM company;
+    v_employee_id company.employee_id%TYPE;
+    v_first_name company.first_name%TYPE;
+    v_last_name company.last_name%TYPE;
+    v_salary company.salary%TYPE;
+BEGIN
+    OPEN emp_cursor;
+
+    FETCH emp_cursor INTO v_employee_id, v_first_name, v_last_name, v_salary;
+    
+    IF emp_cursor%NOTFOUND THEN
+        DBMS_OUTPUT.PUT_LINE('No rows found.');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('First row found:');
+        DBMS_OUTPUT.PUT_LINE('Employee ID: ' || v_employee_id);
+        DBMS_OUTPUT.PUT_LINE('First Name: ' || v_first_name);
+        DBMS_OUTPUT.PUT_LINE('Last Name: ' || v_last_name);
+        DBMS_OUTPUT.PUT_LINE('Salary: ' || v_salary);
+    END IF;
+
+    CLOSE emp_cursor;
+END;
+/
+
+-----------------------------------------------------------------------------------
+--3. %ISOPEN :
+--------------
+
+DECLARE
+    CURSOR emp_cursor IS
+        SELECT employee_id, first_name, last_name, salary
+        FROM company;
+BEGIN
+    IF emp_cursor%ISOPEN THEN
+        DBMS_OUTPUT.PUT_LINE('Cursor is already open.');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Cursor is not open.');
+    END IF;
+    
+    OPEN emp_cursor;
+
+    IF emp_cursor%ISOPEN THEN
+        DBMS_OUTPUT.PUT_LINE('Cursor is now open.');
+    END IF;
+
+    CLOSE emp_cursor;
+
+    IF NOT emp_cursor%ISOPEN THEN
+        DBMS_OUTPUT.PUT_LINE('Cursor is now closed.');
+    END IF;
+END;
+/
+
+-----------------------------------------------------------------------------------
+--4. %ROWCOUNT :
+----------------
+
+DECLARE
+    CURSOR emp_cursor IS
+        SELECT employee_id, first_name, last_name, salary
+        FROM company;
+    v_employee_id company.employee_id%TYPE;
+    v_first_name company.first_name%TYPE;
+    v_last_name company.last_name%TYPE;
+    v_salary company.salary%TYPE;
+BEGIN
+    OPEN emp_cursor;
+
+    LOOP
+        FETCH emp_cursor INTO v_employee_id, v_first_name, v_last_name, v_salary;
+        EXIT WHEN emp_cursor%NOTFOUND;
+
+        DBMS_OUTPUT.PUT_LINE('Employee ID: ' || v_employee_id);
+        DBMS_OUTPUT.PUT_LINE('First Name: ' || v_first_name);
+        DBMS_OUTPUT.PUT_LINE('Last Name: ' || v_last_name);
+        DBMS_OUTPUT.PUT_LINE('Salary: ' || v_salary);
+        DBMS_OUTPUT.PUT_LINE('Rows fetched so far: ' || emp_cursor%ROWCOUNT);
+        DBMS_OUTPUT.PUT_LINE('');
+    END LOOP;
+
+    CLOSE emp_cursor;
+END;
+/
+
+-----------------------------------------------------------------------------------
+--Declare the cursor and use %FOUND :
+-------------------------------------
+
+DECLARE
+    CURSOR emp_cursor IS
+        SELECT employee_id, first_name, last_name, salary
+        FROM company;
+    v_employee_id company.employee_id%TYPE;
+    v_first_name company.first_name%TYPE;
+    v_last_name company.last_name%TYPE;
+    v_salary company.salary%TYPE;
+BEGIN
+    -- Open the cursor
+    OPEN emp_cursor;
+
+    -- Fetch the first row
+    FETCH emp_cursor INTO v_employee_id, v_first_name, v_last_name, v_salary;
+
+    -- Check if the first row was fetched
+    IF emp_cursor%FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('First row found:');
+        DBMS_OUTPUT.PUT_LINE('Employee ID: ' || v_employee_id);
+        DBMS_OUTPUT.PUT_LINE('First Name: ' || v_first_name);
+        DBMS_OUTPUT.PUT_LINE('Last Name: ' || v_last_name);
+        DBMS_OUTPUT.PUT_LINE('Salary: ' || v_salary);
+        DBMS_OUTPUT.PUT_LINE('');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('No rows found.');
+    END IF;
+
+    -- Fetch the second row
+    FETCH emp_cursor INTO v_employee_id, v_first_name, v_last_name, v_salary;
+
+    -- Check if the second row was fetched
+    IF emp_cursor%FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Second row found:');
+        DBMS_OUTPUT.PUT_LINE('Employee ID: ' || v_employee_id);
+        DBMS_OUTPUT.PUT_LINE('First Name: ' || v_first_name);
+        DBMS_OUTPUT.PUT_LINE('Last Name: ' || v_last_name);
+        DBMS_OUTPUT.PUT_LINE('Salary: ' || v_salary);
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('No more rows.');
+    END IF;
+
+    -- Close the cursor
+    CLOSE emp_cursor;
+END;
+/
+
+-----------------------------------------------------------------------------------
+--Declare the cursor and use %FOUND :
+-------------------------------------
+DECLARE
+    CURSOR emp_cursor IS
+        SELECT employee_id, first_name, last_name, salary
+        FROM company
+        WHERE salary = 80000;
+    v_employee_id company.employee_id%TYPE;
+    v_first_name company.first_name%TYPE;
+    v_last_name company.last_name%TYPE;
+    v_salary company.salary%TYPE;
+BEGIN
+    -- Open the cursor
+    OPEN emp_cursor;
+
+    -- Fetch the first row (which should be the row with salary 80000)
+    FETCH emp_cursor INTO v_employee_id, v_first_name, v_last_name, v_salary;
+
+    -- Check if the row was fetched
+    IF emp_cursor%FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Row found with salary 80000:');
+        DBMS_OUTPUT.PUT_LINE('Employee ID: ' || v_employee_id);
+        DBMS_OUTPUT.PUT_LINE('First Name: ' || v_first_name);
+        DBMS_OUTPUT.PUT_LINE('Last Name: ' || v_last_name);
+        DBMS_OUTPUT.PUT_LINE('Salary: ' || v_salary);
+        DBMS_OUTPUT.PUT_LINE('');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('No rows found with salary 80000.');
+    END IF;
+
+    -- Close the cursor
+    CLOSE emp_cursor;
+END;
+/
+
+drop table company;
+-----------------------------------------------------------------------------------
+
