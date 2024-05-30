@@ -1,173 +1,136 @@
-
-Ref cursor :
+/*
+REF CURSOR :
 ------------
 
-	1. It is PL/SQL Datatype, used to create a special type of variable called cursor variable.
-	2. cursor variable act as pointers to the cursor result. 
+A REF CURSOR in Oracle SQL is a cursor variable that allows you to pass a cursor as a parameter to procedures and functions. 
+This can be particularly useful for returning query results from a stored procedure to a calling application.
 
 
+*/
+CREATE TABLE company (
+    employee_id NUMBER PRIMARY KEY,
+    first_name VARCHAR2(50),
+    last_name VARCHAR2(50),
+    department VARCHAR2(50)
+);
 
+INSERT INTO company VALUES (1, 'John', 'Doe', 'HR');
+INSERT INTO company VALUES (2, 'Jane', 'Smith', 'Finance');
+INSERT INTO company VALUES (3, 'Sam', 'Brown', 'IT');
+INSERT INTO company VALUES (4, 'Sue', 'Johnson', 'IT');
+COMMIT;
 
+select * from company;
 
-Introduction To PL/SQL Ref Cursors In Oracle Database :
--------------------------------------------------------
+--PACKAGE header
+CREATE OR REPLACE PACKAGE employee_pkg IS
+    TYPE ref_cursor IS REF CURSOR;
+    PROCEDURE get_employees(dept IN VARCHAR2, emp_cursor OUT ref_cursor);
+END employee_pkg;
+/
 
-What are PL/SQL Ref Cursors in Oracle Database?:
-------------------------------------------------
+--PACKAGE body
+CREATE OR REPLACE PACKAGE BODY employee_pkg IS
+    PROCEDURE get_employees(dept IN VARCHAR2, emp_cursor OUT ref_cursor) IS
+    BEGIN
+        OPEN emp_cursor FOR
+        SELECT employee_id, first_name, last_name
+        FROM company
+        WHERE department = dept;
+    END get_employees;
+END employee_pkg;
+/
 
-	Ref Cursor is an acronym of Reference to a Cursor. 
-	It is a PL/SQL datatype using which you can declare a special type of variable called Cursor Variable.
-	
-What Is PL/SQL Ref Cursors In Oracle Database? :
-------------------------------------------------
-
-	A single ref cursor to get associated with multiple SELECT statements in a single PL/SQL block.
-	In addition, this reduces the need for writing separate explicit cursors. 
-	
-	
-What is the syntax for Declaring Ref Cursor? :
-----------------------------------------------
-
-		DECLARE
-		 TYPE [cursor_variable_name] IS REF CURSOR [RETURN (return_type)];
-		 
-How many types of PL/SQL ref cursors do we have? :
---------------------------------------------------
-
-		1. Strong Ref Cursor and
-		2. Weak Ref Cursor
-		
-1. Strong Ref Cursor :
-----------------------
-
-	Any ref cursor which has fixed return type is called strong ref cursor.
-	
-Syntax of Strong Ref Cursors in PL/SQL :
-----------------------------------------
-
-		DECLARE
-			TYPE cursor_variable_name IS REF CURSOR 
-		RETURN (return type);
-		
-What is a Weak Ref Cursor in Oracle Database? :
------------------------------------------------
-
-	weak ref cursors are those which do not have any return type. In other words, 
-	those ref cursors which do not have fixed return type are called weak ref cursors.
-
-	Since weak Ref Cursors do not have any fixed return type thus they are open to all SELECT statements. 
-	And this makes them one of the most used Ref Cursors in PL/SQL.
-	
-Syntax of Weak Ref Cursors in PL/SQL :
---------------------------------------
-
-		DECLARE
-			TYPE ref_cursor_name IS REF CURSOR;
-			
-Sys_RefCursor :
----------------
-	Sys Ref cursor is an Oracle built in cursor variable. It declares a weak ref cursor and that too without declaring the ref pointer type.
-	
-	
-___________________________________________________________________________________________________________________________________________________
-
-Strong Ref Cursors With Table Based Record Datatype :
------------------------------------------------------
-
-SET SERVEROUTPUT ON
- DECLARE
-    	/*Create Ref Pointer Type*/
-	TYPE	my_RefCur	IS REF CURSOR RETURN 	employees%ROWTYPE;
-	/*Create Cursor Variable*/
-	cur_var my_RefCur;
-	rec_var     employees%ROWTYPE;
- BEGIN
-	OPEN cur_var FOR SELECT * FROM employees WHERE employee_id = 100;
-	FETCH cur_var INTO rec_var;
-	CLOSE cur_var;
-	DBMS_OUTPUT.PUT_LINE ('Employee '||rec_var.first_name||' has salary '||rec_var.salary||'.');
-END;
-/ 
-
-___________________________________________________________________________________________________________________________________________________
-
-PL/SQL Strong Ref Cursor With User Defined Record Datatype :
-------------------------------------------------------------
+-- Execute the procedure and fetch the results using a script :
 
 SET SERVEROUTPUT ON;
 DECLARE
-	--Create User-Defined Record Datatype
-    TYPE my_rec IS RECORD (
-        emp_sal employees.salary%TYPE
-        );
-	--Declare Strong Ref Cursor
-    TYPE RefCur IS REF CURSOR RETURN my_rec;
-    cur_var REFCUR;
-	--Another anchored datatype variable for holding data
-    at_var  employees.salary%TYPE;
+    emp_cursor employee_pkg.ref_cursor;
+    emp_id company.employee_id%TYPE;
+    fname company.first_name%TYPE;
+    lname company.last_name%TYPE;
 BEGIN
-   OPEN cur_var FOR SELECT salary FROM employees WHERE employee_id = 100;
-    FETCH cur_var INTO at_var;
-    CLOSE cur_var;
-    DBMS_OUTPUT.PUT_LINE ('Salary of the employee is '||at_var);
+    -- Call the procedure
+    employee_pkg.get_employees('IT', emp_cursor);
+
+    -- Fetch the results
+    LOOP
+        FETCH emp_cursor INTO emp_id, fname, lname;
+        EXIT WHEN emp_cursor%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE('Employee ID: ' || emp_id || ', Name: ' || fname || ' ' || lname);
+    END LOOP;
+
+    -- Close the cursor
+    CLOSE emp_cursor;
 END;
 /
 
-___________________________________________________________________________________________________________________________________________________
 
-How To Create PL/SQL Weak Ref Cursor In Oracle Database :
----------------------------------------------------------
+drop table company;
+--------------------------------------------------------------------------------
 
-Syntax of Weak Ref Cursor :
----------------------------
+-- Basic Usage of %ROWTYPE :
 
-TYPE ref_cursor_name IS REF CURSOR;
+-- In Oracle PL/SQL, %ROWTYPE is an attribute that provides a record type that represents a row in a table or a view. 
 
+CREATE TABLE company (
+    employee_id NUMBER PRIMARY KEY,
+    first_name VARCHAR2(50),
+    last_name VARCHAR2(50),
+    department VARCHAR2(50)
+);
 
-Example :
----------
+INSERT INTO company VALUES (1, 'John', 'Doe', 'HR');
+INSERT INTO company VALUES (2, 'Jane', 'Smith', 'Finance');
+INSERT INTO company VALUES (3, 'Sam', 'Brown', 'IT');
+INSERT INTO company VALUES (4, 'Sue', 'Johnson', 'IT');
+COMMIT;
 
-SET SERVEROUTPUT ON;
+-- Declare a variable using %ROWTYPE :
+
 DECLARE
-    /*Declare Weak Ref Cursor*/
-    TYPE wk_RefCur IS REF CURSOR;
-    /*Declare Cursor Variable of ref cursor type*/
-    cur_var wk_RefCur;
+    emp_record company%ROWTYPE;
+BEGIN
+    -- Retrieve a row into the emp_record variable
+    SELECT *
+    INTO emp_record
+    FROM company
+    WHERE employee_id = 1;
     
-     /*Declare two "Anchored Datatype Variable" for holding data from the cursor*/
-    f_name  employees.first_name%TYPE;
-    emp_sal employees.salary%TYPE;
-BEGIN
-    OPEN cur_var FOR SELECT first_name, Salary FROM employees WHERE employee_id = 100;
-    FETCH cur_var INTO f_name, emp_sal;
-    CLOSE cur_var;
-    DBMS_OUTPUT.PUT_LINE (f_name ||' '||emp_sal);
+    -- Print the fields
+    DBMS_OUTPUT.PUT_LINE('Employee ID: ' || emp_record.employee_id);
+    DBMS_OUTPUT.PUT_LINE('First Name: ' || emp_record.first_name);
+    DBMS_OUTPUT.PUT_LINE('Last Name: ' || emp_record.last_name);
+    DBMS_OUTPUT.PUT_LINE('Department: ' || emp_record.department);
 END;
 /
 
-___________________________________________________________________________________________________________________________________________________
+--------------------------------------------------------------------------------
+-- Using %ROWTYPE in a Cursor Loop :
 
-How To Create PL/SQL SYS_REFCURSOR In Oracle Database :
--------------------------------------------------------
-
-What is PL/SQL SYS_REFCURSOR? :
--------------------------------
-	SYS_REFCURSOR is a predefined weak ref cursor which comes built-in with the Oracle database software.
-	
-SET SERVEROUTPUT ON;
 DECLARE
-    --Declare cursor variable of SYS_REFCURSOR type
-    cur_var SYS_REFCURSOR;
-    
-    --Declare variables for holding data
-    f_name  employees.first_name%TYPE;
-    emp_sal employees.salary%TYPE;
+    CURSOR emp_cursor IS
+        SELECT *
+        FROM company;
+        
+    emp_record company%ROWTYPE;
 BEGIN
-OPEN cur_var FOR SELECT first_name, Salary FROM employees WHERE employee_id = 100;
-    FETCH cur_var INTO f_name, emp_sal;
-    CLOSE cur_var;
-    DBMS_OUTPUT.PUT_LINE(f_name ||' '||emp_sal);
+    OPEN emp_cursor;
+    LOOP
+        FETCH emp_cursor INTO emp_record;
+        EXIT WHEN emp_cursor%NOTFOUND;
+        
+        -- Print the fields
+        DBMS_OUTPUT.PUT_LINE('Employee ID: ' || emp_record.employee_id);
+        DBMS_OUTPUT.PUT_LINE('First Name: ' || emp_record.first_name);
+        DBMS_OUTPUT.PUT_LINE('Last Name: ' || emp_record.last_name);
+        DBMS_OUTPUT.PUT_LINE('Department: ' || emp_record.department);
+        DBMS_OUTPUT.PUT_LINE('');
+    END LOOP;
+    CLOSE emp_cursor;
 END;
 /
 
-___________________________________________________________________________________________________________________________________________________
+
+drop table company;
+--------------------------------------------------------------------------------
