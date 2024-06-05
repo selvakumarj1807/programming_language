@@ -134,3 +134,110 @@ END;
 
 drop table company;
 --------------------------------------------------------------------------------
+
+/*
+--Records
+In Oracle PL/SQL, a record is a composite data structure that allows you to store
+multiple related items of different data types as a single unit. 
+*/
+
+declare
+
+type emp_record is record(emp_name varchar2(100), salary number, hire_date date);
+
+employee_1 emp_record;
+employee_2 emp_record;
+employee_3 emp_record;
+
+begin
+
+employee_1.emp_name := 'selva';
+employee_1.salary := 6000;
+employee_1.hire_date := sysdate;
+
+DBMS_OUTPUT.PUT_LINE('Employee 1 : Name : '||employee_1.emp_name||'Salary :'||employee_1.salary||'Joining date :'||employee_1.hire_date);
+
+employee_2.emp_name := 'Info';
+employee_2.salary := 60000;
+employee_2.hire_date := sysdate;
+
+DBMS_OUTPUT.PUT_LINE('Employee 2 : Name : '||employee_2.emp_name||'Salary :'||employee_2.salary||'Joining date :'||employee_2.hire_date);
+
+
+end;
+/
+
+--------------------------------------------------------------------------------
+
+select * from employees;
+
+desc employees;
+------------------------
+
+declare
+
+type emp_record is record(emp_name varchar2(100), salary number, hire_date date);
+
+employee_1 emp_record;
+employee_2 emp_record;
+
+begin
+
+select FIRST_NAME, SALARY, HIRE_DATE into employee_1 from employees where EMPLOYEE_ID = 100;
+
+DBMS_OUTPUT.PUT_LINE('Employee 1 : Name : '||employee_1.emp_name||'Salary :'||employee_1.salary||'Joining date :'||employee_1.hire_date);
+
+select FIRST_NAME, SALARY, HIRE_DATE into employee_2 from employees where EMPLOYEE_ID = 101;
+
+DBMS_OUTPUT.PUT_LINE('Employee 2 : Name : '||employee_2.emp_name||'Salary :'||employee_2.salary||'Joining date :'||employee_2.hire_date);
+
+end;
+/
+
+--------------------------------------------------------------------------------
+/*
+Nested Records :
+----------------
+Records can also be nested within other records, allowing for more complex data structures.
+*/
+select * from employees;
+select * from departments;
+select * from locations;
+
+desc locations;
+desc departments;
+desc employees;
+
+------------------------
+SET SERVEROUTPUT ON;
+declare
+    type location_record is record(street_addr locations.street_address%type, city locations.city%type);
+    
+    type employee_record is record(
+        emp_name varchar2(100),
+        salary number,
+        hire_date date,
+        department departments%rowtype,
+        emp_location location_record
+    );
+    
+    employee_01 employee_record;
+    employee_02 employee_record;
+    
+begin
+    employee_01.emp_name := 'selva';
+    employee_01.department.department_name := 'Employee';
+    employee_01.emp_location.street_addr := 'Dindigul';
+    
+    DBMS_OUTPUT.PUT_LINE('Employee 1 = Name : '||employee_01.emp_name||'. Department :'||employee_01.department.department_name||'. Street Address :'||employee_01.emp_location.street_addr);
+
+
+    select first_name, department_name, street_address into employee_02.emp_name, employee_02.department.department_name, employee_02.emp_location.street_addr from employees e, departments d, locations l
+        where e.department_id = d.department_id and d.location_id = l.location_id and e.employee_id = 100;
+        
+    DBMS_OUTPUT.PUT_LINE('Employee 2 = Name : '||employee_02.emp_name||'. Department :'||employee_02.department.department_name||'. Street Address :'||employee_02.emp_location.street_addr);
+
+end;
+/
+
+--------------------------------------------------------------------------------
