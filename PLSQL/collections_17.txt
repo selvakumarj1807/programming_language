@@ -1,38 +1,213 @@
-Collections In Oracle Database :
---------------------------------
+/*
+collections  :
+--------------
 
-		A homogeneous single dimension data structure which is made up of elements of same datatype is called collection in Oracle Database. 
-		In simple language we can say that, an array in Oracle Database is called Collection.
-		
-Why we call collection a homogeneous data structure? :
-------------------------------------------------------
+In Oracle SQL, collections are composite data types that allow you to store multiple row values in a single variable.
 
-		1. As we know that array consists data of same datatype and so does the PL/SQL collection 
-			which is why we call them homogeneous data structure.
-			
-		2. The structure of PL/SQL collections consist of a cell with subscript called index. 
-			Data is stored into these cells and can be identified and accessed using the index number. 
-			This is again very similar to the structure of arrays, but unlike array PL/SQL Collections are strictly one-dimensional.
-			
-Types of PL/SQL Collections in Oracle Database :
-------------------------------------------------
+The main types of collections in Oracle are:
+--------------------------------------------
 
-				1. Persistent and
-				2. Non-persistent.
+1. Varray (Variable-size array)
+2. Nested Table
+3. Associative Array (also known as Index-By Table)
+
+1. Varray (Variable-size array) :
+---------------------------------
+
+A Varray (Variable-size Array) is a collection type in Oracle PL/SQL that stores a fixed number of elements.
+Unlike other collection types, the maximum size of a Varray is defined when it is declared and cannot change.
 
 
-		Persistent collection, as the name suggests, are those which physically store the collection structure with 
-		the data into the database and can be accessed again if needed. Whereas non-persistent collection only stores data 
-		and structure for one session.
-
-
-1. Persistent :
----------------
-				
-		1. Nested Tables
-		2. Variable Sized Arrays or VARRAY's
-		
-2. Non-persistent :
+Defining a Varray :
 -------------------
 
-		1. Associative arrays.
+To define a Varray, you need to specify:
+----------------------------------------
+
+1. The maximum number of elements it can hold.
+2. The data type of the elements.
+
+Syntax :
+--------
+
+TYPE varray_type IS VARRAY(n) OF element_type;
+
+*/
+
+--Example :
+
+set serveroutput on;
+DECLARE
+  TYPE NumberArray IS VARRAY(5) OF NUMBER;
+  
+  numbers NumberArray;
+BEGIN
+  numbers := NumberArray(1, 2, 3, 4, 5);
+  FOR i IN 1..numbers.COUNT LOOP
+    DBMS_OUTPUT.PUT_LINE('Element ' || i || ': ' || numbers(i));
+  END LOOP;
+END;
+/
+
+--------------------------------------------------------------------------------
+
+/*
+Collection Methods :
+--------------------
+Here are the methods you can use with Varray collections :
+----------------------------------------------------------
+
+COUNT, LIMIT, EXTEND, TRIM, DELETE, EXISTS, FIRST, LAST, PRIOR, NEXT
+*/
+
+-- 1. COUNT
+-- Returns the number of elements currently in the Varray.
+
+DECLARE
+  TYPE NumberArray IS VARRAY(5) OF NUMBER;
+  numbers NumberArray;
+BEGIN
+  numbers := NumberArray(1, 2, 3);
+  DBMS_OUTPUT.PUT_LINE('Count: ' || numbers.COUNT); -- Output: Count: 3
+END;
+/
+
+--------------------------------------------------------------------------------
+
+-- 2. LIMIT
+-- Returns the maximum number of elements that the Varray can hold.
+
+DECLARE
+  TYPE NumberArray IS VARRAY(5) OF NUMBER;
+  numbers NumberArray;
+BEGIN
+  numbers := NumberArray(1, 2, 3);
+  DBMS_OUTPUT.PUT_LINE('Limit: ' || numbers.LIMIT); -- Output: Limit: 5
+END;
+/
+
+--------------------------------------------------------------------------------
+
+-- 3. EXTEND
+-- Adds one or more null elements to the end of the Varray.
+
+DECLARE
+  TYPE NumberArray IS VARRAY(5) OF NUMBER;
+  numbers NumberArray;
+BEGIN
+  numbers := NumberArray(1, 2, 3);
+  numbers.EXTEND(2); -- Adds 2 null elements
+  DBMS_OUTPUT.PUT_LINE('Count after EXTEND: ' || numbers.COUNT); -- Output: Count after EXTEND: 5
+  FOR i IN 1..numbers.COUNT LOOP
+    DBMS_OUTPUT.PUT_LINE('Element ' || i || ': ' || NVL(TO_CHAR(numbers(i)), 'NULL'));
+  END LOOP;
+END;
+/
+
+--------------------------------------------------------------------------------
+
+-- 4. TRIM
+-- Removes one or more elements from the end of the Varray.
+
+DECLARE
+  TYPE NumberArray IS VARRAY(5) OF NUMBER;
+  numbers NumberArray;
+BEGIN
+  numbers := NumberArray(1, 2, 3, 4, 5);
+  numbers.TRIM(2); -- Removes the last 2 elements
+  DBMS_OUTPUT.PUT_LINE('Count after TRIM: ' || numbers.COUNT); -- Output: Count after TRIM: 3
+  FOR i IN 1..numbers.COUNT LOOP
+    DBMS_OUTPUT.PUT_LINE('Element ' || i || ': ' || numbers(i));
+  END LOOP;
+END;
+/
+
+--------------------------------------------------------------------------------
+
+-- 5. DELETE
+-- Removes all elements from the Varray.
+
+DECLARE
+  TYPE NumberArray IS VARRAY(5) OF NUMBER;
+  numbers NumberArray;
+BEGIN
+  numbers := NumberArray(1, 2, 3, 4, 5);
+  numbers.DELETE;
+  DBMS_OUTPUT.PUT_LINE('Count after DELETE: ' || numbers.COUNT); -- Output: Count after DELETE: 0
+END;
+/
+
+--------------------------------------------------------------------------------
+
+-- 6. EXISTS
+-- Checks if an element at a specified index exists.
+
+DECLARE
+  TYPE NumberArray IS VARRAY(5) OF NUMBER;
+  numbers NumberArray;
+BEGIN
+  numbers := NumberArray(1, 2, 3);
+  IF numbers.EXISTS(2) THEN 
+    DBMS_OUTPUT.PUT_LINE('Element at index 2 exists.');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('Element at index 2 does not exist.');
+  END IF;
+END;
+/
+
+--------------------------------------------------------------------------------
+
+-- 7. FIRST and 8. LAST
+-- Returns the first and last index numbers in the Varray.
+
+DECLARE
+  TYPE NumberArray IS VARRAY(5) OF NUMBER;
+  numbers NumberArray;
+BEGIN
+  numbers := NumberArray(10, 20, 30);
+  DBMS_OUTPUT.PUT_LINE('First index: ' || numbers.FIRST); -- Output: First index: 1
+  DBMS_OUTPUT.PUT_LINE('Last index: ' || numbers.LAST); -- Output: Last index: 3
+  DBMS_OUTPUT.PUT_LINE('First value: ' || numbers(numbers.FIRST)); -- Output: First value: 10
+  DBMS_OUTPUT.PUT_LINE('Last value: ' || numbers(numbers.LAST));   -- Output: Last value: 30
+
+END;
+/
+
+--------------------------------------------------------------------------------
+
+-- 9. PRIOR and 10. NEXT
+-- Returns the index number that precedes or succeeds a given index.
+
+DECLARE
+  TYPE NumberArray IS VARRAY(5) OF NUMBER;
+  numbers NumberArray;
+BEGIN
+  numbers := NumberArray(10, 20, 30);
+  DBMS_OUTPUT.PUT_LINE('Next index after 1: ' || numbers.NEXT(1)); -- Output: Next index after 1: 2
+  DBMS_OUTPUT.PUT_LINE('Prior index before 2: ' || numbers.PRIOR(2)); -- Output: Prior index before 2: 1
+END;
+/
+
+--------------------------------------------------------------------------------
+
+set serveroutput on;
+declare
+    type emp is varray(107) of employees%rowtype;
+    employees_list emp := emp();
+    indx number := 1;
+begin
+    for i in 101 .. 206 loop
+        employees_list.extend();
+        select * into employees_list(indx) from employees where employee_id = i;
+        dbms_output.put_line(employees_list(indx).first_name || ' Salary is ' || employees_list(indx).salary);
+        indx := indx + 1;
+    end loop;
+    
+-- Output the count of employees in the array
+    dbms_output.put_line('');
+    dbms_output.put_line('Total employees in the array: ' || employees_list.count());
+        
+end;
+/
+
+--------------------------------------------------------------------------------
