@@ -94,10 +94,14 @@ rank() Over(ORDER BY salary desc) RANK from employees) where rank=2;
 select employee_id,first_name,salary,department_id,
 rank() Over(PARTITION BY department_id ORDER BY salary desc) RANK from employees;
 
-SELECT * FROM
-(select employee_id,first_name,salary,department_id,
-rank() Over(PARTITION BY department_id ORDER BY salary desc) RANK from employees)
- where rank=25;
+SELECT *
+FROM (
+    SELECT employee_id, first_name, salary, department_id,
+           RANK() OVER (PARTITION BY department_id ORDER BY salary DESC) AS rank
+    FROM employees
+)
+WHERE rank = 2;
+
  
  ---------------
  
