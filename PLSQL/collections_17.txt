@@ -211,3 +211,140 @@ end;
 /
 
 --------------------------------------------------------------------------------
+
+--Nested tables in Oracle PL/SQL
+--------------------------------
+--1. Initialize and Populate the Nested Table
+---------------------------------------------
+
+SET SERVEROUTPUT ON;
+DECLARE
+  TYPE NumberTable IS TABLE OF NUMBER;
+  numbers NumberTable := NumberTable();
+BEGIN
+  -- Adding elements to the nested table
+  numbers.EXTEND(3);
+  numbers(1) := 10;
+  numbers(2) := 20;
+  numbers(3) := 30;
+  
+  numbers.EXTEND(3);
+  numbers(4) := 40;
+  numbers(5) := 50;
+  numbers(6) := 60;
+  
+  -- Display the elements
+  FOR i IN 1..numbers.COUNT LOOP
+    DBMS_OUTPUT.PUT_LINE('Element ' || i || ': ' || numbers(i));
+  END LOOP;
+END;
+/
+
+--------------------------------------------------------------------------------
+
+--2. Manipulate Nested Table Elements
+-------------------------------------
+
+DECLARE
+  TYPE NumberTable IS TABLE OF NUMBER;
+  numbers NumberTable := NumberTable();
+BEGIN
+  -- Initialize the nested table
+  numbers.EXTEND(5);
+  numbers(1) := 100;
+  numbers(2) := 200;
+  numbers(3) := 300;
+  numbers(4) := 400;
+  numbers(5) := 500;
+  
+  -- TRIM the last element
+  numbers.TRIM;
+  DBMS_OUTPUT.PUT_LINE('Count after TRIM: ' || numbers.COUNT); -- Output: Count after TRIM: 4
+  
+  -- Display the elements
+  FOR i IN 1..numbers.COUNT LOOP
+    DBMS_OUTPUT.PUT_LINE('Element ' || i || ': ' || numbers(i));
+  END LOOP;
+  
+  -- DELETE an element
+  numbers.DELETE(2);
+  DBMS_OUTPUT.PUT_LINE('Count after DELETE: ' || numbers.COUNT); -- Output: Count after DELETE: 3
+  
+  -- Display the elements after DELETE
+  FOR i IN 1..numbers.LAST LOOP
+    IF numbers.EXISTS(i) THEN
+      DBMS_OUTPUT.PUT_LINE('Element ' || i || ': ' || numbers(i));
+    ELSE
+      DBMS_OUTPUT.PUT_LINE('Element ' || i || ': NULL');
+    END IF;
+  END LOOP;
+END;
+/
+
+--------------------------------------------------------------------------------
+
+--3. Use Nested Tables in Procedures and Functions
+--------------------------------------------------
+
+DECLARE
+  TYPE NumberTable IS TABLE OF NUMBER;
+  numbers NumberTable := NumberTable();
+  
+  PROCEDURE print_numbers(num_table IN NumberTable) IS
+  BEGIN
+    FOR i IN 1..num_table.COUNT LOOP
+      DBMS_OUTPUT.PUT_LINE('Element ' || i || ': ' || num_table(i));
+    END LOOP;
+  END;
+BEGIN
+  -- Initialize the nested table
+  numbers.EXTEND(3);
+  numbers(1) := 10;
+  numbers(2) := 20;
+  numbers(3) := 30;
+  
+  -- Call the procedure
+  print_numbers(numbers);
+END;
+/
+
+--Example: Using Nested Tables with Employee Records
+----------------------------------------------------
+
+-- Step 1: Define a record type and a nested table type
+DECLARE
+  TYPE EmployeeRecord IS RECORD (
+    employee_id employees.employee_id%TYPE,
+    first_name employees.first_name%TYPE,
+    last_name employees.last_name%TYPE,
+    salary employees.salary%TYPE
+  );
+
+  TYPE EmployeeTable IS TABLE OF EmployeeRecord;
+
+  -- Step 2: Declare a nested table variable
+  employees_list EmployeeTable := EmployeeTable();
+  indx NUMBER := 1;
+BEGIN
+  -- Step 3: Initialize and populate the nested table using a loop
+  FOR i IN 100 .. 107 LOOP
+    employees_list.EXTEND;
+    SELECT employee_id, first_name, last_name, salary
+    INTO employees_list(indx)
+    FROM employees
+    WHERE employee_id = i;
+    indx := indx + 1;
+  END LOOP;
+  
+  -- Step 4: Manipulate and display the nested table elements
+  FOR i IN 1 .. employees_list.COUNT LOOP
+    DBMS_OUTPUT.PUT_LINE(employees_list(i).first_name || ' ' || employees_list(i).last_name || ': ' || employees_list(i).salary);
+  END LOOP;
+  
+  DBMS_OUTPUT.PUT_LINE('Total employees in the array: ' || employees_list.COUNT);
+END;
+/
+
+
+--------------------------------------------------------------------------------
+
