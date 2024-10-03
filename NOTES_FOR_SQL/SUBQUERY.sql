@@ -97,15 +97,15 @@ SELECT EMPLOYEE_ID,FIRST_NAME,DEPARTMENT_ID FROM EMPLOYEES E WHERE DEPARTMENT_ID
 
 SELECT * FROM EMPLOYEES;
 
-SELECT * FROM EMPLOYEES ORDER BY FIRST_NAME; --151,165 --SA_REP
+SELECT * FROM EMPLOYEES where department_id= 90;
 
-SELECT * FROM EMPLOYEES WHERE FIRST_NAME = 'David' AND JOB_ID = 'SA_REP';
+SELECT * FROM EMPLOYEES where manager_id= 100;
 
-SELECT * FROM EMPLOYEES WHERE (FIRST_NAME,JOB_ID)IN(SELECT FIRST_NAME,JOB_ID FROM EMPLOYEES WHERE EMPLOYEE_ID IN (151,165));
+SELECT * FROM EMPLOYEES where department_id= 90 and manager_id= 100;
 
 select employee_id,first_name,hire_date,salary,department_id,manager_id
 			from employees 
-where(manager_id,department_id)=(SELECT manager_id,department_id from employees where first_name='Neena');
+where(manager_id,department_id) = (SELECT manager_id,department_id from employees where first_name='Neena');
 
 
 --DECODE
