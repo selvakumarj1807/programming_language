@@ -235,3 +235,68 @@ select * from studentDetails02;
 drop table studentDetails;
 
 drop index depid_idx1;
+
+--------------------------------------------------------------------------------
+
+/*
+Table Partitioning :
+--------------------
+    Based on data we can split table into multiple parts.
+    
+Types of Table Partition :
+--------------------------
+
+    1. List
+    2. Range
+    3. Hash
+
+*/
+
+--1. List Partition :
+---------------------
+
+create table table_cutomer_list
+(
+cust_id number,
+cust_name varchar2(50),
+cust_mobile number,
+cust_country varchar2(50)
+)
+
+partition by list(cust_country)
+(
+partition c1 values('india'),
+partition c2 values('china'),
+partition c3 values('srilanka'),
+partition d1 values(default) -- default partition
+);
+
+select * from user_tab_partitions;
+
+select * from V$VERSION;
+
+--------------------------------------------------------------------------------
+
+--1. Range Partition :
+---------------------
+
+create table table_cutomer_range
+(
+cust_id number,
+cust_name varchar2(50),
+cust_mobile number,
+cust_country varchar2(50),
+cust_amount number
+)
+partition by range(cust_amount)
+interval(3000) --create(add) partition range values. If insert 16000. then add 15000 + 3000 and now insert 16000 range values
+(
+partition a1 values less than(5000),
+partition a2 values less than(10000),
+partition a3 values less than(15000)
+);
+
+
+select * from user_tab_partitions;
+
+--------------------------------------------------------------------------------
