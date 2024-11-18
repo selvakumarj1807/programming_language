@@ -47,39 +47,68 @@ END;
 __________________________________________________________________________________________________________________________________
 
 /*
-
-Bind Variables :
-
-      Bind variables in Oracle database can be defined as the variables that we create in SQL* PLUS and then reference in PL/SQL.
-      
+1. What is a Bind Variable?
+---------------------------
+    1. A bind variable is a variable used in PL/SQL to hold values that will be passed to SQL statements at runtime.
+    2. They are denoted using a colon (:) prefix, such as :variable_name.
 */
 
-VARIABLE v_bindl VARCHAR2(10); --declare
-EXEC :v_bind1 := 'Bind variable'; --initializing
+--Exampl 01:
 
+VARIABLE var_dept NUMBER;
 
---2nd way of initializing bind variable 
-BEGIN 
-  :v_bind1 := 'Bind variable'; 
+EXEC :var_dept := 10;
+
+SELECT * FROM employees WHERE department_id = :var_dept; -- assign a value in run time
+
+--------------------------------------------------------------------------------
+--Exampl 02:
+
+VARIABLE var_salary NUMBER;
+
+BEGIN
+    :var_salary := 50000;
 END;
 /
 
--- EXAMPLE 1 :
-SET SERVEROUTPUT ON;
-BEGIN 
-  :v_bind1 := 'Bind variable'; 
-  DBMS_OUTPUT.PUT_LINE (:v_bind1);
+SELECT * FROM employees WHERE salary > :var_salary; -- assign a value in run time
+
+--------------------------------------------------------------------------------
+-- Example03 :
+
+VARIABLE var_fname varchar2(50);
+
+BEGIN
+    :var_fname := 'Admin';
 END;
 /
 
---EXAMPLE 2 :
-PRINT :v_bind1;
+print var_fname;
 
---EXAMPLE 3:
+set AUTOPRINT on;
 
-SET AUTOPRINT ON;
-VARIABLE v_bind2 varchar2(30);
-EXEC :v_bind2 :='AUTO PRINT IN BIND VARIABLE';
+BEGIN
+    :var_fname := 'Admin';
+END;
+/
 
+set AUTOPRINT off;
+
+BEGIN
+    :var_fname := 'Admin';
+END;
+/
+
+--------------------------------------------------------------------------------
+-- Example04 :
+
+BEGIN 
+  :var_fname := 'Bind variable'; 
+  DBMS_OUTPUT.PUT_LINE (:var_fname);
+  
+  :var_salary := 8000; 
+  DBMS_OUTPUT.PUT_LINE (:var_salary);
+END;
+/
 
 __________________________________________________________________________________________________________________________________
