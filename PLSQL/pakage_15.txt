@@ -131,3 +131,124 @@ END;
 
 
 ___________________________________________________________________________________________________________________________________________
+
+
+08-04-2025
+
+--------------------------
+--------------------------
+--------------------------
+
+/*
+Oracle PL/SQL Packages:
+
+    A PL/SQL package is a schema object that groups related procedures,
+functions, variables, cursors, and exceptions into a single unit.
+Think of it as a modular and organized way to encapsulate logic - like a class in OOP.
+
+Structure of a Package:
+-----------------------
+A PL/SQL package has two parts:
+-------------------------------
+
+    1. Package Specification – declaration only
+
+    2. Package Body – implementation
+
+*/
+
+CREATE TABLE employeesProcedure (
+    emp_id   NUMBER PRIMARY KEY,
+    emp_name VARCHAR2(50),
+    salary   NUMBER
+);
+
+-- Sample data for employees table
+INSERT INTO employeesProcedure (emp_id, emp_name, salary) VALUES (101, 'Alice Johnson', 50000);
+INSERT INTO employeesProcedure (emp_id, emp_name, salary) VALUES (102, 'Bob Smith', 60000);
+INSERT INTO employeesProcedure (emp_id, emp_name, salary) VALUES (103, 'Charlie Davis', 55000);
+INSERT INTO employeesProcedure (emp_id, emp_name, salary) VALUES (104, 'Diana Prince', 70000);
+INSERT INTO employeesProcedure (emp_id, emp_name, salary) VALUES (105, 'Ethan Hunt', 65000);
+
+-- Commit the changes
+COMMIT;
+
+select * from employeesProcedure;
+
+---1. Package Specification
+
+CREATE OR REPLACE PACKAGE emp_pkg IS
+
+  -- Variable
+  g_total_employees NUMBER := 0;
+
+  -- Type declaration
+  TYPE emp_rec_type IS RECORD (
+    emp_id   employeesProcedure.emp_id%TYPE,
+    emp_name employeesProcedure.emp_name%TYPE,
+    salary   employeesProcedure.salary%TYPE
+  );
+
+  -- Cursor declaration
+  CURSOR emp_cur RETURN emp_rec_type;
+
+  -- Stored Procedure
+  PROCEDURE add_employee(p_id NUMBER, p_name VARCHAR2, p_salary NUMBER);
+
+  -- Function
+  FUNCTION get_salary(p_id NUMBER) RETURN NUMBER;
+
+END emp_pkg;
+/
+
+--2. Package Body
+
+CREATE OR REPLACE PACKAGE BODY emp_pkg IS
+
+  -- Cursor definition
+  CURSOR emp_cur RETURN emp_rec_type IS
+    SELECT emp_id, emp_name, salary FROM employeesProcedure;
+
+  -- Stored Procedure implementation
+  PROCEDURE add_employee(p_id NUMBER, p_name VARCHAR2, p_salary NUMBER) IS
+  BEGIN
+    INSERT INTO employeesProcedure(emp_id, emp_name, salary)
+    VALUES (p_id, p_name, p_salary);
+
+    g_total_employees := g_total_employees + 1;
+  END;
+
+  -- Function implementation
+  FUNCTION get_salary(p_id NUMBER) RETURN NUMBER IS
+    v_salary employeesProcedure.salary%TYPE;
+  BEGIN
+    SELECT salary INTO v_salary
+    FROM employeesProcedure
+    WHERE emp_id = p_id;
+    
+    RETURN v_salary;
+  END;
+
+END emp_pkg;
+/
+
+-- Test Script
+BEGIN
+  -- Add employee
+  emp_pkg.add_employee(106, 'Alice Proc', 50000);
+  emp_pkg.add_employee(107, 'Bob Proc', 60000);
+
+  -- Get salary
+  DBMS_OUTPUT.PUT_LINE('Salary of Bob: ' || emp_pkg.get_salary(102));
+
+  -- Display total employees
+  DBMS_OUTPUT.PUT_LINE('Total Employees: ' || emp_pkg.g_total_employees);
+
+  -- Use cursor
+  FOR rec IN emp_pkg.emp_cur LOOP
+    DBMS_OUTPUT.PUT_LINE('Emp: ' || rec.emp_id || ' - ' || rec.emp_name || ' - ' || rec.salary);
+  END LOOP;
+END;
+/
+
+
