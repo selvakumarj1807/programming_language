@@ -1,3 +1,163 @@
+-- Instead Of trigger With Out Joins
+
+create table studentDetails(studId number, studName VARCHAR2(50));
+
+create table studentDepartment(deptId number, deptName varchar2(50));
+
+insert into studentDetails values(101, 'Sara');
+
+insert into studentDetails values(102, 'Ram');
+
+insert into studentDepartment values(10, 'BSc');
+
+insert into studentDepartment values(20, 'BA');
+
+select * from studentDetails;
+
+select * from studentDepartment;
+
+select studId, studName, deptId, deptName from studentDetails, studentDepartment;
+
+create view studentViews as 
+select studId, studName, deptId, deptName from studentDetails, studentDepartment;
+
+
+select * from STUDENTVIEWS;
+
+desc STUDENTVIEWS;
+
+insert into STUDENTVIEWS values (103, 'Sam', 30, 'MSC');-- cannot modify a column which maps to a non key-preserved table
+
+-- Create Instead of Trigger
+
+create or replace trigger STUDENTVIEWS_Trigg instead of insert on STUDENTVIEWS
+for each row
+begin
+  insert into studentDetails (studId, studName) values (:new.studId, :new.studName);
+  
+  insert into studentDepartment (deptId, deptName) values(:new.deptId, :new.deptName);
+end;
+/
+
+insert into STUDENTVIEWS values (103, 'Sam', 30, 'MSC');
+
+select * from STUDENTVIEWS;
+
+insert into STUDENTVIEWS values (104, 'Sam Dev', 40, 'MA');
+
+insert into STUDENTVIEWS values (105, 'Sara Dev', 50, 'MCom');
+
+select * from STUDENTVIEWS;
+
+select * from studentDetails;
+
+select * from studentDepartment;
+
+with 
+studentDetailsRank as (select studId, studName, rownum as rn from studentDetails),
+studentDepartmentRank as (select deptId, deptName, rownum as rn from studentDepartment)
+select s1.studId, s1.studName, s2.deptId, s2.deptName 
+from studentDetailsRank s1 join studentDepartmentRank s2 on s1.rn = s2.rn;
+
+----------------------------------------------------------------------------------
+-- Instead Of trigger -- With joins
+
+-- 1. Create studentDepartment table
+CREATE TABLE studentDepartment (
+    deptId NUMBER PRIMARY KEY,
+    deptName VARCHAR2(50)
+);
+
+-- 2. Create studentDetails table with a foreign key to department
+CREATE TABLE studentDetails (
+    studId NUMBER PRIMARY KEY,
+    studName VARCHAR2(50),
+    deptId NUMBER,
+    CONSTRAINT fk_dept FOREIGN KEY (deptId) REFERENCES studentDepartment(deptId)
+);
+
+-- 3. Insert department data
+INSERT INTO studentDepartment VALUES (10, 'BSc');
+INSERT INTO studentDepartment VALUES (20, 'BA');
+
+-- 4. Insert student data (linked to departments)
+INSERT INTO studentDetails VALUES (101, 'Sara', 10);
+INSERT INTO studentDetails VALUES (102, 'Ram', 20);
+
+-- 5. Select with proper JOIN (no cross join)
+SELECT 
+    s.studId, s.studName, d.deptId, d.deptName
+FROM 
+    studentDetails s
+JOIN 
+    studentDepartment d ON s.deptId = d.deptId;
+
+-- 6. Create a view based on correct JOIN
+CREATE OR REPLACE VIEW studentViews AS
+SELECT 
+    s.studId, s.studName, d.deptId, d.deptName
+FROM 
+    studentDetails s
+JOIN 
+    studentDepartment d ON s.deptId = d.deptId;
+
+-- 7. View the results
+SELECT * FROM studentViews;
+
+desc studentViews;
+
+insert into studentViews values(103, 'Sam', 30, 'MSC'); --cannot modify more than one base table through a join view
+
+-- Create Instead Of Trigger for INSERT
+CREATE OR REPLACE TRIGGER STUDENTVIEWS_Trigg
+INSTEAD OF INSERT ON studentViews
+FOR EACH ROW
+DECLARE
+    dept_exists NUMBER;
+BEGIN
+    -- Check if department already exists
+    SELECT COUNT(*) INTO dept_exists 
+    FROM studentDepartment 
+    WHERE deptId = :new.deptId;
+
+    -- Insert department if not exists
+    IF dept_exists = 0 THEN
+        INSERT INTO studentDepartment (deptId, deptName)
+        VALUES (:new.deptId, :new.deptName);
+    END IF;
+
+    -- Insert student
+    INSERT INTO studentDetails (studId, studName, deptId)
+    VALUES (:new.studId, :new.studName, :new.deptId);
+END;
+/
+
+insert into STUDENTVIEWS values (103, 'Sam', 30, 'MSC');
+
+select * from STUDENTVIEWS;
+
+insert into STUDENTVIEWS values (104, 'Sam Dev', 40, 'MA');
+
+insert into STUDENTVIEWS values (105, 'Sara Dev', 50, 'MCom');
+
+select * from STUDENTVIEWS;
+
+select * from studentDetails;
+
+select * from studentDepartment;
+
+drop table studentDetails;
+drop table studentDepartment;
+drop view STUDENTVIEWS;
+
+with 
+studentDetailsRank as (select studId, studName, rownum as rn from studentDetails),
+studentDepartmentRank as (select deptId, deptName, rownum as rn from studentDepartment)
+select s1.studId, s1.studName, s2.deptId, s2.deptName 
+from studentDetailsRank s1 join studentDepartmentRank s2 on s1.rn = s2.rn;
+
+-------------------------------------------------------------------------------------
+
 Instead-Of Insert Trigger  :
 
 
