@@ -1,0 +1,85 @@
+set SERVEROUTPUT ON
+
+-- Oracle PL/SQL Compound Trigger
+/*
+A Compound Trigger in Oracle PL/SQL is a special type of trigger
+introduced in Oracle 11g.
+It allows you to define multiple timing points 
+(BEFORE, AFTER, INSTEAD OF, FOR EACH ROW) in a single trigger block,
+specifically for DML operations (INSERT, UPDATE, DELETE) on a table or view.
+*/
+
+
+-- Step 1: Create Table (if not exists)
+
+CREATE TABLE products (
+  product_id NUMBER PRIMARY KEY,
+  product_name VARCHAR2(50),
+  price NUMBER
+);
+
+-- Insert sample data
+INSERT INTO products VALUES (1, 'Mouse', 500);
+INSERT INTO products VALUES (2, 'Keyboard', 1000);
+INSERT INTO products VALUES (3, 'Monitor', 8000);
+COMMIT;
+
+select * from products;
+
+-- Step 2: Create Compound Trigger (Update Only)
+
+CREATE OR REPLACE TRIGGER trg_product_update
+FOR UPDATE ON products
+COMPOUND TRIGGER
+
+  -- Global declaration section using nested table
+  TYPE id_list_t IS TABLE OF products.product_id%TYPE;
+  updated_ids id_list_t := id_list_t();  -- Initialize nested table
+
+  BEFORE STATEMENT IS
+  BEGIN
+    DBMS_OUTPUT.PUT_LINE('Trigger Fired: BEFORE STATEMENT');
+  END BEFORE STATEMENT;
+
+  BEFORE EACH ROW IS
+  BEGIN
+    DBMS_OUTPUT.PUT_LINE('Updating Row: ' || :OLD.product_id);
+  END BEFORE EACH ROW;
+
+  AFTER EACH ROW IS
+  BEGIN
+    updated_ids.EXTEND;  -- Add space for new element
+    updated_ids(updated_ids.COUNT) := :NEW.product_id;  -- Add value
+  END AFTER EACH ROW;
+
+  AFTER STATEMENT IS
+  BEGIN
+    DBMS_OUTPUT.PUT_LINE('Trigger Fired: AFTER STATEMENT');
+    DBMS_OUTPUT.PUT_LINE('Total Rows Updated: ' || updated_ids.COUNT);
+    FOR i IN 1 .. updated_ids.COUNT LOOP
+      DBMS_OUTPUT.PUT_LINE('Updated Product ID: ' || updated_ids(i));
+    END LOOP;
+  END AFTER STATEMENT;
+
+END trg_product_update;
+/
+
+-- Step 3: Run an Update Statement
+
+UPDATE products
+SET price = price + 100
+WHERE product_id IN (1, 2);
+
+UPDATE products
+SET price = price + 100
+WHERE product_id = 3;
+
+select * from products;
+
+truncate table products;
+
+drop table products;
+
+drop trigger trg_product_update;
+
+--------------------------------------------------------------------------------
