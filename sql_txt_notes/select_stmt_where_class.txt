@@ -108,3 +108,32 @@ SELECT * FROM EMPL WHERE EMP_LNAME LIKE '_E_I';
 SELECT * FROM EMPL WHERE EMP_LNAME LIKE 'S%I';
 
 SELECT * FROM EMPL WHERE EMP_LNAME NOT LIKE 'S%I';
+
+
+/*
+LEVEL:
+------
+
+LEVEL works only in hierarchical queries
+
+You must include both START WITH and CONNECT BY
+
+Without CONNECT BY, LEVEL is undefined
+
+If you want, I can help you design a hierarchical query for your 
+data — just share your employees sample rows!
+*/
+
+select employee_id, level from employees;
+
+SELECT employee_id, first_name, LEVEL, MANAGER_ID
+FROM employees
+START WITH manager_id IS NULL
+CONNECT BY PRIOR employee_id = manager_id;
+
+SELECT employee_id, first_name, LEVEL, manager_id
+FROM employees
+WHERE LEVEL <= 3
+START WITH manager_id IS NULL
+CONNECT BY PRIOR employee_id = manager_id;
+
