@@ -1,0 +1,144 @@
+-- Denormalized Table: StudentData
+
+CREATE TABLE StudentData (
+    StudentID INT,
+    StudentName VARCHAR2(50),
+    Courses VARCHAR2(100),       -- e.g., 'Math,Science'
+    Instructors VARCHAR2(100)    -- e.g., 'John,Mary'
+);
+
+INSERT INTO StudentData VALUES (1, 'Alice', 'Math,Science', 'John,Mary');
+INSERT INTO StudentData VALUES (2, 'Bob',   'Math',         'John');
+INSERT INTO StudentData VALUES (3, 'Charlie', 'Science,English', 'Mary,Mike');
+
+-- Querying Denormalized Data
+SELECT * FROM StudentData;
+
+/*
+Problems:
+---------
+
+1. Hard to search individual courses.
+
+2. Cannot use JOINs easily.
+
+3. Data duplication if more students are added with same courses.
+*/
+
+-- 1NF – First Normal Form
+-- Goal: Remove multivalued attributes (split into multiple rows)
+
+-- Table: StudentCourses_1NF
+
+CREATE TABLE StudentCourses_1NF (
+    StudentID INT,
+    StudentName VARCHAR2(50),
+    Course VARCHAR2(50),
+    Instructor VARCHAR2(50)
+);
+
+
+INSERT INTO StudentCourses_1NF VALUES (1, 'Alice', 'Math', 'John');
+INSERT INTO StudentCourses_1NF VALUES (1, 'Alice', 'Science', 'Mary');
+INSERT INTO StudentCourses_1NF VALUES (2, 'Bob', 'Math', 'John');
+INSERT INTO StudentCourses_1NF VALUES (3, 'Charlie', 'Science', 'Mary');
+INSERT INTO StudentCourses_1NF VALUES (3, 'Charlie', 'English', 'Mike');
+
+-- Query: All Student-Course Info
+SELECT * FROM StudentCourses_1NF;
+
+-- 2NF – Second Normal Form
+-- Goal: Remove partial dependency — break out repeating values (like StudentName)
+
+-- Tables
+
+-- Students table
+CREATE TABLE Students (
+    StudentID INT PRIMARY KEY,
+    StudentName VARCHAR2(50)
+);
+
+-- StudentCourses table
+CREATE TABLE StudentCourses_2NF (
+    StudentID INT,
+    Course VARCHAR2(50),
+    Instructor VARCHAR2(50),
+    FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+);
+
+-- Students
+INSERT INTO Students VALUES (1, 'Alice');
+INSERT INTO Students VALUES (2, 'Bob');
+INSERT INTO Students VALUES (3, 'Charlie');
+
+-- StudentCourses
+INSERT INTO StudentCourses_2NF VALUES (1, 'Math', 'John');
+INSERT INTO StudentCourses_2NF VALUES (1, 'Science', 'Mary');
+INSERT INTO StudentCourses_2NF VALUES (2, 'Math', 'John');
+INSERT INTO StudentCourses_2NF VALUES (3, 'Science', 'Mary');
+INSERT INTO StudentCourses_2NF VALUES (3, 'English', 'Mike');
+
+-- Query: Student Course + Name
+SELECT sc.StudentID, s.StudentName, sc.Course, sc.Instructor
+FROM StudentCourses_2NF sc
+JOIN Students s ON sc.StudentID = s.StudentID;
+
+
+-- 3NF – Third Normal Form
+-- Goal: Remove transitive dependency (Instructor depends on Course, not StudentID)
+
+-- Tables
+
+-- Courses table
+CREATE TABLE Courses (
+    Course VARCHAR2(50) PRIMARY KEY,
+    Instructor VARCHAR2(50)
+);
+
+-- Final StudentCourses (only mapping)
+CREATE TABLE StudentCourses_3NF (
+    StudentID INT,
+    Course VARCHAR2(50),
+    FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
+    FOREIGN KEY (Course) REFERENCES Courses(Course)
+);
+
+
+-- Courses
+INSERT INTO Courses VALUES ('Math', 'John');
+INSERT INTO Courses VALUES ('Science', 'Mary');
+INSERT INTO Courses VALUES ('English', 'Mike');
+
+-- StudentCourses
+INSERT INTO StudentCourses_3NF VALUES (1, 'Math');
+INSERT INTO StudentCourses_3NF VALUES (1, 'Science');
+INSERT INTO StudentCourses_3NF VALUES (2, 'Math');
+INSERT INTO StudentCourses_3NF VALUES (3, 'Science');
+INSERT INTO StudentCourses_3NF VALUES (3, 'English');
+
+-- Final Query: Student → Course → Instructor
+
+SELECT s.StudentName, sc.Course, c.Instructor
+FROM StudentCourses_3NF sc
+JOIN Students s ON s.StudentID = sc.StudentID
+JOIN Courses c ON sc.Course = c.Course;
+
+/*
+| Normal Form  | Tables Used                                 | Problems Solved                            |
+| ------------ | ------------------------------------------- | ------------------------------------------ |
+| Denormalized | `StudentData`                               | Data redundancy, no atomic values          |
+| 1NF          | `StudentCourses_1NF`                        | Atomic values                              |
+| 2NF          | `Students`, `StudentCourses_2NF`            | Removed partial dependency (Name)          |
+| 3NF          | `Students`, `Courses`, `StudentCourses_3NF` | Removed transitive dependency (Instructor) |
+
+
+Benefits of 3NF in SQL/PLSQL:
+-----------------------------
+1. Less data duplication
+
+2. Easier to update (change instructor in one table)
+
+3. Clean schema for joins
+
+4. Enforces integrity via foreign keys
+*/
