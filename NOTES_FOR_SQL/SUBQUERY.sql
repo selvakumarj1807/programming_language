@@ -86,11 +86,101 @@ SELECT RN,FIRST_NAME,EMPLOYEE_ID FROM(SELECT ROWNUM RN, E.*FROM EMPLOYEES E ORDE
 -- Correlated sub query
         -- if a subquery depands on outer query or the outer query depends on inner query
         
-SELECT * FROM EMPLOYEES;
+-- Correlated SubQuery  
+/*
+A correlated subquery is a subquery that depends on a value from the outer query.
+It is evaluated row-by-row — for each row of the outer query,
+the inner query runs using that row’s values.
+*/
+/*
+Find all employees whose current salary is greater than the average salary they’ve ever had.
+*/
+-- Current employees
+CREATE TABLE employees_Sal (
+    employee_id NUMBER PRIMARY KEY,
+    first_name  VARCHAR2(50),
+    salary      NUMBER
+);
 
-SELECT * FROM DEPARTMENTS;
+-- Salary history for employees
+CREATE TABLE salary_history (
+    history_id  NUMBER PRIMARY KEY,
+    employee_id NUMBER,
+    salary      NUMBER,
+    change_date DATE
+);
 
-SELECT EMPLOYEE_ID,FIRST_NAME,DEPARTMENT_ID FROM EMPLOYEES E WHERE DEPARTMENT_ID IN (SELECT DEPARTMENT_ID FROM DEPARTMENTS D WHERE D.DEPARTMENT_ID = E.DEPARTMENT_ID);
+INSERT INTO employees_Sal VALUES (1, 'Alice', 70000);
+INSERT INTO employees_Sal VALUES (2, 'Bob',   50000);
+INSERT INTO employees_Sal VALUES (3, 'Carol', 90000);
+
+INSERT INTO salary_history VALUES (101, 1, 60000, DATE '2022-01-01');
+INSERT INTO salary_history VALUES (102, 1, 65000, DATE '2023-01-01');
+INSERT INTO salary_history VALUES (103, 2, 45000, DATE '2023-01-01');
+INSERT INTO salary_history VALUES (104, 3, 85000, DATE '2023-01-01');
+INSERT INTO salary_history VALUES (105, 3, 87000, DATE '2024-01-01');
+INSERT INTO salary_history VALUES (106, 3, 95000, DATE '2023-01-01');
+INSERT INTO salary_history VALUES (107, 3, 97000, DATE '2024-01-01');
+
+SELECT e.employee_id,
+       e.first_name,
+       e.salary
+FROM employees_Sal e
+WHERE e.salary > (
+    SELECT AVG(s.salary)
+    FROM salary_history s
+    WHERE s.employee_id = e.employee_id
+);
+
+
+SELECT AVG(salary) FROM salary_history
+WHERE employee_id = 1;
+
+
+
+-------------------------------------------------------
+/*
+ list all customer orders that are larger than that customer’s average order amount.
+*/
+
+-- Customers
+CREATE TABLE customers (
+    customer_id NUMBER PRIMARY KEY,
+    customer_name VARCHAR2(100)
+);
+
+-- Orders
+CREATE TABLE orders (
+    order_id NUMBER PRIMARY KEY,
+    customer_id NUMBER,
+    order_date DATE,
+    order_amount NUMBER
+);
+
+INSERT INTO customers VALUES (1, 'John');
+INSERT INTO customers VALUES (2, 'Mary');
+
+INSERT INTO orders VALUES (101, 1, DATE '2024-01-10', 200);
+INSERT INTO orders VALUES (102, 1, DATE '2024-02-15', 150);
+INSERT INTO orders VALUES (103, 1, DATE '2024-03-20', 500); -- Big order id 1
+INSERT INTO orders VALUES (104, 2, DATE '2024-01-05', 300);
+INSERT INTO orders VALUES (105, 2, DATE '2024-02-12', 320); -- Big order id 2
+INSERT INTO orders VALUES (106, 2, DATE '2024-03-18', 280);
+
+SELECT o.order_id,
+       o.customer_id,
+       o.order_amount,
+       o.order_date
+FROM orders o
+WHERE o.order_amount > (
+    SELECT AVG(o2.order_amount)
+    FROM orders o2
+    WHERE o2.customer_id = o.customer_id
+);
+
+SELECT AVG(o2.order_amount)
+    FROM orders o2
+    WHERE o2.customer_id = 1;
 
 --MULTI COLUMN SUBQUERY
         -- THE SUBQUERY THAT RETURNS MORE THAN ONE COLUMN.
